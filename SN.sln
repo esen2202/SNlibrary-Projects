@@ -7,13 +7,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Network", "Network", "{58FB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetSet", "NetSet", "{F73D94FE-2C39-43EB-B79B-4140FE3BE27E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.Library", "SN.Library\SN.Library.csproj", "{F4579D44-BB37-48FB-8D3A-939D37274B9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SN.Library", "SN.Library\SN.Library.csproj", "{F4579D44-BB37-48FB-8D3A-939D37274B9C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.NetSet.Entities", "SN.NetSet.Entities\SN.NetSet.Entities.csproj", "{319E0FA3-55F7-48E7-B61D-160D06FE6D16}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.NetSet.Business", "SN.NetSet.Business\SN.NetSet.Business.csproj", "{B29E88C0-8185-4614-81E2-4A90535D0CFD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.NetSet.DataAccess", "SN.NetSet.DataAccess\SN.NetSet.DataAccess.csproj", "{36C501D1-1552-4A61-8524-125F1C0B2BB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SN.NetSet.UnitTest", "SN.NetSet.UnitTest\SN.NetSet.UnitTest.csproj", "{6C1FF55E-1187-4227-B836-4AAFFFE63227}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{36C501D1-1552-4A61-8524-125F1C0B2BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36C501D1-1552-4A61-8524-125F1C0B2BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36C501D1-1552-4A61-8524-125F1C0B2BB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C1FF55E-1187-4227-B836-4AAFFFE63227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C1FF55E-1187-4227-B836-4AAFFFE63227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C1FF55E-1187-4227-B836-4AAFFFE63227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C1FF55E-1187-4227-B836-4AAFFFE63227}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{319E0FA3-55F7-48E7-B61D-160D06FE6D16} = {F73D94FE-2C39-43EB-B79B-4140FE3BE27E}
 		{B29E88C0-8185-4614-81E2-4A90535D0CFD} = {F73D94FE-2C39-43EB-B79B-4140FE3BE27E}
 		{36C501D1-1552-4A61-8524-125F1C0B2BB5} = {F73D94FE-2C39-43EB-B79B-4140FE3BE27E}
+		{6C1FF55E-1187-4227-B836-4AAFFFE63227} = {F73D94FE-2C39-43EB-B79B-4140FE3BE27E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6BBD6261-91D6-4D1A-8BB5-17BD1212B472}
