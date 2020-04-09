@@ -46,11 +46,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SN.Library\SN.Library.csproj">
-      <Project>{f4579d44-bb37-48fb-8d3a-939d37274b9c}</Project>
-      <Name>SN.Library</Name>
+    <ProjectReference Include="..\SN.Data\SN.Data.csproj">
+      <Project>{947355DF-DFC5-41E5-9E15-E6AC5AF12810}</Project>
+      <Name>SN.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

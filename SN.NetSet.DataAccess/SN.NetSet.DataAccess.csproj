@@ -153,9 +153,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SN.Library\SN.Library.csproj">
-      <Project>{F4579D44-BB37-48FB-8D3A-939D37274B9C}</Project>
-      <Name>SN.Library</Name>
+    <ProjectReference Include="..\SN.Data\SN.Data.csproj">
+      <Project>{947355DF-DFC5-41E5-9E15-E6AC5AF12810}</Project>
+      <Name>SN.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\SN.NetSet.Entities\SN.NetSet.Entities.csproj">
       <Project>{319E0FA3-55F7-48E7-B61D-160D06FE6D16}</Project>

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 
-namespace SN.Library.Tools
+namespace SN.Class.Utility
 {
-    public class Class
+    public class Base : IBase
     {
         public static void CopyObjectPropertiesValue<TObject>(TObject source, TObject target)
         {

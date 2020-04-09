@@ -1,10 +1,9 @@
-﻿using SN.Library.Entities;
+﻿using SN.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 
-namespace SN.Library.DataAccess
+namespace SN.Data.DataAccess
 {
     public interface IEntityRepository<TEntity> where TEntity:class, IEntity,new()
     {

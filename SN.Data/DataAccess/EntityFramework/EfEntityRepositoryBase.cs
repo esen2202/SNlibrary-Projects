@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SN.Library.Entities;
+using SN.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace SN.Library.DataAccess.EntityFramework
+namespace SN.Data.DataAccess.EntityFramework
 {
     public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()

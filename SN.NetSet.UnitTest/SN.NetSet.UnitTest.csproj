@@ -128,10 +128,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SN.Library\SN.Library.csproj">
-      <Project>{F4579D44-BB37-48FB-8D3A-939D37274B9C}</Project>
-      <Name>SN.Library</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SN.NetSet.DataAccess\SN.NetSet.DataAccess.csproj">
       <Project>{36c501d1-1552-4a61-8524-125f1c0b2bb5}</Project>
       <Name>SN.NetSet.DataAccess</Name>

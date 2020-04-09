@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SN.NetSet.DataAccess.Concrete.FakeDb
 {
-    public class FakeDbContext: IFakeDbContext
+    public class FakeDbContext : IFakeDbContext
     {
         private static readonly object _lock = new object();
         private static FakeDbContext _instance;

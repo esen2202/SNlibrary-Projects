@@ -47,9 +47,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\SN.Library\SN.Library.csproj">
-      <Project>{F4579D44-BB37-48FB-8D3A-939D37274B9C}</Project>
-      <Name>SN.Library</Name>
+    <ProjectReference Include="..\SN.Data\SN.Data.csproj">
+      <Project>{947355DF-DFC5-41E5-9E15-E6AC5AF12810}</Project>
+      <Name>SN.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\SN.NetSet.DataAccess\SN.NetSet.DataAccess.csproj">
       <Project>{36C501D1-1552-4A61-8524-125F1C0B2BB5}</Project>

@@ -1,11 +1,10 @@
-﻿using SN.Library.Entities;
-using SN.Library.Tools;
+﻿using SN.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace SN.Library.DataAccess.FakeDb
+namespace SN.Data.DataAccess.FakeDb
 {
     public class FakeDbEntityRepositoryBase<TEntity, TList> : IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()
@@ -41,7 +40,7 @@ namespace SN.Library.DataAccess.FakeDb
         {
             var record = Get(filter);
             if (record != null)
-                Class.CopyObjectPropertiesValue(entity, record);
+                SN.Class.Utility.Base.CopyObjectPropertiesValue(entity, record);
         }
     }
 }

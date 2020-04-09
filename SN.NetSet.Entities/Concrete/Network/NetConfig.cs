@@ -1,9 +1,4 @@
-﻿using SN.Library.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SN.Data.Entities;
 
 namespace SN.NetSet.Entities.Concrete.Network
 {

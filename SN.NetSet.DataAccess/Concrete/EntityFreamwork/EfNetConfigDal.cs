@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SN.Library.DataAccess.EntityFramework;
+using SN.Data.DataAccess.EntityFramework;
 using SN.NetSet.DataAccess.Abstract;
-using SN.NetSet.DataAccess.Concrete.EntityFreamwork.Context;
 using SN.NetSet.Entities.Concrete.Network;
 
 namespace SN.NetSet.DataAccess.Concrete.EntityFreamwork
