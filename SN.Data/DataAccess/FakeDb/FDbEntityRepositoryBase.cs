@@ -40,7 +40,8 @@ namespace SN.Data.DataAccess.FakeDb
         {
             var record = Get(filter);
             if (record != null)
-                SN.Class.Utility.Base.CopyObjectPropertiesValue(entity, record);
+                SN.Class.Helpers.ClassHelper.CopyObjectPropertiesValue(entity, record);
+
         }
     }
 }

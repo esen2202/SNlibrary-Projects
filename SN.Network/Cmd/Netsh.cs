@@ -3,9 +3,9 @@ using System;
 
 namespace SN.Network.Abstract
 {
-    public class Netsh : INetAdapterConfigure
+    public class Netsh
     {
-         string adapter, ip, subnet, gateway, dns1;
+        string adapter, ip, subnet, gateway, dns1;
 
         ICommandLine _cmd { get; set; }
 
@@ -16,8 +16,8 @@ namespace SN.Network.Abstract
 
         void Execute(String action)
         {
-            int exitCode;
-            var result = _cmd.Execute(action, out exitCode);
+
+            _cmd.Execute(action);
         }
 
         void SetIP4Configuration()
@@ -29,7 +29,7 @@ namespace SN.Network.Abstract
         {
             var dhcp = "/c netsh interface ip set address \"" + adapter + "\" dhcp & netsh interface ip set dns \"" + adapter + "\" dhcp";
 
-            var ipset ="/c netsh interface ip set address \"" + adapter + "\" static " + ip +
+            var ipset = "/c netsh interface ip set address \"" + adapter + "\" static " + ip +
               " " + subnet + " " + gateway + " & netsh interface ip set dns \"" +
               adapter + "\" static " + dns1;
 

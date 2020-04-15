@@ -1,4 +1,4 @@
-﻿namespace SN.Network.Abstract
+﻿namespace SN.Network.Information
 {
     public interface INetAdapterInfoService
     {

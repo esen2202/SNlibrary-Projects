@@ -1,17 +1,13 @@
-﻿namespace SN.Network.Information
+﻿namespace SN.Network.Model
 {
-    public class NetAdapterInfo : NetAdapterInfoBase
+    public class NetAdapterModel : NetAdapterModelBase
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public string NetworkInterfaceType { get; set; }
+        public NetIpConfigModel IpConfig { get; set; }
         public string PhysicalAddress { get; set; }
         public bool IsReceiveOnly { get; set; }
         public bool SupportMulticast { get; set; }
-        public bool IsOperationalStatusUp { get; set; }
         public long Speed { get; set; }
         public bool Internet { get; set; }
- 
         public string DnsSuffix { get; set; }
         public bool IsDnsEnabled { get; set; }
         public bool IsDynamicDnsEnabled { get; set; }
@@ -21,7 +17,6 @@
         public bool IsAutomaticPrivateAddressingEnabled { get; set; }
         public bool IsForwardingEnabled { get; set; }
         public bool UsesWins { get; set; }
-        public string DhcpServer { get; set; }
 
     }
 }

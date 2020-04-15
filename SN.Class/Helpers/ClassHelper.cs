@@ -1,8 +1,8 @@
-﻿using System.Linq;
+﻿ using System.Linq;
 
-namespace SN.Class.Utility
+namespace SN.Class.Helpers
 {
-    public class Base : IBase
+    public class ClassHelper : IHelper
     {
         public static void CopyObjectPropertiesValue<TObject>(TObject source, TObject target)
         {

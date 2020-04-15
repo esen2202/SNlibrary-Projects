@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SN.Library.Entities;
+using SN.Data.Entities;
 using SN.NetSet.DataAccess.Abstract;
 using SN.NetSet.DataAccess.Concrete.EntityFreamwork;
 using SN.NetSet.DataAccess.Concrete.EntityFreamwork.Context;

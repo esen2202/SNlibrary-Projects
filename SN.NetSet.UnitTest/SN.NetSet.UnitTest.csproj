@@ -122,12 +122,17 @@
   <ItemGroup>
     <Compile Include="DataAccess\DataAccessTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SNNetwork\SNNetwork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SN.Data\SN.Data.csproj">
+      <Project>{947355DF-DFC5-41E5-9E15-E6AC5AF12810}</Project>
+      <Name>SN.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SN.NetSet.DataAccess\SN.NetSet.DataAccess.csproj">
       <Project>{36c501d1-1552-4a61-8524-125f1c0b2bb5}</Project>
       <Name>SN.NetSet.DataAccess</Name>
@@ -135,6 +140,10 @@
     <ProjectReference Include="..\SN.NetSet.Entities\SN.NetSet.Entities.csproj">
       <Project>{319E0FA3-55F7-48E7-B61D-160D06FE6D16}</Project>
       <Name>SN.NetSet.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SN.Network\SN.Network.csproj">
+      <Project>{D34D8676-B9EC-4910-A389-2A8DD0BF8333}</Project>
+      <Name>SN.Network</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

@@ -144,7 +144,6 @@
     <Compile Include="Concrete\FakeDb\FakeDbContext.cs" />
     <Compile Include="Concrete\FakeDb\FakeDbNetConfigDal.cs" />
     <Compile Include="Concrete\FakeDb\FakeDbUserDal.cs" />
-    <Compile Include="Concrete\Sqlite\SqliteNetConfigDal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
