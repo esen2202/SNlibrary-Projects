@@ -39,12 +39,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.HashCode.1.1.0\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.EntityFrameworkCore, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.EntityFrameworkCore.3.1.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
     </Reference>
@@ -121,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\DataAccessTest.cs" />
+    <Compile Include="Mapping\MapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SNNetwork\SNNetwork.cs" />
   </ItemGroup>
@@ -129,9 +134,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SN.Cmd\SN.Cmd.csproj">
+      <Project>{309D6963-2877-4C4A-A192-15A38F6374F1}</Project>
+      <Name>SN.Cmd</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SN.Data\SN.Data.csproj">
       <Project>{947355DF-DFC5-41E5-9E15-E6AC5AF12810}</Project>
       <Name>SN.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SN.NetSet.Business\SN.NetSet.Business.csproj">
+      <Project>{B29E88C0-8185-4614-81E2-4A90535D0CFD}</Project>
+      <Name>SN.NetSet.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\SN.NetSet.DataAccess\SN.NetSet.DataAccess.csproj">
       <Project>{36c501d1-1552-4a61-8524-125f1c0b2bb5}</Project>

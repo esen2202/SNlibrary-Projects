@@ -39,7 +39,7 @@ namespace SN.Data.DataAccess.EntityFramework
             }
         }
 
-        public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
+        public IList<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             using (TContext context = new TContext())
             {

@@ -1,7 +1,10 @@
-﻿namespace SN.NetSet.Business.Abstract
+﻿using SN.NetSet.DataAccess.Abstract;
+
+namespace SN.NetSet.Business.Abstract
 {
-    public interface INetConfigService 
+    public interface INetConfigService  
     {
+
         void GetNetworkList();
         void Save();
 

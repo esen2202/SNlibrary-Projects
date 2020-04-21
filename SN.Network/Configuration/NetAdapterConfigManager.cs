@@ -6,5 +6,6 @@ namespace SN.Network.Configuration
 {
     public class NetAdapterConfigManager : INetAdapterConfigService
     {
+
     }
 }

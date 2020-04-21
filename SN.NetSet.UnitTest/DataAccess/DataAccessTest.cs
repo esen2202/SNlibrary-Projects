@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SN.Data.Entities;
+using SN.NetSet.Business.DependencyResolvers.Ninject;
 using SN.NetSet.DataAccess.Abstract;
 using SN.NetSet.DataAccess.Concrete.EntityFreamwork;
-using SN.NetSet.DataAccess.Concrete.EntityFreamwork.Context;
 using SN.NetSet.DataAccess.Concrete.FakeDb;
 using SN.NetSet.Entities.Concrete.Network;
 
@@ -16,22 +16,18 @@ namespace SN.NetSet.UnitTest
 
         private void InitializeDB()
         {
-            entity = new NetConfig();
-            dal = new FakeDbNetConfigDal();
+            entity = new NetConfigBase();
+            dal = InstanceFactory.GetInstance<INetConfigDal>();
         }
 
-        private void InitializeEfDB()
-        {
-            entity = new NetConfig();
-            dal = new EfNetConfigDal<EfMssqlContext>();
-        }
+
 
         private void AddSampleRecords()
         {
             dal.Add(
-               new NetConfig()
+               new NetConfigBase()
                {
-                   NetConfigId = 1,
+                   Id = 1,
                    ConfigName = "1",
                    IpAddress = "ip1",
                    Gateway = "gate1",
@@ -39,9 +35,9 @@ namespace SN.NetSet.UnitTest
                });
 
             dal.Add(
-               new NetConfig()
+               new NetConfigBase()
                {
-                   NetConfigId = 2,
+                   Id = 2,
                    ConfigName = "2",
                    IpAddress = "ip2",
                    Gateway = "gate2",
@@ -57,17 +53,17 @@ namespace SN.NetSet.UnitTest
             AddSampleRecords();
 
             list = dal.GetList();
-            dal.Update(new NetConfig()
+            dal.Update(new NetConfigBase()
             {
                 ConfigName = "yeni",
-                NetConfigId = 1,
+                Id = 1,
                 Gateway = "y",
                 IpAddress = "e",
                 SubnetMask = "n"
             },
-                o => o.NetConfigId == 1);
+                o => o.Id == 1);
             list = dal.GetList();
-            var del = dal.Get(o => o.NetConfigId == 2);
+            var del = dal.Get(o => o.Id == 2);
             dal.Delete(del);
 
             list = dal.GetList();

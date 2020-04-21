@@ -1,5 +1,6 @@
 ﻿using SN.NetSet.Business.Abstract;
 using SN.NetSet.DataAccess.Abstract;
+using SN.NetSet.Entities.Concrete.Network;
 
 namespace SN.NetSet.Business.Concrete
 {
@@ -18,7 +19,7 @@ namespace SN.NetSet.Business.Concrete
 
         public void Save()
         {
-            _netConfigDal.Add(new Entities.Concrete.Network.NetConfig());
+            _netConfigDal.Add(new  NetConfigBase());
         }
     }
 }

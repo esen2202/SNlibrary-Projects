@@ -29,12 +29,12 @@ namespace SN.NetSet.DataAccess.Concrete.FakeDb
             OnConfigure();
         }
 
-        public List<NetConfig> NetConfigs { get; set; }
+        public List<NetConfigBase> NetConfigs { get; set; }
         public List<User> Users { get; set; }
 
         public override void OnConfigure()
         {
-            NetConfigs = new List<NetConfig>();
+            NetConfigs = new List<NetConfigBase>();
             Users = new List<User>();
         }
 

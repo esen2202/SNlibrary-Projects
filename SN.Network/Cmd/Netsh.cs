@@ -1,38 +1,37 @@
 ﻿using SN.Cmd;
 using System;
 
-namespace SN.Network.Abstract
+namespace SN.Network.Cmd
 {
-    public class Netsh
+    public class Netsh : INetConfigurator
     {
-        string adapter, ip, subnet, gateway, dns1;
+        public event EventHandler ProcessCompleted;
+        private ICommandLine _cmd { get; set; }
+        private ICommandGenerator _commandGenerator { get; set; }
+        public string ResultData { get; set; }
 
-        ICommandLine _cmd { get; set; }
-
-        public Netsh(ICommandLine cmd)
+        public Netsh(ICommandLine cmd, ICommandGenerator commandGenerator)
         {
             _cmd = cmd;
+            _commandGenerator = commandGenerator;
+            _cmd.ProcessCompleted += _cmd_ProcessCompleted;
         }
 
-        void Execute(String action)
+        private void _cmd_ProcessCompleted(object sender, EventArgs e)
         {
+            string data = "";
+            _cmd.OutputData.ForEach(item =>
+            {
+                data += item.ToString();
+            });
+            ResultData = data.Trim();
 
-            _cmd.Execute(action);
+            ProcessCompleted?.Invoke(sender, e);
         }
 
-        void SetIP4Configuration()
+        public void Execute()
         {
-
-        }
-
-        void Create()
-        {
-            var dhcp = "/c netsh interface ip set address \"" + adapter + "\" dhcp & netsh interface ip set dns \"" + adapter + "\" dhcp";
-
-            var ipset = "/c netsh interface ip set address \"" + adapter + "\" static " + ip +
-              " " + subnet + " " + gateway + " & netsh interface ip set dns \"" +
-              adapter + "\" static " + dns1;
-
+            _cmd.Execute(_commandGenerator.Generate());
         }
     }
 }

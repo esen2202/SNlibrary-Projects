@@ -31,7 +31,7 @@ namespace SN.Data.DataAccess.FakeDb
             return _context.Where(filter.Compile()).FirstOrDefault();
         }
 
-        public List<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
+        public IList<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             return filter == null ? _context.ToList() : _context.Where(filter.Compile()).ToList(); ;
         }

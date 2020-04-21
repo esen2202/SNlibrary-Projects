@@ -9,6 +9,12 @@ namespace SN.Cmd
         public event EventHandler ProcessCompleted;
         public event DataReceivedEventHandler OutputDataReceived;
         public List<string> OutputData { get; set; }
+
+        public CommandLine()
+        {
+            OutputData = new List<string>();
+        }
+
         public void Execute(string action)
         {
             var process = new Process
@@ -22,7 +28,7 @@ namespace SN.Cmd
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
-                    Arguments = "/c " + action
+                    Arguments =  action
                 },
                 EnableRaisingEvents = true
             };
@@ -41,12 +47,12 @@ namespace SN.Cmd
 
         private void Process_Exited(object sender, System.EventArgs e)
         {
-            var _sender = (Process)sender;
-            var _output = _sender.StandardOutput.ReadToEnd();
+            var process = (Process)sender;
+            var output = process.StandardOutput.ReadToEnd();
 
-            var _messages = _output.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            var messages = output.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
-            foreach (var message in _messages)
+            foreach (var message in messages)
                 OutputData.Add(message);
 
             ProcessCompleted?.Invoke(this, e);
