@@ -8,7 +8,7 @@ using System;
 namespace SN.NetSet.UnitTest.SNNetwork
 {
     [TestClass]
-    public class SNNetwork
+    public class SNNetworkTest
     {
 
 

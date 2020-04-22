@@ -127,7 +127,7 @@
     <Compile Include="DataAccess\DataAccessTest.cs" />
     <Compile Include="Mapping\MapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SNNetwork\SNNetwork.cs" />
+    <Compile Include="SNNetwork\SNNetworkTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
