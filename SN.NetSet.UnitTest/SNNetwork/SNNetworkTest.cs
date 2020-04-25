@@ -1,7 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SN.Cmd;
-using SN.Network.Cmd;
-using SN.Network.Information;
+using SN.NetSet.Business.Abstract;
+using SN.NetSet.Business.DependencyResolvers.Ninject;
+using SN.NetSet.Business.Network;
+using SN.Network.Config.CommandGenerator;
+using SN.Network.Config.IpConfigurator;
+using SN.Network.Info.NetAdapter;
 using SN.Network.Model;
 using System;
 
@@ -34,7 +38,7 @@ namespace SN.NetSet.UnitTest.SNNetwork
         [TestMethod]
         public void GetAdapterList()
         {
-            NetAdapterInfoManager nac = new NetAdapterInfoManager();
+            NetAdapterInfoSystem nac = new NetAdapterInfoSystem();
             var adpterlist = nac.GetAdapterList();
 
             var captionlist = nac.GetAdapterCaptionList();
@@ -43,35 +47,59 @@ namespace SN.NetSet.UnitTest.SNNetwork
 
         }
 
-        NetAdapterInfoManager nac;
-        Netsh netsh;
+        NetAdapterInfoSystem nac;
+
         [TestMethod]
         public void NetshControl()
         {
-            nac = new NetAdapterInfoManager();
-            var captionlist = nac.GetAdapterCaptionList();
+            //nac = new NetAdapterInfoSystem();
+            //var captionlist = nac.GetAdapterCaptionList();
 
-            ICommandGenerator commandGenerator = new CommandNetshIpConfig()
+            //ICommandGeneratorIpConfigurator commandGenerator =
+            //    new CommandGeneratorNetshIpConfigurator();
+            //commandGenerator.ParameterInject("VMware Virtual Ethernet Adapter for VMnet10", new NetIpConfigModel
+            //{
+            //    IpAddress = "192.5.5.5",
+            //    SubnetMask = "255.255.0.0",
+            //    DnsServer1 = "192.5.5.1",
+            //    IsDhcpEnabled = false
+            //});
+
+            //IpConfiguratorNetsh ipConfiguratorNetsh =
+            //   new IpConfiguratorNetsh(new CommandLineCmd(), new CommandGeneratorNetshIpConfigurator());
+            //ipConfiguratorNetsh.SetIpConfig("VMware Virtual Ethernet Adapter for VMnet10", new NetIpConfigModel
+            //{
+            //    IpAddress = "192.5.5.5",
+            //    SubnetMask = "255.255.0.0",
+            //    DnsServer1 = "192.5.5.1",
+            //    IsDhcpEnabled = false          
+            //});
+            //ipConfiguratorNetsh.SetIpOperationCompleted += İpConfiguratorNetsh_SetIpOperationCompleted;
+
+            INetAdapterInfoService netAdapterInfoManager = 
+                InstanceFactory.GetInstance<INetAdapterInfoService>();
+            var list = netAdapterInfoManager.GetAdapterCaptionList();
+            var adapter = netAdapterInfoManager.GetAdapter("Wireless");
+
+            INetAdapterIpConfigService netAdapterIpConfigService =
+                InstanceFactory.GetInstance<INetAdapterIpConfigService>();
+
+            netAdapterIpConfigService.SetIpConfig(adapter.Description, new NetIpConfigModel()
             {
-                InterfaceDescription = "VMware Virtual Ethernet Adapter for VMnet10",
-                NetIpConfig = new NetIpConfigModel
-                {
-                    IpAddress = "192.5.5.5",
-                    SubnetMask = "255.255.0.0",
-                    DnsServer1 ="192.5.5.1",
-                    IsDhcpEnabled = false
-                }
-            };
+                IpAddress = "10.0.0.5",
+                SubnetMask = "255.0.0.0",
+                DnsServer1 = "10.0.0.1",
+                IsDhcpEnabled = false
+            });
 
-            netsh = new Netsh(new CommandLine(), commandGenerator);
-            netsh.ProcessCompleted += Netsh_ProcessCompleted;
-            netsh.Execute();
+            adapter = netAdapterInfoManager.GetAdapter("Wireless");
 
         }
 
-        private void Netsh_ProcessCompleted(object sender, EventArgs e)
+
+        private void İpConfiguratorNetsh_SetIpOperationCompleted(object sender, EventArgs e)
         {
-            var result = netsh.ResultData;
+            //var result = netsh.ResultData;
             var netadap = nac.GetAdapter("VMware Virtual Ethernet Adapter for VMnet10");
         }
     }

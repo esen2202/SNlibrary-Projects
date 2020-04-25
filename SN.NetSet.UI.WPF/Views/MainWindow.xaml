@@ -1,0 +1,31 @@
+﻿<Window x:Class="SN.NetSet.UI.WPF.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views"
+        xmlns:mainPanel ="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel"
+        xmlns:settingsPanel ="clr-namespace:SN.NetSet.UI.WPF.Views.SettingsPanel" 
+        mc:Ignorable="d"
+        Name="MainWindowXaml" Style="{StaticResource MainWindowStyle}">
+
+    <Grid x:Name="MainGrid" Margin="43,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Main Panel -->
+        <DockPanel HorizontalAlignment="Right" Grid.Column="2" 
+                   DataContext="{Binding Path=DataContext,ElementName=MainWindowXaml}">
+            <mainPanel:_MainPanel/>
+        </DockPanel>
+
+        <!-- Settings Panel -->
+        <!--<DockPanel HorizontalAlignment="Right" Grid.Column="1" >
+            <settingsPanel:_SettingsPanel/>
+        </DockPanel>-->
+
+    </Grid>
+</Window>

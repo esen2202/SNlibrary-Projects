@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using Ninject.Modules;
 using SN.Class.Helpers;
-using System;
-using System.Linq;
-using System.Reflection;
 
 namespace SN.NetSet.Business.DependencyResolvers
 {

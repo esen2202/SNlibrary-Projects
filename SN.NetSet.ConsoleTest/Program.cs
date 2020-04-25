@@ -19,7 +19,7 @@ namespace SN.NetSet.ConsoleTest
 
         private static void CRUDOperations()
         {
-             INetConfigDal netConfigDal = InstanceFactory.GetInstance<INetConfigDal>();
+            INetConfigDal netConfigDal = InstanceFactory.GetInstance<INetConfigDal>();
 
             netConfigDal.Add(new NetConfigBase { ConfigName = "net1", Id = 1, Gateway = "192.159.2.23" });
             netConfigDal.Add(new NetConfigBase { ConfigName = "net2", Id = 2, Gateway = "192.1.2.1" });

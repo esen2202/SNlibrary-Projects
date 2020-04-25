@@ -2,8 +2,6 @@
 using SN.Data.Entities;
 using SN.NetSet.Business.DependencyResolvers.Ninject;
 using SN.NetSet.DataAccess.Abstract;
-using SN.NetSet.DataAccess.Concrete.EntityFreamwork;
-using SN.NetSet.DataAccess.Concrete.FakeDb;
 using SN.NetSet.Entities.Concrete.Network;
 
 namespace SN.NetSet.UnitTest
@@ -19,8 +17,6 @@ namespace SN.NetSet.UnitTest
             entity = new NetConfigBase();
             dal = InstanceFactory.GetInstance<INetConfigDal>();
         }
-
-
 
         private void AddSampleRecords()
         {

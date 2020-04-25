@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="SN.NetSet.UI.WPF.Views.MainPanel._MainPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel"
+             xmlns:usercontrols="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls"
+             xmlns:adapterViewer="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.NetworkAdapterViewer"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="320">
+    
+    <Border Name="MainBorder" Width="320"  VerticalAlignment="Stretch" HorizontalAlignment="Right" Background="#EA0D3253">
+        <Grid Name="LayoutRoot">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Show Current Adapter Information -->
+            <Border Grid.Row="0" BorderBrush="{x:Null}" Margin="2 0 0 0"
+                    DataContext="{Binding CurrentAdapter}">
+                <adapterViewer:_NetworkAdapterViewer/>
+            </Border>
+
+            <!-- Show Global Ip -->
+            <Border Grid.Row="1"  BorderBrush="{x:Null}" Width="318" HorizontalAlignment="Left"  Margin="2 0 0 5">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="25"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Global IP"  VerticalAlignment="Center" Grid.Column="0" Foreground="#FF92BFFF" FontWeight="Normal" />
+
+                    <TextBlock Name="TxbGlobalIP" Text="'0.0.0.0'" Grid.Column="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14"/>
+
+                    <Button Name="BtnCopyGlobalIP" Width="25" Height="25" Padding="0 0 0 0" Grid.Column="2" HorizontalAlignment="Left" >
+                    </Button>
+
+                </Grid>
+            </Border>
+
+            <!-- Button Set -->
+            <Border Grid.Row="2">
+                <local:_ControlButtonSet/>
+            </Border>
+      
+            <!-- Show Adapter List -->
+            <Border Grid.Row="3"
+                    DataContext="{Binding AdapterList}">
+                <local:_NetworkAdapterListContainer/>
+            </Border>
+
+        </Grid>
+    </Border>
+</UserControl>

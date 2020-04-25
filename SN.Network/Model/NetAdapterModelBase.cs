@@ -9,7 +9,7 @@
 
         public IModel Clone()
         {
-           return (IModel)this.MemberwiseClone();
+            return (IModel)this.MemberwiseClone();
         }
     }
 }

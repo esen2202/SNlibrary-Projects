@@ -22,7 +22,7 @@ namespace SN.NetSet.UnitTest.Mapping
                 SubnetMask = "sub 1"
             };
 
-            NetConfigMap netConfigMap = new NetConfigMap
+            NetConfigBase netConfigMap = new NetConfigBase
             {
                 ConfigName = "net config mapping",
                 IpAddress = "ip 1",
@@ -30,7 +30,7 @@ namespace SN.NetSet.UnitTest.Mapping
             };
 
             var _mapper = InstanceFactory.GetInstance<IMapper>();
-            var map = _mapper.Map<NetConfigMap>(netConfigBase);
+            var map = _mapper.Map<NetConfigBase>(netConfigBase);
 
             Assert.AreEqual(netConfigMap, map);
         }
