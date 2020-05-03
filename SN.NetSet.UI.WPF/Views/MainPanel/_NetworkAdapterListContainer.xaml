@@ -7,7 +7,7 @@
              xmlns:adapterList="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.NetworkAdapterList"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="320">
-    
+
     <ListBox 
         Name="LBAdapterList"
         Grid.Row="3"
@@ -17,6 +17,7 @@
         IsSynchronizedWithCurrentItem="True"
         ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
         ScrollViewer.VerticalScrollBarVisibility="Auto">
+        
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <adapterList:_NetworkAdapterListItem Margin="0"/>

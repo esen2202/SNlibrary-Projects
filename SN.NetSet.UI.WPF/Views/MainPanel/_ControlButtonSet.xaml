@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel"
+             xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="320">
     <UserControl.Resources>
@@ -14,17 +14,35 @@
         <StackPanel>
             <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left">
 
-                <Button Name="BtnClose" Margin="2 0 20 4" Style="{StaticResource CloseButton}"/>
+                <Button Name="BtnClose" Margin="2 0 20 4" 
+                        Style="{StaticResource CloseButton}"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                    AncestorType={x:Type Window}}, Path=DataContext.CloseWindowCommand}"/>
 
-                <Button Name="BtnNetConnections" Margin="10 0 10 4" Style="{StaticResource NetConnectionsButton}"/>
+                <Button Name="BtnNetConnections" Margin="10 0 10 4" 
+                        Style="{StaticResource NetConnectionsButton}"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                    AncestorType={x:Type Window}}, Path=DataContext.ShowNetworksCommand}"/>
 
-                <Button Name="BtnRefresh"  Margin="10 0 10 4" Style="{StaticResource RefreshButton}"/>
+                <Button Name="BtnRefresh"  Margin="10 0 10 4" 
+                        Style="{StaticResource RefreshButton}"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                    AncestorType={x:Type Window}}, Path=DataContext.RefreshExecuteCommand}"/>
 
-                <Button Name="BtnSettings"  Margin="10 0 10 4" Style="{StaticResource SettingsButton}"/>
+                <Button Name="BtnSettings"  Margin="10 0 10 4" 
+                        Style="{StaticResource SettingsButton}"
+                        Click="BtnSettings_Click"/>
 
-                <Button Name="BtnAlwaysTop"   Margin="10 0 10 4" Style="{StaticResource AlwaysTopButton}"/>
+                <Button Name="BtnAlwaysTop"   Margin="10 0 10 4" 
+                        Style="{StaticResource AlwaysTopButton}"
+                        Click="BtnAlwaysTop_Click">
+                    <materialDesign:PackIcon Name="iconPin" Kind="PinOutline" Foreground="#DDC7C3F3" Width="25" Height="25" />
+                </Button>
 
-                <Button Name="BtnShowHideList"  Margin="10 0 10 4" Style="{StaticResource ShowHideButton}"/>
+                <Button Name="BtnShowHideList"  Margin="10 0 10 4" Style="{StaticResource ShowHideButton}"
+                        Click="BtnShowHideList_Click">
+                    <materialDesign:PackIcon Name="iconShowHide" Kind="ArrowCollapse" Foreground="#FF2E4665" Width="25" Height="25" />
+                </Button>
 
             </DockPanel>
         </StackPanel>

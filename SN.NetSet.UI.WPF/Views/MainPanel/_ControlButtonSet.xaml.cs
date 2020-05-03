@@ -24,5 +24,40 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
         {
             InitializeComponent();
         }
+
+        private void BtnAlwaysTop_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnShowHideList_Click(object sender, RoutedEventArgs e)
+        {
+            var obj = (MainWindow)Application.Current.MainWindow;
+            
+            
+            if (obj.MainPanel.ListVisibility == Visibility.Collapsed)
+            {
+                obj.MainPanel.ListVisibility = Visibility.Visible;
+                obj.SizeToContent = SizeToContent.Manual;
+                obj.Height = SystemParameters.WorkArea.Height;
+
+            }
+            else
+            {
+                obj.SizeToContent = SizeToContent.Height;
+                obj.MainPanel.ListVisibility = Visibility.Collapsed;
+            }
+            ShowHideIconChanger(obj.MainPanel.ListVisibility == Visibility.Visible);
+        }
+
+        private void BtnSettings_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ShowHideIconChanger(bool visible)
+        {
+            iconShowHide.Kind = visible == false ? MaterialDesignThemes.Wpf.PackIconKind.ArrowExpand : MaterialDesignThemes.Wpf.PackIconKind.ArrowCollapse;
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace SN.NetSet.Business.DependencyResolvers.Ninject
             Bind<INetAdapterInfoService>().To<NetAdapterInfoManager>();
             Bind<INetAdapterIpConfigService>().To<NetAdapterIpConfigManager>();
 
-            Bind<INetAdapterInfo>().To<NetAdapterInfoFake>();
+            Bind<INetAdapterInfo>().To<NetAdapterInfoFake>().InSingletonScope();
             Bind<IIpConfigurator>().To<IpConfiguratorFake>();
  
             Bind<ICommandLine>().To<CommandLineFake>();

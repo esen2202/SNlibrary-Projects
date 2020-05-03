@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SN.Network.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
     /// </summary>
     public partial class _NetworkAdapterListContainer : UserControl
     {
+        private Point startPoint;
+
         public _NetworkAdapterListContainer()
         {
             InitializeComponent();
         }
+
     }
 }

@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Assets.styles">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="MainWindowStyle.xaml" />
+        <ResourceDictionary Source="MainStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

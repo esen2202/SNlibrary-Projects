@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SN.Network.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,19 @@ namespace SN.NetSet.UI.WPF.Views.UserControls.NetworkAdapterList
         public _NetworkAdapterListItem()
         {
             InitializeComponent();
+            this.DataContextChanged += NetListItem_DataContextChanged;
+        }
+
+        private void NetListItem_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (this.DataContext != null)
+                IsNetworkIconChanger(((NetAdapterModelBase)this.DataContext).IsOperationalStatusUp);
+        }
+        private void IsNetworkIconChanger(bool status)
+        {
+            iconNetworkStatus.Kind = status ? MaterialDesignThemes.Wpf.PackIconKind.LanConnect : MaterialDesignThemes.Wpf.PackIconKind.LanDisconnect;
+            iconNetworkStatus.Foreground = status ? new SolidColorBrush(Color.FromArgb(255, 59, 255, 0)) : new SolidColorBrush(Color.FromArgb(255, 255, 97, 89));
+
         }
     }
 }

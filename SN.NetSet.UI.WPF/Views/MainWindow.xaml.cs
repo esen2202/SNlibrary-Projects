@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -27,8 +28,7 @@ namespace SN.NetSet.UI.WPF.Views
             this.Top = SystemParameters.WorkArea.Top;
             this.Width = SystemParameters.WorkArea.Width;
             this.Height = SystemParameters.WorkArea.Height;
-        } 
-
+        }
 
         public MainWindow()
         {
@@ -37,5 +37,6 @@ namespace SN.NetSet.UI.WPF.Views
 
             this.DataContext = new MainWindowViewModel();
         }
+
     }
 }

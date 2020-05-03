@@ -17,7 +17,7 @@ namespace SN.Cmd
             OutputData =
                 "Output Data Count  : " + (ExecCount++).ToString() + Environment.NewLine +
                 "Input Action       : " + action;
-            Thread.Sleep(2000);
+            //Thread.Sleep(2000);
             ProcessCompleted?.Invoke(this, new EventArgs());
         }
 

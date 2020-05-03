@@ -104,7 +104,7 @@ namespace SN.Network.Info.NetAdapter
 
         public NetAdapterModel GetAdapter(string adapterDesc)
         {
-            var adapter = NetworkInterface.GetAllNetworkInterfaces().Where(o => o.Description == adapterDesc).FirstOrDefault();
+            var adapter = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault(o => o.Description == adapterDesc);
 
             return AssignAdapterValues(adapter);
         }

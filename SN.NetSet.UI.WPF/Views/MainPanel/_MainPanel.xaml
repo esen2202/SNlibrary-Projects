@@ -6,58 +6,82 @@
              xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel"
              xmlns:usercontrols="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls"
              xmlns:adapterViewer="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.NetworkAdapterViewer"
+             xmlns:converters="clr-namespace:SN.NetSet.UI.WPF.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="320">
-    
-    <Border Name="MainBorder" Width="320"  VerticalAlignment="Stretch" HorizontalAlignment="Right" Background="#EA0D3253">
-        <Grid Name="LayoutRoot">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+             Name="MainPanel"
+             Height="auto" d:DesignWidth="320">
+    <UserControl.Resources>
+        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Border Name="BorderPanel" Width="320"  VerticalAlignment="Stretch" HorizontalAlignment="Right" Background="#EA0D3253"
+            MouseLeave="BorderPanel_OnMouseLeave">
+            <Grid Name="LayoutRoot">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-            <!-- Show Current Adapter Information -->
-            <Border Grid.Row="0" BorderBrush="{x:Null}" Margin="2 0 0 0"
+                <!-- Show Current Adapter Information -->
+                <Border Grid.Row="0" BorderBrush="{x:Null}" Margin="20 0 0 0"
                     DataContext="{Binding CurrentAdapter}">
-                <adapterViewer:_NetworkAdapterViewer/>
-            </Border>
+                    <adapterViewer:_NetworkAdapterViewer/>
+                </Border>
 
-            <!-- Show Global Ip -->
-            <Border Grid.Row="1"  BorderBrush="{x:Null}" Width="318" HorizontalAlignment="Left"  Margin="2 0 0 5">
-                <Grid >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="3*" />
-                        <ColumnDefinition Width="3*" />
-                        <ColumnDefinition Width="2*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="25"/>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+                <!-- Show Global Ip -->
+                <Border Grid.Row="1"  BorderBrush="{x:Null}" Width="318" HorizontalAlignment="Left"  Margin="20 5 0 10">
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                    <TextBlock Text="Global IP"  VerticalAlignment="Center" Grid.Column="0" Foreground="#FF92BFFF" FontWeight="Normal" />
+                        <TextBlock Text="Global IP"  VerticalAlignment="Top" Grid.Column="0"
+                               Style="{StaticResource LabelTextBlock}"/>
 
-                    <TextBlock Name="TxbGlobalIP" Text="'0.0.0.0'" Grid.Column="1" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="14"/>
+                        <TextBlock Name="TxbGlobalIP" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left"
+                                   Text="{Binding GlobalIp,FallbackValue='0.0.0.0'}" 
+                                   Style="{StaticResource ValueTextBlock}"/>
 
-                    <Button Name="BtnCopyGlobalIP" Width="25" Height="25" Padding="0 0 0 0" Grid.Column="2" HorizontalAlignment="Left" >
-                    </Button>
+                        <Button Name="BtnCopyGlobalIP" Padding="0 0 0 0" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left"
+                                Style="{StaticResource CopyButton}"                                 
+                                CommandParameter="{Binding GlobalIp}"
+                                Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                                AncestorType={x:Type Window}}, Path=DataContext.CopyToClipboard}"
+                                Visibility="{Binding GlobalIp,Converter={StaticResource StringToVisibilityConverter}}"/>
 
-                </Grid>
-            </Border>
+                    </Grid>
+                </Border>
 
-            <!-- Button Set -->
-            <Border Grid.Row="2">
-                <local:_ControlButtonSet/>
-            </Border>
-      
-            <!-- Show Adapter List -->
-            <Border Grid.Row="3"
+                <!-- Button Set -->
+                <Border Grid.Row="2">
+                    <local:_ControlButtonSet/>
+                </Border>
+
+                <!-- Show Adapter List -->
+                <Border Name="BorderAdapterList"
+                    Grid.Row="3" Height="auto" 
+                    Visibility="{Binding ListVisibility, ElementName=MainPanel}"
                     DataContext="{Binding AdapterList}">
-                <local:_NetworkAdapterListContainer/>
-            </Border>
+                    <local:_NetworkAdapterListContainer/>
+                </Border>
 
-        </Grid>
-    </Border>
+            </Grid>
+        </Border>
+
+        <!-- Floating -->
+        
+            <Border x:Name="BorderFloating" VerticalAlignment="Top"
+                Style="{StaticResource FloatingBar}"
+                MouseEnter="BorderFloating_OnMouseEnter" />
+  
+    </Grid>
+    
 </UserControl>

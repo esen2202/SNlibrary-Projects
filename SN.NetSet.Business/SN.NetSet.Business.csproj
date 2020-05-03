@@ -129,6 +129,7 @@
     <Compile Include="Abstract\INetAdapterInfoService.cs" />
     <Compile Include="Network\NetAdapterInfoManager.cs" />
     <Compile Include="Network\NetAdapterIpConfigManager.cs" />
+    <Compile Include="Network\NetworkTools.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

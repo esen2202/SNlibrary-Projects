@@ -7,9 +7,16 @@
         xmlns:mainPanel ="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel"
         xmlns:settingsPanel ="clr-namespace:SN.NetSet.UI.WPF.Views.SettingsPanel" 
         mc:Ignorable="d"
-        Name="MainWindowXaml" Style="{StaticResource MainWindowStyle}">
-
-    <Grid x:Name="MainGrid" Margin="43,0,0,0">
+        WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" Topmost="True"
+        Name="MainWindowXaml" Title="SNNetSet">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Assets/styles/_MainWindowStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid x:Name="MainGrid" Height="auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
@@ -17,15 +24,16 @@
         </Grid.ColumnDefinitions>
 
         <!-- Main Panel -->
-        <DockPanel HorizontalAlignment="Right" Grid.Column="2" 
+        <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Column="2" 
                    DataContext="{Binding Path=DataContext,ElementName=MainWindowXaml}">
-            <mainPanel:_MainPanel/>
+            <mainPanel:_MainPanel x:Name="MainPanel"/>
         </DockPanel>
 
         <!-- Settings Panel -->
         <!--<DockPanel HorizontalAlignment="Right" Grid.Column="1" >
             <settingsPanel:_SettingsPanel/>
         </DockPanel>-->
+
 
     </Grid>
 </Window>
