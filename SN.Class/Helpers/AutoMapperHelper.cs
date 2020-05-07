@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
 
-namespace SN.Class.Mappings
+namespace SN.Class.Helpers
 {
     public class AutoMapperHelper
     {

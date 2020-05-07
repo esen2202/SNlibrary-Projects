@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
-using Ninject.Infrastructure.Language;
+using SN.Class.Derivations;
 using SN.NetSet.Business.Abstract;
 using SN.NetSet.Business.DependencyResolvers.Ninject;
 using SN.NetSet.Business.Network;
 using SN.NetSet.UI.WPF.Commands.Generic;
 using SN.Network.Model;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -18,9 +16,8 @@ namespace SN.NetSet.UI.WPF.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-
-        private ObservableCollection<NetAdapterModelBase> _adapterList;
-        public ObservableCollection<NetAdapterModelBase> AdapterList
+        private ObservableCollectionPropertyNotify<NetAdapterModelBase> _adapterList;
+        public ObservableCollectionPropertyNotify<NetAdapterModelBase> AdapterList
         {
             get { return _adapterList; }
             set
@@ -41,11 +38,13 @@ namespace SN.NetSet.UI.WPF.ViewModels
             }
         }
 
+        private string _globalIp;
         public string GlobalIp
         {
-            get { return NetworkTools.GetGlobalIp(); }
+            get { return _globalIp; }
             set
             {
+                _globalIp = value;
                 base.OnPropertyChanged(() => GlobalIp);
             }
         }
@@ -54,25 +53,45 @@ namespace SN.NetSet.UI.WPF.ViewModels
         private readonly INetAdapterIpConfigService _netAdapterIpConfigService;
 
         private readonly IMapper _mapper;
+
         public MainWindowViewModel()
         {
             _mapper = InstanceFactory.GetInstance<IMapper>();
-
             _netAdapterInfoService = InstanceFactory.GetInstance<INetAdapterInfoService>();
+            _netAdapterIpConfigService = InstanceFactory.GetInstance<INetAdapterIpConfigService>();
+
             _netAdapterInfoService.ReloadedAdapterList += _netAdapterInfoService_ReloadedAdapterList;
 
-            _netAdapterIpConfigService = InstanceFactory.GetInstance<INetAdapterIpConfigService>();
-            
+            GetGlobalIp();
         }
 
         private void _netAdapterInfoService_ReloadedAdapterList(object sender, EventArgs e)
         {
-            AdapterList = _mapper.Map<ObservableCollection<NetAdapterModelBase>>(_netAdapterInfoService.GetAdapterCaptionList());
+            AdapterList = _mapper.Map<ObservableCollectionPropertyNotify<NetAdapterModelBase>>(_netAdapterInfoService.GetAdapterCaptionList());
 
-            if(CurrentAdapter == null) 
-                CurrentAdapter = _netAdapterInfoService.GetAdapterList().First();
+            if (CurrentAdapter == null)
+                CurrentAdapter = _netAdapterInfoService.GetAdapterList().Count > 0
+                    ? (NetAdapterModel)_netAdapterInfoService.GetAdapterList().First().Clone()
+                    : new NetAdapterModel()
+                    {
+                        Name = "No Adapter",
+                        Description = "Not Found Adapter",
+                        IpConfig = new NetIpConfigModel()
+                    };
+            else CurrentAdapter = (NetAdapterModel)_netAdapterInfoService.GetAdapter(CurrentAdapter.Description).Clone();
         }
 
+        public void SuspendInfoService()
+        {
+            _netAdapterInfoService.SuspendThread = true;
+        }
+
+        public void ContinueInfoService()
+        {
+            _netAdapterInfoService.SuspendThread = false;
+        }
+
+        #region Commands
         private ICommand _selectNetAdaptCommand;
         public ICommand SelectNetAdaptCommand
         {
@@ -81,17 +100,17 @@ namespace SN.NetSet.UI.WPF.ViewModels
                 if (_selectNetAdaptCommand == null)
                 {
                     _selectNetAdaptCommand = new RelayCommand(
-                    p => this.SelectedAdapter(p));
+                    p => this.SelectNetAdaptMethod(p));
                 }
                 return _selectNetAdaptCommand;
             }
         }
-        private void SelectedAdapter(object p)
+        private void SelectNetAdaptMethod(object p)
         {
             if (p != null)
             {
                 NetAdapterModelBase obj = p as NetAdapterModelBase;
-                CurrentAdapter = _netAdapterInfoService.GetAdapter(obj.Description);
+                CurrentAdapter = (NetAdapterModel)_netAdapterInfoService.GetAdapter(obj.Description).Clone();
             }
         }
 
@@ -105,49 +124,36 @@ namespace SN.NetSet.UI.WPF.ViewModels
                     _refreshExecuteCommand = new RelayCommand(
                         p =>
                         {
-                            //Action
-                            ChangeAdapterSettingsTest(p);
+                            RefreshExecuteMethod();
                         });
                 }
                 return _refreshExecuteCommand;
             }
         }
 
-        int i;
-        private void ChangeAdapterSettingsTest(object p)
+        private void RefreshExecuteMethod()
         {
-            AdapterList[0].Description = "description " + i.ToString();
-            //var c = (NetAdapterModel)CurrentAdapter.Clone();
-            CurrentAdapter.Speed = i * 5;
-            i++;
-            //CurrentAdapter = c;
-            //GC.SuppressFinalize(c);
 
-            //base.OnPropertyChanged(() => CurrentAdapter);
-            CurrentAdapter = (NetAdapterModel)CurrentAdapter.Clone();
-            //AdapterList.Add(new NetAdapterModelBase { Description = "description " + i.ToString(), IsOperationalStatusUp = false, Name = "name " + i.ToString() });
-
-            var changeAdapter = CurrentAdapter.IpConfig;
-            CurrentAdapter.IpConfig.IpAddress = "ip " + i.ToString();
-
-            _netAdapterIpConfigService.SetIpConfig(CurrentAdapter.Description, changeAdapter );
-
-            CurrentAdapter = _netAdapterInfoService.GetAdapter(CurrentAdapter.Description);
-            Network.Info.NetAdapter.NetAdapterInfoFake.netAdapterModels[0].Name =  "name " + i.ToString();
         }
 
-        private ICommand _closeWindowCommand;
-        public ICommand CloseWindowCommand
+        private ICommand _shutDownAppCommand;
+        public ICommand ShutDownAppCommand
         {
             get
             {
-                if (_closeWindowCommand == null)
+                if (_shutDownAppCommand == null)
                 {
-                    _closeWindowCommand = new RelayCommand(
-                        p => Application.Current.Shutdown());
+                    _shutDownAppCommand = new RelayCommand(
+                        p => ShutDownAppMethod());
                 }
-                return _closeWindowCommand;
+                return _shutDownAppCommand;
             }
+        }
+
+        private void ShutDownAppMethod()
+        {
+            _netAdapterInfoService.Dispose();
+            Application.Current.Shutdown();
         }
 
         private ICommand _showNetworksCommand;
@@ -159,10 +165,15 @@ namespace SN.NetSet.UI.WPF.ViewModels
                 {
                     _showNetworksCommand =
                         new RelayCommand(
-                        p => NetworkTools.ShowNetConnections());
+                        p => ShowNetworksMethod());
                 }
                 return _showNetworksCommand;
             }
+        }
+
+        private void ShowNetworksMethod()
+        {
+            NetworkTools.ShowNetConnections();
         }
 
         private ICommand _copyToClipboard;
@@ -173,11 +184,35 @@ namespace SN.NetSet.UI.WPF.ViewModels
                 if (_copyToClipboard == null)
                 {
                     _copyToClipboard = new RelayCommand(
-                    p => Clipboard.SetText((string)p));
+                    p => CopyToClipboardMethod(p));
                 }
                 return _copyToClipboard;
             }
         }
 
+        private static void CopyToClipboardMethod(object p)
+        {
+            Clipboard.SetText((string)p);
+        }
+
+        private ICommand _refreshGlobalIp;
+        public ICommand RefreshGlobalIp
+        {
+            get
+            {
+                if (_refreshGlobalIp == null)
+                {
+                    _refreshGlobalIp = new RelayCommand(
+                    p => GetGlobalIp());
+                }
+                return _refreshGlobalIp;
+            }
+        }
+
+        private async void GetGlobalIp()
+        {
+            GlobalIp = await NetworkTools.GetGlobalIpAsync();
+        }
+        #endregion
     }
 }

@@ -1,18 +1,6 @@
-﻿using SN.Network.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SN.NetSet.UI.WPF.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SN.NetSet.UI.WPF.Views.MainPanel
 {
@@ -21,11 +9,31 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
     /// </summary>
     public partial class _NetworkAdapterListContainer : UserControl
     {
-        private Point startPoint;
-
         public _NetworkAdapterListContainer()
         {
             InitializeComponent();
+            LBAdapterList.DataContextChanged += LBAdapterList_DataContextChanged;
+            LBAdapterList.SelectionChanged += LBAdapterList_SelectionChanged;
+        }
+
+        private void LBAdapterList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (LBAdapterList.SelectedIndex != -1)
+                _selectedItemIndex = LBAdapterList.SelectedIndex;
+        }
+
+        private int _selectedItemIndex = 0;
+
+        private void LBAdapterList_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            ((MainWindowViewModel)Application.Current.MainWindow.DataContext).AdapterList.CollectionChanged += AdapterList_CollectionChanged;
+        }
+
+        private void AdapterList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            ListBoxItem lbi = (ListBoxItem)LBAdapterList.ItemContainerGenerator.ContainerFromIndex(_selectedItemIndex);
+            if (lbi != null)
+                lbi.IsSelected = true;
         }
 
     }

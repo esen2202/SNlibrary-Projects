@@ -15,10 +15,10 @@ namespace SN.NetSet.Business.DependencyResolvers.Ninject
             Bind<INetAdapterInfoService>().To<NetAdapterInfoManager>();
             Bind<INetAdapterIpConfigService>().To<NetAdapterIpConfigManager>();
 
-            Bind<INetAdapterInfo>().To<NetAdapterInfoFake>().InSingletonScope();
-            Bind<IIpConfigurator>().To<IpConfiguratorFake>();
+            Bind<INetAdapterInfo>().To<NetAdapterInfoSystem>().InSingletonScope();
+            Bind<IIpConfigurator>().To<IpConfiguratorNetsh>();
  
-            Bind<ICommandLine>().To<CommandLineFake>();
+            Bind<ICommandLine>().To<CommandLineCmd>();
             Bind<ICommandGeneratorIpConfigurator>().To<CommandGeneratorNetshIpConfigurator>();
         
         }

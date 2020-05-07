@@ -1,14 +1,23 @@
 ﻿using SN.Network.Helpers;
+using System.Threading.Tasks;
 
 namespace SN.NetSet.Business.Network
 {
     public class NetworkTools
     {
-        public static string GetGlobalIp() => NetworkHelper.GetGlobalIp();
-
-        public static void ShowNetConnections()
+        public static Task<string> GetGlobalIpAsync()
         {
-            NetworkHelper.ShowNetConnections();
+            Task<string> islem = Task.Run<string>(() =>
+            {
+                return NetworkHelper.GetGlobalIp();
+            });
+
+            return islem;
+        }
+
+        public  static void ShowNetConnections()
+        {
+             NetworkHelper.ShowNetConnections();
         }
     }
 }

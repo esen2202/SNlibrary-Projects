@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="SN.NetSet.UI.WPF.Views.MainPanel._AppSettings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="320">
+ 
+        <Expander Name="ExpAdapter" 
+                      HorizontalAlignment="Stretch" 
+                      Foreground="#FFFFB900" Background="{x:Null}">
+            <Expander.Header >
+                <HeaderedContentControl >
+                    <DockPanel VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="SettingsHelper" Foreground="Aqua" VerticalAlignment="Center" 
+                                             Height="20" Width="20" Margin="0 0 15 0"/>
+                    <TextBlock Text="App Settings" VerticalAlignment="Center"
+                                       Style="{StaticResource MaterialDesignBody2TextBlock}"/>
+                    </DockPanel>
+                </HeaderedContentControl>
+            </Expander.Header>
+
+            <!-- Detail Content -->
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="2*" />
+                     
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="25"/>
+       
+                </Grid.RowDefinitions>
+
+                <!--#region Startup -->
+                <DockPanel Grid.Column="0" Grid.Row="0">
+                    <TextBlock Text="Run at Windows Startup"  VerticalAlignment="Center"
+                                   Style="{StaticResource LabelTextBlock}"/>
+                </DockPanel>
+
+                <DockPanel Grid.Column="1" Grid.Row="0"  >
+                    <CheckBox x:Name="CBStartup" 
+                              Margin="20 0 0 0" Width="25" Height="25"
+                              Checked="CBStartup_Checked" Unchecked="CBStartup_Unchecked" 
+                              Background="Gold" Foreground="Black"
+                              Style="{StaticResource MaterialDesignActionToggleButton}" />
+                </DockPanel>
+
+                <!--#endregion-->
+
+
+            </Grid>
+
+        </Expander>
+
+ 
+</UserControl>

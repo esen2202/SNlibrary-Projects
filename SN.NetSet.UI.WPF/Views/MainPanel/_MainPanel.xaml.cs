@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SN.NetSet.UI.WPF.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SN.NetSet.UI.WPF.Views.MainPanel
 {
@@ -23,9 +14,7 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
     {
         private Storyboard openSideBarStoryboard;
         private Storyboard closeSideBarStoryboard;
-
-        private bool pinnedSideBar;
-
+        MainWindow mainWindow;
         public Visibility ListVisibility
         {
             get { return (Visibility)GetValue(ListVisibilityProperty); }
@@ -35,9 +24,12 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
         public static readonly DependencyProperty ListVisibilityProperty =
             DependencyProperty.Register("ListVisibility", typeof(Visibility), typeof(_MainPanel), new PropertyMetadata(Visibility.Visible));
 
+
         public _MainPanel()
         {
             InitializeComponent();
+
+            this.Loaded += _MainPanel_Loaded;
 
             openSideBarStoryboard = new Storyboard();
             closeSideBarStoryboard = new Storyboard();
@@ -46,9 +38,16 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
             closeSideBarStoryboard.Completed += CloseStoryboard_Completed;
         }
 
+        private void _MainPanel_Loaded(object sender, RoutedEventArgs e)
+        {
+            mainWindow = (MainWindow)Application.Current.MainWindow;
+        }
+
         private void CloseStoryboard_Completed(object sender, EventArgs e)
         {
             BorderFloating.Visibility = Visibility.Visible;
+            (mainWindow.DataContext as MainWindowViewModel).SuspendInfoService();
+            mainWindow.SetTopMost(true, false);
         }
 
         private void OpenStoryboard_Completed(object sender, EventArgs e)
@@ -70,7 +69,7 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
 
         private void BorderPanel_OnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (BorderPanel.Width >= 320)
+            if (BorderPanel.Width >= 320 && !mainWindow.GetStatusPinSideBar())
                 BorderWidthAnimation(BorderPanel, closeSideBarStoryboard, BorderPanel.Width, 0);
         }
         private void BorderFloating_OnMouseEnter(object sender, MouseEventArgs e)
@@ -78,6 +77,9 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
             closeSideBarStoryboard.Stop();
             BorderFloating.Visibility = Visibility.Collapsed;
             BorderWidthAnimation(BorderPanel, openSideBarStoryboard, BorderPanel.Width, 320);
+
+            (mainWindow.DataContext as MainWindowViewModel).ContinueInfoService();
+            mainWindow.SetTopMost(mainWindow.GetStatusTopMost(), false);
         }
     }
 }

@@ -15,20 +15,21 @@ namespace SN.NetSet.Business.Network
         INetAdapterInfo _netAdapterInfo;
         static List<NetAdapterModel> _netAdapterList;
         static List<NetAdapterModelBase> _netAdapterCaptionList;
-        Thread thread;
+        Timer timer;
         IMapper _mapper;
+
+        public bool SuspendThread { get; set; }
+
         public event EventHandler ReloadedAdapterList;
 
-        private void GetAdapterListThread()
+        private void GetAdapterListThread(object state)
         {
-            while (true)
+            if (!SuspendThread)
             {
                 _netAdapterList = _netAdapterInfo.GetAdapterList();
                 _netAdapterCaptionList = _mapper.Map<List<NetAdapterModelBase>>(_netAdapterList);
 
-                ReloadedAdapterList?.Invoke(this,new EventArgs());
-
-                Thread.Sleep(3000);
+                ReloadedAdapterList?.Invoke(this, new EventArgs());
             }
         }
 
@@ -39,29 +40,31 @@ namespace SN.NetSet.Business.Network
 
             _netAdapterList = new List<NetAdapterModel>();
             _netAdapterCaptionList = new List<NetAdapterModelBase>();
-            thread = new Thread(GetAdapterListThread);
-            thread.Start();
+
+            timer = new Timer(new TimerCallback(GetAdapterListThread), null, 1000, 5000);
         }
 
         public List<NetAdapterModel> GetAdapterList()
         {
             return _netAdapterList;
-                //_netAdapterInfo.GetAdapterList();
         }
 
         public List<NetAdapterModelBase> GetAdapterCaptionList()
         {
             return _netAdapterCaptionList;
-                //_netAdapterInfo.GetAdapterCaptionList();
         }
 
         public NetAdapterModel GetAdapter(string adapterDesc)
         {
-            return _netAdapterList.SingleOrDefault(o => o.Description == adapterDesc) ?? new NetAdapterModel();
-            //_netAdapterInfo.GetAdapter(adapterDesc);
+            var adapter = _netAdapterList.SingleOrDefault(o => o.Description == adapterDesc) ?? new NetAdapterModel();
+            adapter.IpConfig = adapter.IpConfig ?? new NetIpConfigModel();
+            return adapter;
         }
 
-
-
+        public void Dispose()
+        {
+            timer.Dispose();
+            GC.SuppressFinalize(this);
+        }
     }
 }

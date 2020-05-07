@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using System.Linq;
 
 namespace SN.Regedit.Startup
 {
@@ -23,6 +24,12 @@ namespace SN.Regedit.Startup
                 RegistryKey key = Registry.CurrentUser.OpenSubKey(StartupKey, true);
                 key.DeleteValue(StartupValue);
             }
+        }
+
+        public static bool IsExistStartup(string StartupValue)
+        {
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(StartupKey, true);
+            return (key.GetValueNames().Contains(StartupValue));
         }
     }
 }

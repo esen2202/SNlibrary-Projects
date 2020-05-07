@@ -73,8 +73,16 @@
     <Compile Include="Converters\MacAddressConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="Properties\AppSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>AppSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="Views\MainPanel\_AppSettings.xaml.cs">
+      <DependentUpon>_AppSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPanel\_ControlButtonSet.xaml.cs">
       <DependentUpon>_ControlButtonSet.xaml</DependentUpon>
     </Compile>
@@ -118,6 +126,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Assets\styles\_NetworkAdapterContainerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPanel\_AppSettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,6 +205,10 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <None Include="Properties\AppSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>AppSettings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -207,6 +223,10 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SN.Class\SN.Class.csproj">
+      <Project>{BEA351B9-CBDE-4196-A96A-A5AA8AFFF25D}</Project>
+      <Name>SN.Class</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SN.NetSet.Business\SN.NetSet.Business.csproj">
       <Project>{B29E88C0-8185-4614-81E2-4A90535D0CFD}</Project>
       <Name>SN.NetSet.Business</Name>
@@ -214,6 +234,14 @@
     <ProjectReference Include="..\SN.Network\SN.Network.csproj">
       <Project>{D34D8676-B9EC-4910-A389-2A8DD0BF8333}</Project>
       <Name>SN.Network</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SN.Regedit\SN.Regedit.csproj">
+      <Project>{EF215FA4-1C94-4357-AD53-69C5D2C90975}</Project>
+      <Name>SN.Regedit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SN.Windows\SN.Windows.csproj">
+      <Project>{075A4654-61BA-47B9-A760-E8FB30F8BAA5}</Project>
+      <Name>SN.Windows</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -7,7 +7,7 @@
         xmlns:mainPanel ="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel"
         xmlns:settingsPanel ="clr-namespace:SN.NetSet.UI.WPF.Views.SettingsPanel" 
         mc:Ignorable="d"
-        WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" Topmost="True"
+        WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" ShowInTaskbar="False"
         Name="MainWindowXaml" Title="SNNetSet">
     <Window.Resources>
         <ResourceDictionary>
@@ -24,9 +24,9 @@
         </Grid.ColumnDefinitions>
 
         <!-- Main Panel -->
-        <DockPanel HorizontalAlignment="Right" VerticalAlignment="Top"  Grid.Column="2" 
+        <DockPanel HorizontalAlignment="Right"  Grid.Column="2" 
                    DataContext="{Binding Path=DataContext,ElementName=MainWindowXaml}">
-            <mainPanel:_MainPanel x:Name="MainPanel"/>
+            <mainPanel:_MainPanel x:Name="MainPanel" />
         </DockPanel>
 
         <!-- Settings Panel -->

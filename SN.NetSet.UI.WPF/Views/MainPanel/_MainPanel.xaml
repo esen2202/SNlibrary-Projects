@@ -6,13 +6,15 @@
              xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel"
              xmlns:usercontrols="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls"
              xmlns:adapterViewer="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.NetworkAdapterViewer"
-             xmlns:converters="clr-namespace:SN.NetSet.UI.WPF.Converters"
+             xmlns:converters="clr-namespace:SN.NetSet.UI.WPF.Converters" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              Name="MainPanel"
              Height="auto" d:DesignWidth="320">
+    
     <UserControl.Resources>
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     </UserControl.Resources>
+    
     <Grid>
         <Border Name="BorderPanel" Width="320"  VerticalAlignment="Stretch" HorizontalAlignment="Right" Background="#EA0D3253"
             MouseLeave="BorderPanel_OnMouseLeave">
@@ -22,6 +24,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="40"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <!-- Show Current Adapter Information -->
@@ -50,13 +53,23 @@
                                    Text="{Binding GlobalIp,FallbackValue='0.0.0.0'}" 
                                    Style="{StaticResource ValueTextBlock}"/>
 
-                        <Button Name="BtnCopyGlobalIP" Padding="0 0 0 0" Grid.Column="2" VerticalAlignment="Top" HorizontalAlignment="Left"
-                                Style="{StaticResource CopyButton}"                                 
-                                CommandParameter="{Binding GlobalIp}"
-                                Command="{Binding RelativeSource={RelativeSource FindAncestor,
-                                AncestorType={x:Type Window}}, Path=DataContext.CopyToClipboard}"
-                                Visibility="{Binding GlobalIp,Converter={StaticResource StringToVisibilityConverter}}"/>
+                        <DockPanel Grid.Column="2">
+                            <Button Name="BtnCopyGlobalIP" Padding="0 0 0 0"  VerticalAlignment="Top" HorizontalAlignment="Left"
+                                    Style="{StaticResource CopyButton}"                                 
+                                    CommandParameter="{Binding GlobalIp}"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                                    AncestorType={x:Type Window}}, Path=DataContext.CopyToClipboard}"
+                                    Visibility="{Binding GlobalIp,Converter={StaticResource StringToVisibilityConverter}}"/>
 
+                            <Button Name="BtnRefreshGlobalIP" Padding="0 0 0 0"  
+                                    VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Top"
+                                    Style="{StaticResource MaterialDesignToolButton}"
+                                    Command="{Binding RelativeSource={RelativeSource FindAncestor,
+                                    AncestorType={x:Type Window}}, Path=DataContext.RefreshGlobalIp}">
+                                <materialDesign:PackIcon Name="iconShowHide" Kind="Refresh" Foreground="Green"  
+                                                         Width="23" Height="23"  Margin="4 2 0 0"/>
+                            </Button>
+                        </DockPanel>
                     </Grid>
                 </Border>
 
@@ -67,12 +80,17 @@
 
                 <!-- Show Adapter List -->
                 <Border Name="BorderAdapterList"
-                    Grid.Row="3" Height="auto" 
+                    Grid.Row="3"  
                     Visibility="{Binding ListVisibility, ElementName=MainPanel}"
                     DataContext="{Binding AdapterList}">
                     <local:_NetworkAdapterListContainer/>
                 </Border>
 
+                <!-- Settings -->
+                <Border Name="BorderSettings"
+                    Grid.Row="4">
+                    <local:_AppSettings Margin=" 10 0 0 0"/>
+                </Border>
             </Grid>
         </Border>
 
@@ -80,7 +98,7 @@
         
             <Border x:Name="BorderFloating" VerticalAlignment="Top"
                 Style="{StaticResource FloatingBar}"
-                MouseEnter="BorderFloating_OnMouseEnter" />
+                MouseEnter="BorderFloating_OnMouseEnter"/>
   
     </Grid>
     
