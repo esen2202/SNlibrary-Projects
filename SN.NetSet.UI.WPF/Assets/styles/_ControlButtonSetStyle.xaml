@@ -52,5 +52,8 @@
 
     <Style x:Key="ShowHideButton" TargetType="Button" BasedOn="{StaticResource ToolButtonBase}">
     </Style>
+
+    <Style x:Key="TopMostButton" TargetType="Button" BasedOn="{StaticResource ToolButtonBase}">
+    </Style>
     
 </ResourceDictionary>

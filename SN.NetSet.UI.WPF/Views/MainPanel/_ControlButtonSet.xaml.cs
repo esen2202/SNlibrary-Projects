@@ -38,7 +38,7 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
 
         private void BtnAlwaysTop_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.SetPinSideBar(!mainWindow.GetStatusPinSideBar());
+            mainWindow.SetPinSideBar(!MainWindow.GetStatusPinSideBar());
             PinnedIconChanger();
         }
 
@@ -58,9 +58,9 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
             ShowHideIconChanger(mainWindow.MainPanel.ListVisibility == Visibility.Visible);
         }
 
-        private void BtnSettings_Click(object sender, RoutedEventArgs e)
+        private void BtnTopMost_Click(object sender, RoutedEventArgs e)
         {
-            mainWindow.SetTopMost(!mainWindow.GetStatusTopMost(),true);
+            mainWindow.SetTopMost(!MainWindow.GetStatusTopMost(), true);
             TopMostIconChanger();
         }
 
@@ -71,17 +71,30 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
 
         private void PinnedIconChanger()
         {
-            if (mainWindow.GetStatusPinSideBar())
+            if (MainWindow.GetStatusPinSideBar())
                 iconPin.Kind = MaterialDesignThemes.Wpf.PackIconKind.PinOutline;
             else
                 iconPin.Kind = MaterialDesignThemes.Wpf.PackIconKind.PinOffOutline;
+
         }
 
         private void TopMostIconChanger()
         {
-            iconTopMost.Kind = mainWindow.GetStatusTopMost()
+            iconTopMost.Kind = MainWindow.GetStatusTopMost()
                 ? MaterialDesignThemes.Wpf.PackIconKind.ArrangeBringToFront
                 : MaterialDesignThemes.Wpf.PackIconKind.ArrangeSendToBack;
+        }
+
+        private void BtnConfig_Click(object sender, RoutedEventArgs e)
+        {
+            (Application.Current.MainWindow as MainWindow).ConfigPanel.OpenConfig();
+            (Application.Current.MainWindow as MainWindow).MainPanel.PreventClose = true;
+        }
+
+        private void BtnClose_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.SetSettings();
+            Application.Current.Shutdown();
         }
     }
 }

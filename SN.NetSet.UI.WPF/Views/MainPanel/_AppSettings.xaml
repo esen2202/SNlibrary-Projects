@@ -6,7 +6,10 @@
              xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="320">
- 
+    <UserControl.Resources>
+            <ResourceDictionary Source="../../Assets/styles/_AppSettingsStyle.xaml" />
+    </UserControl.Resources>
+    
         <Expander Name="ExpAdapter" 
                       HorizontalAlignment="Stretch" 
                       Foreground="#FFFFB900" Background="{x:Null}">
@@ -15,8 +18,8 @@
                     <DockPanel VerticalAlignment="Center">
                     <materialDesign:PackIcon Kind="SettingsHelper" Foreground="Aqua" VerticalAlignment="Center" 
                                              Height="20" Width="20" Margin="0 0 15 0"/>
-                    <TextBlock Text="App Settings" VerticalAlignment="Center"
-                                       Style="{StaticResource MaterialDesignBody2TextBlock}"/>
+                    <TextBlock Text="App Settings"                                        
+                               Style="{StaticResource AppSetTitle}"/>
                     </DockPanel>
                 </HeaderedContentControl>
             </Expander.Header>
@@ -36,24 +39,20 @@
 
                 <!--#region Startup -->
                 <DockPanel Grid.Column="0" Grid.Row="0">
-                    <TextBlock Text="Run at Windows Startup"  VerticalAlignment="Center"
-                                   Style="{StaticResource LabelTextBlock}"/>
+                    <TextBlock Text="Run at Windows Startup" 
+                               Style="{StaticResource AppSetLabel}"/>
                 </DockPanel>
 
                 <DockPanel Grid.Column="1" Grid.Row="0"  >
                     <CheckBox x:Name="CBStartup" 
-                              Margin="20 0 0 0" Width="25" Height="25"
                               Checked="CBStartup_Checked" Unchecked="CBStartup_Unchecked" 
-                              Background="Gold" Foreground="Black"
-                              Style="{StaticResource MaterialDesignActionToggleButton}" />
+                              Style="{StaticResource AppSetToggle}"/>
                 </DockPanel>
 
                 <!--#endregion-->
-
-
+                
             </Grid>
 
         </Expander>
-
  
 </UserControl>

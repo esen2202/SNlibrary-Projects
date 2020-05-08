@@ -14,6 +14,7 @@
             <converters:StringFormatConverter x:Key="StringFormatConverter" />
             <converters:MacAddressConverter x:Key="MacAddressConverter"/>
             <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+            <converters:BitToMBConverter x:Key="BitToMBConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../../Assets/styles/_NetworkAdapterContainerStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
@@ -276,7 +277,7 @@
                         <TextBlock  Foreground="White" VerticalAlignment="Center" FontSize="14">
                             <TextBlock Name="TxbSpeed"
                                        Style="{StaticResource ValueTextBlock}"
-                                       Text="{Binding Speed,FallbackValue='-',UpdateSourceTrigger=PropertyChanged}"/>
+                                       Text="{Binding Speed,FallbackValue='-',UpdateSourceTrigger=PropertyChanged,Converter={StaticResource BitToMBConverter}}"/>
                             <TextBlock Text=" Mbps" Foreground="#FF858585" />
                         </TextBlock>
                     </DockPanel>

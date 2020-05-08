@@ -17,8 +17,7 @@
 
                 <Button Name="BtnClose" Margin="2 0 20 4" 
                         Style="{StaticResource CloseButton}"
-                        Command="{Binding RelativeSource={RelativeSource FindAncestor,
-                    AncestorType={x:Type Window}}, Path=DataContext.ShutDownAppCommand}"/>
+                        Click="BtnClose_Click"/>
 
                 <Button Name="BtnNetConnections" Margin="10 0 10 4" 
                         Style="{StaticResource NetConnectionsButton}"
@@ -30,9 +29,17 @@
                         Command="{Binding RelativeSource={RelativeSource FindAncestor,
                     AncestorType={x:Type Window}}, Path=DataContext.RefreshExecuteCommand}"/>
 
-                <Button Name="BtnSettings"  Margin="10 0 10 4" 
-                        Style="{StaticResource MaterialDesignToolButton}"
-                        Click="BtnSettings_Click">
+                <Button Name="BtnConfig"  Margin="10 0 10 4" 
+                        Style="{StaticResource TopMostButton}"
+                        Click="BtnConfig_Click">
+                    <materialDesign:PackIcon  Kind="ShapePlus" Foreground="BlanchedAlmond" Width="25" Height="25" />
+                </Button>
+
+                
+                <Button Name="BtnTopMost"  Margin="10 0 10 4" 
+                        Style="{StaticResource TopMostButton}"
+                        Click="BtnTopMost_Click"
+                        Visibility="Collapsed">
                     <materialDesign:PackIcon Name="iconTopMost" Kind="ArrangeBringToFront" Foreground="BlanchedAlmond" Width="25" Height="25" />
                 </Button>
 

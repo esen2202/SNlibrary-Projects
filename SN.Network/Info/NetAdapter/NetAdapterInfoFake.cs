@@ -57,9 +57,9 @@ namespace SN.Network.Info.NetAdapter
             };
         }
 
-        public NetAdapterModel GetAdapter(string adapterDesc)
+        public NetAdapterModel GetAdapter(string interfaceName)
         {
-            return netAdapterModels.SingleOrDefault(o => o.Description == adapterDesc) ?? new NetAdapterModel();
+            return netAdapterModels.SingleOrDefault(o => o.Name == interfaceName) ?? new NetAdapterModel();
         }
 
         public List<NetAdapterModelBase> GetAdapterCaptionList()

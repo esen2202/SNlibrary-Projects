@@ -7,17 +7,37 @@ namespace SN.NetSet.Business.Network
     {
         public static Task<string> GetGlobalIpAsync()
         {
-            Task<string> islem = Task.Run<string>(() =>
+            Task<string> result = Task.Run<string>(() =>
             {
                 return NetworkHelper.GetGlobalIp();
             });
 
-            return islem;
+            return result;
         }
 
-        public  static void ShowNetConnections()
+        public static Task<bool> CheckForInternetConnection()
         {
-             NetworkHelper.ShowNetConnections();
+            Task<bool> result = Task.Run<bool>(() =>
+            {
+                return NetworkHelper.CheckForInternetConnection();
+            });
+
+            return result;
+        }
+        public static Task<bool> CheckForInternetConnectionAPI()
+        {
+            Task<bool> result = Task.Run<bool>(() =>
+            {
+                int desc;
+                return NetworkHelper.CheckForInternetConnection(out desc);
+            });
+
+            return result;
+        }
+
+        public static void ShowNetConnections()
+        {
+            NetworkHelper.ShowNetConnections();
         }
     }
 }

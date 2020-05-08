@@ -29,8 +29,17 @@ namespace SN.Network.Config.CommandGenerator
                 command = "/c netsh interface ip set address \"" + _interfaceName + "\" static "
                     + _netIpConfigModel.IpAddress + " " + _netIpConfigModel.SubnetMask + " " + _netIpConfigModel.Gateway;
 
-                if (_netIpConfigModel.DnsServer1 != null)
-                    command += " & netsh interface ip set dns \"" + _interfaceName + "\" static " + _netIpConfigModel.DnsServer1;
+                if (!string.IsNullOrEmpty(_netIpConfigModel.DnsServer1))
+                {
+                    command += " & netsh interface ip set dnsservers \"" + _interfaceName + "\" static " + _netIpConfigModel.DnsServer1 + " primary";
+
+                    if (!string.IsNullOrEmpty(_netIpConfigModel.DnsServer2))
+                        command += " & netsh interface ip add dnsservers \"" + _interfaceName + "\" " + _netIpConfigModel.DnsServer2 + " index =2";
+                }
+                else
+                {
+                    command += " & netsh interface ip set dns \"" + _interfaceName + "\" dhcp";
+                }
             }
 
             return command;

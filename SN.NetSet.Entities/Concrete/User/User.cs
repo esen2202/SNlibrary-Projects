@@ -9,5 +9,9 @@ namespace SN.NetSet.Entities.Concrete.User
         public virtual int Id { get; set; }
         public virtual string UserName { get; set; }
 
+        public IEntity Clone()
+        {
+            return (IEntity)this.MemberwiseClone();
+        }
     }
 }

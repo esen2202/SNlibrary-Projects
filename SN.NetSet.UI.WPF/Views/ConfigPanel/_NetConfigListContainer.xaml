@@ -1,27 +1,26 @@
-﻿<UserControl x:Class="SN.NetSet.UI.WPF.Views.MainPanel._NetworkAdapterListContainer"
+﻿<UserControl x:Class="SN.NetSet.UI.WPF.Views.ConfigPanel._NetConfigListContainer"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel"
-             xmlns:adapterList="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.NetworkAdapterList"
+             xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.ConfigPanel"
+             xmlns:configList="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.NetworkConfigList"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="320">
 
     <ListBox 
-        Name="LBAdapterList"
+        Name="LBConfigList"
         Grid.Row="3"
         ItemsSource="{Binding}"
         HorizontalContentAlignment="Stretch"
         Background="{x:Null}" BorderBrush="{x:Null}"
         IsSynchronizedWithCurrentItem="False"
         ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-        ScrollViewer.VerticalScrollBarVisibility="Auto"
-       >
-        
+        ScrollViewer.VerticalScrollBarVisibility="Auto">
+
         <ListBox.ItemTemplate>
             <DataTemplate>
-                <adapterList:_NetworkAdapterListItem Margin="0"/>
+                <configList:_NetworkConfigListItem Margin="0"/>
             </DataTemplate>
         </ListBox.ItemTemplate>
 

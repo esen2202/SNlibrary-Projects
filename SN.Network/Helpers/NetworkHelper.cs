@@ -1,11 +1,38 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Net;
 using System.Net.Http;
 
 namespace SN.Network.Helpers
 {
     public class NetworkHelper
     {
+
+        [System.Runtime.InteropServices.DllImport("wininet.dll")]
+        private extern static bool InternetGetConnectedState(out int Description, int ReservedValue);
+
+        //Method with API
+        public static bool CheckForInternetConnection(out int desc)
+        {
+            var result = InternetGetConnectedState(out desc, 0);
+            return result;
+        }
+
+        //Method with WebClient
+        public static bool CheckForInternetConnection()
+        {
+            try
+            {
+                using (var client = new WebClient())
+                using (client.OpenRead("http://google.com/generate_204"))
+                    return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static string GetGlobalIp()
         {
             string uri = "http://checkip.dyndns.org/";
@@ -26,6 +53,9 @@ namespace SN.Network.Helpers
                 return ip;
             }
         }
+
+
+
         public static void ShowNetConnections()
         {
             ProcessStartInfo startInfo = new ProcessStartInfo("NCPA.cpl");

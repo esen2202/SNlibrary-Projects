@@ -52,5 +52,36 @@ namespace SN.NetSet.UI.WPF.Properties {
                 this["StatusTopMost"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastAdapterName
+        {
+            get
+            {
+                return ((string)(this["LastAdapterName"]));
+            }
+            set
+            {
+                this["LastAdapterName"] = value;
+            }
+        }
+
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int LastConfigId
+        {
+            get
+            {
+                return ((int)(this["LastConfigId"]));
+            }
+            set
+            {
+                this["LastConfigId"] = value;
+            }
+        }
     }
 }

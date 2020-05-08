@@ -16,7 +16,9 @@
     </UserControl.Resources>
     
     <Grid>
-        <Border Name="BorderPanel" Width="320"  VerticalAlignment="Stretch" HorizontalAlignment="Right" Background="#EA0D3253"
+        <Border Name="BorderPanel" Width="320"  
+                VerticalAlignment="Stretch" HorizontalAlignment="Right" 
+                Background="#EA0D3253"
             MouseLeave="BorderPanel_OnMouseLeave">
             <Grid Name="LayoutRoot">
                 <Grid.RowDefinitions>

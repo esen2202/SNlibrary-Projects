@@ -4,6 +4,7 @@ using SN.NetSet.Business.Abstract;
 using SN.NetSet.Business.DependencyResolvers.Ninject;
 using SN.NetSet.Business.Network;
 using SN.NetSet.UI.WPF.Commands.Generic;
+using SN.NetSet.UI.WPF.Views;
 using SN.Network.Model;
 using System;
 using System.Collections.ObjectModel;
@@ -14,9 +15,16 @@ using System.Windows.Input;
 
 namespace SN.NetSet.UI.WPF.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase , IDisposable
     {
+        public event EventHandler<ReceivedDataEventArgs> NetAdaptersUpdated;
+
+        private readonly INetAdapterInfoService _netAdapterInfoService;
+
+        private readonly IMapper _mapper;
+        
         private ObservableCollectionPropertyNotify<NetAdapterModelBase> _adapterList;
+
         public ObservableCollectionPropertyNotify<NetAdapterModelBase> AdapterList
         {
             get { return _adapterList; }
@@ -28,6 +36,7 @@ namespace SN.NetSet.UI.WPF.ViewModels
         }
 
         private NetAdapterModel _currentAdapter;
+
         public NetAdapterModel CurrentAdapter
         {
             get { return _currentAdapter; }
@@ -39,6 +48,7 @@ namespace SN.NetSet.UI.WPF.ViewModels
         }
 
         private string _globalIp;
+
         public string GlobalIp
         {
             get { return _globalIp; }
@@ -49,16 +59,10 @@ namespace SN.NetSet.UI.WPF.ViewModels
             }
         }
 
-        private readonly INetAdapterInfoService _netAdapterInfoService;
-        private readonly INetAdapterIpConfigService _netAdapterIpConfigService;
-
-        private readonly IMapper _mapper;
-
         public MainWindowViewModel()
         {
             _mapper = InstanceFactory.GetInstance<IMapper>();
             _netAdapterInfoService = InstanceFactory.GetInstance<INetAdapterInfoService>();
-            _netAdapterIpConfigService = InstanceFactory.GetInstance<INetAdapterIpConfigService>();
 
             _netAdapterInfoService.ReloadedAdapterList += _netAdapterInfoService_ReloadedAdapterList;
 
@@ -69,16 +73,27 @@ namespace SN.NetSet.UI.WPF.ViewModels
         {
             AdapterList = _mapper.Map<ObservableCollectionPropertyNotify<NetAdapterModelBase>>(_netAdapterInfoService.GetAdapterCaptionList());
 
-            if (CurrentAdapter == null)
-                CurrentAdapter = _netAdapterInfoService.GetAdapterList().Count > 0
-                    ? (NetAdapterModel)_netAdapterInfoService.GetAdapterList().First().Clone()
-                    : new NetAdapterModel()
-                    {
-                        Name = "No Adapter",
-                        Description = "Not Found Adapter",
-                        IpConfig = new NetIpConfigModel()
-                    };
-            else CurrentAdapter = (NetAdapterModel)_netAdapterInfoService.GetAdapter(CurrentAdapter.Description).Clone();
+            MainWindow.LastAdapterName = CurrentAdapter == null ? MainWindow.LastAdapterName : CurrentAdapter.Name;
+
+            NetAdapterModel adapter = (NetAdapterModel)_netAdapterInfoService.GetAdapter(MainWindow.LastAdapterName).Clone();
+
+            if (adapter.Name != null)
+            {
+                CurrentAdapter = adapter;
+            }
+            else
+            {
+                CurrentAdapter = AdapterList.Count > 0
+                         ? (NetAdapterModel)_netAdapterInfoService.GetAdapterList().First().Clone()
+                         : new NetAdapterModel()
+                         {
+                             Name = "No Adapter",
+                             Description = "Not Found Adapter",
+                             IpConfig = new NetIpConfigModel()
+                         };
+            }
+
+            NetAdaptersUpdated?.Invoke(this, new ReceivedDataEventArgs() { Id = 1, Message = "" });
         }
 
         public void SuspendInfoService()
@@ -93,6 +108,7 @@ namespace SN.NetSet.UI.WPF.ViewModels
 
         #region Commands
         private ICommand _selectNetAdaptCommand;
+
         public ICommand SelectNetAdaptCommand
         {
             get
@@ -105,16 +121,18 @@ namespace SN.NetSet.UI.WPF.ViewModels
                 return _selectNetAdaptCommand;
             }
         }
+
         private void SelectNetAdaptMethod(object p)
         {
             if (p != null)
             {
                 NetAdapterModelBase obj = p as NetAdapterModelBase;
-                CurrentAdapter = (NetAdapterModel)_netAdapterInfoService.GetAdapter(obj.Description).Clone();
+                CurrentAdapter = (NetAdapterModel)_netAdapterInfoService.GetAdapter(obj.Name).Clone();
             }
         }
 
         private ICommand _refreshExecuteCommand;
+
         public ICommand RefreshExecuteCommand
         {
             get
@@ -136,27 +154,8 @@ namespace SN.NetSet.UI.WPF.ViewModels
 
         }
 
-        private ICommand _shutDownAppCommand;
-        public ICommand ShutDownAppCommand
-        {
-            get
-            {
-                if (_shutDownAppCommand == null)
-                {
-                    _shutDownAppCommand = new RelayCommand(
-                        p => ShutDownAppMethod());
-                }
-                return _shutDownAppCommand;
-            }
-        }
-
-        private void ShutDownAppMethod()
-        {
-            _netAdapterInfoService.Dispose();
-            Application.Current.Shutdown();
-        }
-
         private ICommand _showNetworksCommand;
+
         public ICommand ShowNetworksCommand
         {
             get
@@ -177,6 +176,7 @@ namespace SN.NetSet.UI.WPF.ViewModels
         }
 
         private ICommand _copyToClipboard;
+
         public ICommand CopyToClipboard
         {
             get
@@ -196,6 +196,7 @@ namespace SN.NetSet.UI.WPF.ViewModels
         }
 
         private ICommand _refreshGlobalIp;
+
         public ICommand RefreshGlobalIp
         {
             get
@@ -213,6 +214,18 @@ namespace SN.NetSet.UI.WPF.ViewModels
         {
             GlobalIp = await NetworkTools.GetGlobalIpAsync();
         }
+
+        public void Dispose()
+        {
+            _netAdapterInfoService.Dispose();
+            GC.SuppressFinalize(this);
+        }
         #endregion
+    }
+
+    public class ReceivedDataEventArgs : EventArgs
+    {
+        public int Id { get; set; }
+        public string Message { get; set; }
     }
 }

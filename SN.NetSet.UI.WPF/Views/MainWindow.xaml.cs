@@ -1,7 +1,9 @@
-﻿using SN.NetSet.UI.WPF.Properties;
+﻿using MaterialDesignThemes.Wpf;
+using SN.NetSet.UI.WPF.Properties;
 using SN.NetSet.UI.WPF.ViewModels;
 using SN.Windows.UI;
 using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -13,25 +15,33 @@ namespace SN.NetSet.UI.WPF.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public bool PinnedSideBar { get; set; }
+        private static bool PinnedSideBar { get; set; }
 
-        public bool StatusTopMost { get; set; }
+        private static bool StatusTopMost { get; set; }
 
-        private void GetSettings()
+        public static string LastAdapterName { get; set; }
+
+        public static int LastConfigId { get; set; }
+
+        public static void GetSettings()
         {
             PinnedSideBar = AppSettings.Default.PinnedSideBar;
             StatusTopMost = AppSettings.Default.StatusTopMost;
+            LastAdapterName = AppSettings.Default.LastAdapterName;
+            LastConfigId = AppSettings.Default.LastConfigId;
         }
 
-        private void SetSettings()
+        public static void SetSettings()
         {
             AppSettings.Default.PinnedSideBar = PinnedSideBar;
             AppSettings.Default.StatusTopMost = StatusTopMost;
+            AppSettings.Default.LastAdapterName = LastAdapterName;
+            AppSettings.Default.LastConfigId = LastConfigId;
 
             AppSettings.Default.Save();
         }
 
-        public bool GetStatusTopMost() => this.StatusTopMost;
+        public static bool GetStatusTopMost() => StatusTopMost;
 
         public void SetTopMost(bool status, bool set = false)
         {
@@ -42,7 +52,7 @@ namespace SN.NetSet.UI.WPF.Views
             }
         }
 
-        public bool GetStatusPinSideBar() => PinnedSideBar;
+        public static bool GetStatusPinSideBar() => PinnedSideBar;
 
         public void SetPinSideBar(bool status) => PinnedSideBar = status;
 
@@ -69,12 +79,13 @@ namespace SN.NetSet.UI.WPF.Views
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-           WindowsApiHelper.WpfAltTabMenuBlocker(this);
+            WindowsApiHelper.WpfAltTabMenuBlocker(this);
         }
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             SetSettings();
         }
+
     }
 }

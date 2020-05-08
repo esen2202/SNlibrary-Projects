@@ -13,7 +13,6 @@ namespace SN.NetSet.Business.DependencyResolvers.Ninject
             Bind<INetConfigDataService>().To<NetConfigDbManager>();
             Bind<INetConfigDal>().To<FakeDbNetConfigDal>();
             Bind<IUserDal>().To<FakeDbUserDal>();
-           
         }
     }
 }

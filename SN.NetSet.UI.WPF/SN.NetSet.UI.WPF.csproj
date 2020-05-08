@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
@@ -70,7 +73,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Commands\Generic\RelayCommand.cs" />
+    <Compile Include="Converters\BitToMBConverter.cs" />
     <Compile Include="Converters\MacAddressConverter.cs" />
+    <Compile Include="Converters\ObjectIsNullToVisibility.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Properties\AppSettings.Designer.cs">
@@ -80,6 +85,10 @@
     </Compile>
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\_ConfigPanelViewModel.cs" />
+    <Compile Include="Views\ConfigPanel\_NetConfigListContainer.xaml.cs">
+      <DependentUpon>_NetConfigListContainer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPanel\_AppSettings.xaml.cs">
       <DependentUpon>_AppSettings.xaml</DependentUpon>
     </Compile>
@@ -92,12 +101,18 @@
     <Compile Include="Views\MainPanel\_NetworkAdapterViewerContainer.xaml.cs">
       <DependentUpon>_NetworkAdapterViewerContainer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SettingsPanel\_SettingsPanel.xaml.cs">
-      <DependentUpon>_SettingsPanel.xaml</DependentUpon>
+    <Compile Include="Views\ConfigPanel\_ConfigPanel.xaml.cs">
+      <DependentUpon>_ConfigPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\IUserControlNameSpace.cs" />
     <Compile Include="Views\UserControls\NetworkAdapterList\_NetworkAdapterListItem.xaml.cs">
       <DependentUpon>_NetworkAdapterListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\NetworkConfigList\_NetworkConfigListItem.xaml.cs">
+      <DependentUpon>_NetworkConfigListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\NetworkConfigViewer\_NetworkConfigViewer.xaml.cs">
+      <DependentUpon>_NetworkConfigViewer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\TaggedText\_TaggedText.xaml.cs">
       <DependentUpon>_TaggedText.xaml</DependentUpon>
@@ -117,6 +132,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Assets\styles\_AppSettingsStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Assets\styles\_ControlButtonSetStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,6 +145,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Assets\styles\_NetworkAdapterContainerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConfigPanel\_NetConfigListContainer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,11 +188,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\SettingsPanel\_SettingsPanel.xaml">
+    <Page Include="Views\ConfigPanel\_ConfigPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserControls\NetworkAdapterList\_NetworkAdapterListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\NetworkConfigList\_NetworkConfigListItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControls\NetworkConfigViewer\_NetworkConfigViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,6 +235,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\AppSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -227,9 +259,17 @@
       <Project>{BEA351B9-CBDE-4196-A96A-A5AA8AFFF25D}</Project>
       <Name>SN.Class</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SN.Data\SN.Data.csproj">
+      <Project>{947355DF-DFC5-41E5-9E15-E6AC5AF12810}</Project>
+      <Name>SN.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SN.NetSet.Business\SN.NetSet.Business.csproj">
       <Project>{B29E88C0-8185-4614-81E2-4A90535D0CFD}</Project>
       <Name>SN.NetSet.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SN.NetSet.Entities\SN.NetSet.Entities.csproj">
+      <Project>{319E0FA3-55F7-48E7-B61D-160D06FE6D16}</Project>
+      <Name>SN.NetSet.Entities</Name>
     </ProjectReference>
     <ProjectReference Include="..\SN.Network\SN.Network.csproj">
       <Project>{D34D8676-B9EC-4910-A389-2A8DD0BF8333}</Project>

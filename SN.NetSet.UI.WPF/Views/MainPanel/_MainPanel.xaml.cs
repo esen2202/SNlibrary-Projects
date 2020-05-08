@@ -12,9 +12,14 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
     /// </summary>
     public partial class _MainPanel : UserControl
     {
+        public bool PreventClose { get; set; }
+
         private Storyboard openSideBarStoryboard;
+
         private Storyboard closeSideBarStoryboard;
+
         MainWindow mainWindow;
+
         public Visibility ListVisibility
         {
             get { return (Visibility)GetValue(ListVisibilityProperty); }
@@ -23,7 +28,6 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
 
         public static readonly DependencyProperty ListVisibilityProperty =
             DependencyProperty.Register("ListVisibility", typeof(Visibility), typeof(_MainPanel), new PropertyMetadata(Visibility.Visible));
-
 
         public _MainPanel()
         {
@@ -67,11 +71,6 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
             storyboard.Begin();
         }
 
-        private void BorderPanel_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            if (BorderPanel.Width >= 320 && !mainWindow.GetStatusPinSideBar())
-                BorderWidthAnimation(BorderPanel, closeSideBarStoryboard, BorderPanel.Width, 0);
-        }
         private void BorderFloating_OnMouseEnter(object sender, MouseEventArgs e)
         {
             closeSideBarStoryboard.Stop();
@@ -79,7 +78,18 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
             BorderWidthAnimation(BorderPanel, openSideBarStoryboard, BorderPanel.Width, 320);
 
             (mainWindow.DataContext as MainWindowViewModel).ContinueInfoService();
-            mainWindow.SetTopMost(mainWindow.GetStatusTopMost(), false);
+            mainWindow.SetTopMost(MainWindow.GetStatusTopMost(), false);
+        }
+
+        private void BorderPanel_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            LostFocusOperation();
+        }
+
+        private void LostFocusOperation()
+        {
+            if (BorderPanel.Width >= 320 && !MainWindow.GetStatusPinSideBar() && !PreventClose)
+                BorderWidthAnimation(BorderPanel, closeSideBarStoryboard, BorderPanel.Width, 0);
         }
     }
 }

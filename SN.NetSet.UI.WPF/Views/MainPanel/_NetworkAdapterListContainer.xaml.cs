@@ -1,4 +1,5 @@
 ﻿using SN.NetSet.UI.WPF.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -9,11 +10,30 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
     /// </summary>
     public partial class _NetworkAdapterListContainer : UserControl
     {
+        private int _selectedItemIndex = 0;
+
         public _NetworkAdapterListContainer()
         {
             InitializeComponent();
-            LBAdapterList.DataContextChanged += LBAdapterList_DataContextChanged;
+
             LBAdapterList.SelectionChanged += LBAdapterList_SelectionChanged;
+            this.Loaded += _NetworkAdapterListContainer_Loaded;
+        }
+  
+        private void _NetworkAdapterListContainer_Loaded(object sender, RoutedEventArgs e)
+        {
+            (Application.Current.MainWindow.DataContext as MainWindowViewModel).NetAdaptersUpdated += _NetworkAdapterListContainer_NetAdaptersUpdated;
+        }
+
+        private void _NetworkAdapterListContainer_NetAdaptersUpdated(object sender, ReceivedDataEventArgs e)
+        {
+            this.Dispatcher.Invoke(() =>
+            {
+                //ListBoxItem lbi = (ListBoxItem)LBAdapterList.ItemContainerGenerator.ContainerFromIndex(2);
+                //if (lbi != null)
+                //    lbi.IsSelected = true;
+     
+            });
         }
 
         private void LBAdapterList_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -22,19 +42,6 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
                 _selectedItemIndex = LBAdapterList.SelectedIndex;
         }
 
-        private int _selectedItemIndex = 0;
-
-        private void LBAdapterList_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            ((MainWindowViewModel)Application.Current.MainWindow.DataContext).AdapterList.CollectionChanged += AdapterList_CollectionChanged;
-        }
-
-        private void AdapterList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            ListBoxItem lbi = (ListBoxItem)LBAdapterList.ItemContainerGenerator.ContainerFromIndex(_selectedItemIndex);
-            if (lbi != null)
-                lbi.IsSelected = true;
-        }
 
     }
 }

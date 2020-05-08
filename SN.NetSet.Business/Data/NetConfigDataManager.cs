@@ -1,6 +1,7 @@
 ﻿using SN.NetSet.Business.Abstract;
 using SN.NetSet.DataAccess.Abstract;
 using SN.NetSet.Entities.Concrete.Network;
+using System.Collections.Generic;
 
 namespace SN.NetSet.Business.Data
 {
@@ -12,14 +13,14 @@ namespace SN.NetSet.Business.Data
             _netConfigDal = netConfigDal;
         }
 
-        public void GetNetworkList()
-        {
-            var netlist = _netConfigDal.GetList();
-        }
+        public NetConfigBase GetConfig(int id) => _netConfigDal.Get(config => config.Id == id);
 
-        public void Save()
-        {
-            _netConfigDal.Add(new  NetConfigBase());
-        }
+        public IList<NetConfigBase> GetConfigList() => _netConfigDal.GetList();
+     
+        public void AddNewConfig(NetConfigBase config) => _netConfigDal.Add(config);
+  
+        public void UpdateConfig(NetConfigBase config) => _netConfigDal.Update(config);
+
+        public void DeleteConfig(NetConfigBase config) => _netConfigDal.Delete(config);
     }
 }

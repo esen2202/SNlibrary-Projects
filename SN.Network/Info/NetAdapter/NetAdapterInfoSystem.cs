@@ -1,4 +1,5 @@
-﻿using SN.Network.Model;
+﻿using SN.Network.Helpers;
+using SN.Network.Model;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
@@ -42,7 +43,6 @@ namespace SN.Network.Info.NetAdapter
                 IsForwardingEnabled = adapterProp.GetIPv4Properties().IsForwardingEnabled,
                 UsesWins = adapterProp.GetIPv4Properties().UsesWins,
                 Internet = adapter.GetIPv4Statistics().BytesReceived > 0 && adapter.GetIPv4Statistics().BytesSent > 0,
-
                 IpConfig = new NetIpConfigModel
                 {
                     IsDhcpEnabled = adapterProp.GetIPv4Properties().IsDhcpEnabled,
@@ -102,9 +102,9 @@ namespace SN.Network.Info.NetAdapter
             return GetAdapterList<NetAdapterModelBase>(AssignAdapterCaptionValues);
         }
 
-        public NetAdapterModel GetAdapter(string adapterDesc)
+        public NetAdapterModel GetAdapter(string interfaceName)
         {
-            var adapter = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault(o => o.Description == adapterDesc);
+            var adapter = NetworkInterface.GetAllNetworkInterfaces().FirstOrDefault(o => o.Name == interfaceName);
 
             return AssignAdapterValues(adapter);
         }

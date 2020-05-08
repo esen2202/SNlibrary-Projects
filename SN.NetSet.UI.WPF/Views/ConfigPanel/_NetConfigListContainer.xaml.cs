@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SN.NetSet.UI.WPF.Views.SettingsPanel
+namespace SN.NetSet.UI.WPF.Views.ConfigPanel
 {
     /// <summary>
-    /// Interaction logic for _SettingsPanel.xaml
+    /// Interaction logic for _NetConfigListContainer.xaml
     /// </summary>
-    public partial class _SettingsPanel : UserControl
+    public partial class _NetConfigListContainer : UserControl
     {
-        public _SettingsPanel()
+        public _NetConfigListContainer()
         {
             InitializeComponent();
         }

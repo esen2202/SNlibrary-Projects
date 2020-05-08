@@ -54,9 +54,9 @@ namespace SN.NetSet.Business.Network
             return _netAdapterCaptionList;
         }
 
-        public NetAdapterModel GetAdapter(string adapterDesc)
+        public NetAdapterModel GetAdapter(string interfaceName)
         {
-            var adapter = _netAdapterList.SingleOrDefault(o => o.Description == adapterDesc) ?? new NetAdapterModel();
+            var adapter = _netAdapterList.SingleOrDefault(o => o.Name == interfaceName) ?? new NetAdapterModel();
             adapter.IpConfig = adapter.IpConfig ?? new NetIpConfigModel();
             return adapter;
         }
