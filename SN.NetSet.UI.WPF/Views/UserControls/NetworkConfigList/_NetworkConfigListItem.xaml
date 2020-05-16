@@ -4,64 +4,113 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.NetworkConfigList" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
-             d:DesignHeight="63" d:DesignWidth="320">
+             mc:Ignorable="d" Name="_this"
+             d:DesignHeight="100" d:DesignWidth="320">
     <Border Name="border" BorderBrush="{x:Null}" Margin="5">
         <Grid>
-            <Button Height="50" Background="{x:Null}" HorizontalContentAlignment="Left"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Name="BorderItem" BorderBrush="{x:Null}" Grid.Row="0">
+                <Grid>
+                    
+            <!-- Information Item Box -->
+                <Button  Name="BtnItem"
+                Height="Auto" Background="{x:Null}" HorizontalContentAlignment="Left" 
                 Style="{StaticResource AdapterListItemButton}"
                 CommandParameter="{Binding}"
                 Command="{Binding RelativeSource={RelativeSource FindAncestor,            
                 AncestorType={x:Type UserControl},AncestorLevel=3}, Path=DataContext.SelectConfigCommand}" Margin="10,2,0,1" >
 
-                <StackPanel HorizontalAlignment="Left">
+                    <StackPanel HorizontalAlignment="Left">
 
-                    <DockPanel HorizontalAlignment="Left">
-                        <materialDesign:PackIcon Name="iconNetworkStatus" Kind="LabelVariantOutline" VerticalAlignment="Center" Foreground="#FFFF8B8B"/>
-                        <TextBlock Margin="5 0 0 0"
+                        <DockPanel HorizontalAlignment="Left">
+                            <materialDesign:PackIcon Name="iconNetworkStatus" Kind="LabelVariantOutline" VerticalAlignment="Center" Foreground="#FFFF8B8B"/>
+                            <TextBlock Margin="5 0 0 0"
                                Style="{StaticResource LabelTextBlock}"
                                Text="{Binding Path=ConfigName,FallbackValue='Config Name'}"/>
-                    </DockPanel>
+                        </DockPanel>
 
-                    <DockPanel HorizontalAlignment="Left">
-                        <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Foreground="#FFA2A2A2" 
+                        <DockPanel HorizontalAlignment="Left">
+                            <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Foreground="#FFA2A2A2" 
                                Style="{StaticResource LabelTextBlock}"
                                Text="{Binding Path=IpAddress,FallbackValue='192.168.2.27'}"/>
-                        <TextBlock  Margin="5 0 0 0">
+                            <TextBlock  Margin="5 0 0 0">
                              /
-                        </TextBlock>
-                        <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Foreground="#FFA2A2A2" 
+                            </TextBlock>
+                            <TextBlock Margin="5 0 0 0" VerticalAlignment="Center" Foreground="#FFA2A2A2" 
                                Style="{StaticResource LabelTextBlock}"
                                Text="{Binding Path=SubnetMask,FallbackValue='255.255.255.0'}"/>
-                    </DockPanel>
+                        </DockPanel>
+                    </StackPanel>
+                </Button>
 
-                </StackPanel>
-            </Button>
-            <Canvas>
-                <Canvas.Style>
-                    <Style TargetType="Canvas">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=border,Path=IsMouseOver}" Value="True">
-                                <Setter  Property="Visibility" Value="Visible" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding ElementName=border,Path=IsMouseOver}" Value="False">
-                                <Setter  Property="Visibility" Value="Hidden" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Canvas.Style>
-                <DockPanel Canvas.Left="220" Canvas.Top="5" Background="{x:Null}">
-                    <Button  Height="35" Width="35" Margin="2 2 10 2"  
+                <!-- Floating Operation Buttons -->
+                <Canvas>
+                    <Canvas.Style>
+                        <Style TargetType="Canvas">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=BorderItem,Path=IsMouseOver}" Value="True">
+                                    <Setter  Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=BorderItem,Path=IsMouseOver}" Value="False">
+                                    <Setter  Property="Visibility" Value="Hidden" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Canvas.Style>
+                    <DockPanel Canvas.Left="200" Canvas.Top="5" Background="{x:Null}">
+                        <Button x:Name="BtnUpdate"
+                            Height="35" Width="35" Margin="2 2 10 2"  
+                            CommandParameter="{Binding}"
+                            Command="{Binding RelativeSource={RelativeSource FindAncestor,            
+                            AncestorType={x:Type UserControl},AncestorLevel=3}, Path=DataContext.EnableUpdateModeCommand}"
                             Style="{StaticResource MaterialDesignToolButton}">
-                        <materialDesign:PackIcon Kind="Update" VerticalAlignment="Center" Foreground="LightBlue" Width="30" Height="30"  />
-                    </Button>
-                    <Button  Height="35" Width="35" Margin="2 2 2 2" 
-                             Style="{StaticResource MaterialDesignToolButton}">
-                        <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center" Foreground="PaleVioletRed" Width="30" Height="30" />
-                    </Button>
-           
-                </DockPanel>
-            </Canvas>
+                            <materialDesign:PackIcon Kind="Update" VerticalAlignment="Center" Foreground="LightBlue" Width="30" Height="30"  />
+                        </Button>
+                        <Button x:Name="BtnDelete"
+                            Height="35" Width="35" Margin="2 2 2 2" 
+                            Style="{StaticResource MaterialDesignToolButton}"
+                            Click="BtnDelete_Click">
+                            <materialDesign:PackIcon Kind="Delete" VerticalAlignment="Center" Foreground="PaleVioletRed" Width="30" Height="30" />
+                        </Button>
+
+                    </DockPanel>
+                </Canvas>
+                
+                </Grid>
+            </Border>
+            
+            
+            <!-- Delete Box -->
+            <DockPanel Grid.Row="1" Name="DockPanelDeleteBox" Visibility="{Binding DeleteQuestion,ElementName=_this}">
+                <Button x:Name="BtnDeleteConfig" Width="65" Background="AliceBlue"
+                        Style="{StaticResource MaterialDesignFlatButton}" 
+                        CommandParameter="{Binding}"
+                        Command="{Binding RelativeSource={RelativeSource FindAncestor,            
+                        AncestorType={x:Type UserControl},AncestorLevel=3}, Path=DataContext.DeleteConfigCommand}"
+                        Margin="5">
+                    <materialDesign:PackIcon Kind="Delete" 
+                                             Width="25" Height="25"
+                                             Foreground="Red"
+                                             materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+                                             VerticalAlignment="Center"/>
+                </Button>
+                <Button x:Name="BtnCancelDelete" Width="65" Background="AliceBlue"
+                        Style="{StaticResource MaterialDesignFlatButton}" 
+                        Click="BtnCancelDelete_Click"
+                        Margin="35 0 0 0" HorizontalAlignment="Left">
+                    <materialDesign:PackIcon Kind="Cancel" 
+                                             Width="25" Height="25"
+                                             Foreground="LightSteelBlue"
+                                             materialDesign:ColorZoneAssist.Mode="PrimaryMid"
+                                             VerticalAlignment="Center"/>
+                </Button>
+            </DockPanel>
+
+            
         </Grid>
     </Border>
 </UserControl>

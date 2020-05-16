@@ -5,9 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.ConfigPanel"
              xmlns:configList="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.NetworkConfigList"
+             xmlns:converters="clr-namespace:SN.NetSet.UI.WPF.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="320">
-
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BoolInverseConverter x:Key="BoolInverse"/>
+            <converters:BoolAndConverter x:Key="BoolAnd"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
     <ListBox 
         Name="LBConfigList"
         Grid.Row="3"
@@ -16,8 +24,21 @@
         Background="{x:Null}" BorderBrush="{x:Null}"
         IsSynchronizedWithCurrentItem="False"
         ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-        ScrollViewer.VerticalScrollBarVisibility="Auto">
-
+        ScrollViewer.VerticalScrollBarVisibility="Auto"
+        SelectionChanged="LBConfigList_SelectionChanged">
+        <ListBox.IsEnabled>
+            <MultiBinding Converter="{StaticResource BoolAnd}">
+                <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+                    AncestorType={x:Type UserControl},AncestorLevel=2}" 
+                         Path="DataContext.EnabledUpdateMode" 
+                         Converter="{StaticResource BoolInverse}"/>
+                <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+                    AncestorType={x:Type UserControl},AncestorLevel=2}" 
+                         Path="DataContext.EnabledAddingMode" 
+                         Converter="{StaticResource BoolInverse}"  />
+            </MultiBinding>
+        </ListBox.IsEnabled>
+        
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <configList:_NetworkConfigListItem Margin="0"/>

@@ -11,7 +11,7 @@ namespace SN.Network.Config.IpConfigurator
         ICommandLine _commandLine;
         ICommandGeneratorIpConfigurator _commandGeneratorIpConfigurator;
 
-        public event EventHandler SetIpOperationCompleted;
+        public event EventHandler<EventArgsWithStrMessage> SetIpOperationCompleted;
 
         public IpConfiguratorFake(ICommandLine commandLine, ICommandGeneratorIpConfigurator commandGeneratorIpConfigurator)
         {
@@ -20,7 +20,7 @@ namespace SN.Network.Config.IpConfigurator
             _commandLine.ProcessCompleted += _commandLine_ProcessCompleted;
         }
 
-        private void _commandLine_ProcessCompleted(object sender, EventArgs e)
+        private void _commandLine_ProcessCompleted(object sender, EventArgsWithStrMessage e)
         {
             SetIpOperationCompleted?.Invoke(sender, e);
         }

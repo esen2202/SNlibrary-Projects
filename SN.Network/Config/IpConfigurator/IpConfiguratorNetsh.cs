@@ -10,14 +10,19 @@ namespace SN.Network.Config.IpConfigurator
         ICommandLine _commandLine;
         ICommandGeneratorIpConfigurator _commandGeneratorIpConfigurator;
 
-        public event EventHandler SetIpOperationCompleted;
+        public event EventHandler<EventArgsWithStrMessage> SetIpOperationCompleted;
 
-        public IpConfiguratorNetsh(ICommandLine commandLine, ICommandGeneratorIpConfigurator commandGeneratorIpConfigurator)
+         public IpConfiguratorNetsh(ICommandLine commandLine, ICommandGeneratorIpConfigurator commandGeneratorIpConfigurator)
         {
             _commandLine = commandLine;
             _commandGeneratorIpConfigurator = commandGeneratorIpConfigurator;
 
-            _commandLine.ProcessCompleted += delegate { };
+            _commandLine.ProcessCompleted += _commandLine_ProcessCompleted;
+        }
+
+        private void _commandLine_ProcessCompleted(object sender, EventArgsWithStrMessage e)
+        {
+            SetIpOperationCompleted?.Invoke(sender, e);
         }
 
         public void SetIpConfig(string interfaceName, NetIpConfigModel netIpConfigModel)

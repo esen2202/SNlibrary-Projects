@@ -2,6 +2,7 @@
 using SN.NetSet.Entities.Concrete.Network;
 using SN.NetSet.Entities.Concrete.User;
 using SQLite;
+using System;
 using System.Reflection;
 
 namespace SN.NetSet.DataAccess.Concrete.SQLite
@@ -28,9 +29,10 @@ namespace SN.NetSet.DataAccess.Concrete.SQLite
         }
 
         private SQLiteConnection sqliteConnection { get; set; }
+
         public ISQLiteConnectionService ConnectionManager { get; set; }
 
-        public SQLiteContext()
+        private SQLiteContext()
         {
             OnConfigure();
         }
@@ -45,5 +47,6 @@ namespace SN.NetSet.DataAccess.Concrete.SQLite
             sqliteConnection.CreateTable<NetConfigBase>();
         }
 
+     
     }
 }

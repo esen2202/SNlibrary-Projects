@@ -3,9 +3,11 @@ using System;
 
 namespace SN.Data.DataAccess.SQLiteNet
 {
-    public class SQLiteConnectionManager : ISQLiteConnectionService,IDisposable
+    public class SQLiteConnectionManager : ISQLiteConnectionService, IDisposable
     {
         public string DbName { get; set; }
+        private SQLiteConnection _sqliteConnection;
+
         public SQLiteConnectionManager(string dbName)
         {
             DbName = dbName;
@@ -13,7 +15,12 @@ namespace SN.Data.DataAccess.SQLiteNet
 
         public SQLiteConnection GetConnection()
         {
-            return new SQLiteConnection(DbName);
+            
+           // _sqliteConnection = new SQLiteConnection("deneme");
+
+            _sqliteConnection = new SQLiteConnection(DbName);
+
+            return _sqliteConnection;
         }
 
         public void Dispose()

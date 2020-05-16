@@ -16,32 +16,32 @@ namespace SN.Data.DataAccess.FakeDb
         {
             _context = list;
         }
-        public void Add(TEntity entity)
+
+        public virtual void Add(TEntity entity)
         {
-            _context.Add(entity);
+            _context.Add((TEntity)entity.Clone());
         }
 
-        public void Delete(TEntity entity)
+        public virtual void Delete(TEntity entity)
         {
             _context.Remove(entity);
         }
 
-        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        public virtual TEntity Get(Expression<Func<TEntity, bool>> filter)
         {
             return _context.Where(filter.Compile()).FirstOrDefault();
         }
 
-        public IList<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
+        public virtual IList<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             return filter == null ? _context.ToList() : _context.Where(filter.Compile()).ToList(); ;
         }
 
-        public void Update(TEntity entity, Expression<Func<TEntity, bool>> filter)
+        public virtual void Update(TEntity entity, Expression<Func<TEntity, bool>> filter)
         {
-            var record = Get(filter);
+            TEntity record = Get(filter);
             if (record != null)
                 SN.Class.Helpers.ClassHelper.CopyObjectPropertiesValue(entity, record);
-
         }
     }
 }

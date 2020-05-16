@@ -7,22 +7,20 @@ using SN.NetSet.UI.WPF.Commands.Generic;
 using SN.NetSet.UI.WPF.Views;
 using SN.Network.Model;
 using System;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
 namespace SN.NetSet.UI.WPF.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase , IDisposable
+    public class MainWindowViewModel : ViewModelBase, IDisposable
     {
         public event EventHandler<ReceivedDataEventArgs> NetAdaptersUpdated;
 
         private readonly INetAdapterInfoService _netAdapterInfoService;
 
         private readonly IMapper _mapper;
-        
+
         private ObservableCollectionPropertyNotify<NetAdapterModelBase> _adapterList;
 
         public ObservableCollectionPropertyNotify<NetAdapterModelBase> AdapterList

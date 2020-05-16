@@ -62,6 +62,7 @@ namespace SN.NetSet.UI.WPF.Views
             this.Top = SystemParameters.WorkArea.Top;
             this.Width = SystemParameters.WorkArea.Width;
             this.Height = SystemParameters.WorkArea.Height;
+            this.MaxHeight = SystemParameters.WorkArea.Height;
             this.SetTopMost(StatusTopMost);
         }
 

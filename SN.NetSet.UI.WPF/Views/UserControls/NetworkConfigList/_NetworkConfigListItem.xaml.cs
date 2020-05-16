@@ -20,9 +20,36 @@ namespace SN.NetSet.UI.WPF.Views.UserControls.NetworkConfigList
     /// </summary>
     public partial class _NetworkConfigListItem : UserControl
     {
+
+
+        public Visibility DeleteQuestion
+        {
+            get { return (Visibility)GetValue(DeleteQuestionProperty); }
+            set { SetValue(DeleteQuestionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for DeleteQuestion.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DeleteQuestionProperty =
+            DependencyProperty.Register("DeleteQuestion", typeof(Visibility), typeof(_NetworkConfigListItem ), new PropertyMetadata(Visibility.Collapsed));
+
         public _NetworkConfigListItem()
         {
             InitializeComponent();
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteQuestion = Visibility.Visible;
+        }
+
+        private void BtnCancelDelete_Click(object sender, RoutedEventArgs e)
+        {
+            DeleteQuestion = Visibility.Collapsed;
+        }
+
+        public void DeleteQuestionReset()
+        {
+            DeleteQuestion = Visibility.Collapsed;
         }
     }
 }

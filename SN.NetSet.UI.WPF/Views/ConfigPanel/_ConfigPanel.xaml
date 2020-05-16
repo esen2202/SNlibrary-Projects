@@ -4,8 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.ConfigPanel"
-              xmlns:configViewer="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.NetworkConfigViewer" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:configViewer="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.NetworkConfigViewer" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             Name="_this"
              d:DesignHeight="450" d:DesignWidth="320">
 
     <Border Name="BorderConfiguration" Width="320"  
@@ -16,6 +17,7 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <!-- Left Panel Title Bar -->
@@ -28,7 +30,8 @@
                 AncestorType={x:Type Window}}, Path=DataContext.CurrentAdapter.Name}" 
                                    />
                     </DockPanel>
-
+                    
+                    <!-- Config Control Buttons -->
                     <DockPanel VerticalAlignment="Center" HorizontalAlignment="Right">
                         <Button Name="BtnHideConfiguration" 
                                 HorizontalAlignment="Right" 
@@ -43,19 +46,29 @@
                 </DockPanel>
             </Border>
 
-            <!-- Show Current Adapter Information -->
+            <!-- Show Current Config Information -->
             <Border Grid.Row="1" BorderBrush="{x:Null}" Margin="0 0 0 0"
                     DataContext="{Binding CurrentNetConfig}">
                 <configViewer:_NetworkConfigViewer/>
             </Border>
             
-            <!-- Show Adapter List -->
+            <!-- Show Config List -->
             <Border Name="BorderAdapterList"
                     Grid.Row="2" Margin="0 15 0 0"
                     DataContext="{Binding NetConfigList}">
                 <local:_NetConfigListContainer/>
             </Border>
-            
+
+            <!-- Config Editor -->
+            <Border Name="BorderConfigEditor"
+                    Grid.Row="3" Margin="0 15 0 0"
+                    DataContext="{Binding ElementName=_this,Path=DataContext}">
+                <local:_ConfigRecordControl/>
+            </Border>
+
+            <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}"
+                                     x:Name="MainSnackbar"
+                                     Grid.Row="2" />
         </Grid>
 
     </Border>

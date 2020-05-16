@@ -6,8 +6,14 @@ namespace SN.Cmd
 {
     public interface ICommandLine
     {
-        event EventHandler ProcessCompleted;
+        event EventHandler<EventArgsWithStrMessage> ProcessCompleted;
         string OutputData { get; set; }
         void Execute(string action);
+    }
+
+    public class EventArgsWithStrMessage
+    {
+        public string Message { get; set; }
+        public List<string> MessageList { get; set; }
     }
 }

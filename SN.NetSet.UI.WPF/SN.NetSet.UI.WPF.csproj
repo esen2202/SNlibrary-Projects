@@ -74,10 +74,17 @@
     </ApplicationDefinition>
     <Compile Include="Commands\Generic\RelayCommand.cs" />
     <Compile Include="Converters\BitToMBConverter.cs" />
+    <Compile Include="Converters\BoolOrConverter.cs" />
+    <Compile Include="Converters\BoolAndConverter.cs" />
+    <Compile Include="Converters\BoolInverseConverter.cs" />
+    <Compile Include="Converters\BoolAndVisiblityConverter.cs" />
+    <Compile Include="Converters\BoolOrVisiblityConverter.cs" />
+    <Compile Include="Converters\BoolTrueToVisiblityConverter.cs" />
     <Compile Include="Converters\MacAddressConverter.cs" />
-    <Compile Include="Converters\ObjectIsNullToVisibility.cs" />
+    <Compile Include="Converters\NullToVisibility.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Properties\AppSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -86,6 +93,9 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\_ConfigPanelViewModel.cs" />
+    <Compile Include="Views\ConfigPanel\_ConfigRecordControl.xaml.cs">
+      <DependentUpon>_ConfigRecordControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ConfigPanel\_NetConfigListContainer.xaml.cs">
       <DependentUpon>_NetConfigListContainer.xaml</DependentUpon>
     </Compile>
@@ -145,6 +155,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Assets\styles\_NetworkAdapterContainerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConfigPanel\_ConfigRecordControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -258,6 +272,10 @@
     <ProjectReference Include="..\SN.Class\SN.Class.csproj">
       <Project>{BEA351B9-CBDE-4196-A96A-A5AA8AFFF25D}</Project>
       <Name>SN.Class</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SN.Cmd\SN.Cmd.csproj">
+      <Project>{309D6963-2877-4C4A-A192-15A38F6374F1}</Project>
+      <Name>SN.Cmd</Name>
     </ProjectReference>
     <ProjectReference Include="..\SN.Data\SN.Data.csproj">
       <Project>{947355DF-DFC5-41E5-9E15-E6AC5AF12810}</Project>

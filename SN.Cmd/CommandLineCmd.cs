@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace SN.Cmd
 {
-	public class CommandLineCmd: ICommandLine
+    public class CommandLineCmd : ICommandLine
     {
-        public event EventHandler ProcessCompleted;
+        public event EventHandler<EventArgsWithStrMessage> ProcessCompleted;
         public event DataReceivedEventHandler OutputDataReceived;
         public string OutputData { get; set; }
 
@@ -33,7 +34,7 @@ namespace SN.Cmd
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
-                    Arguments =  action
+                    Arguments = action
                 },
                 EnableRaisingEvents = true
             };
@@ -57,9 +58,13 @@ namespace SN.Cmd
 
             var messages = output.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
 
-            AppendOutputData(output); 
+            AppendOutputData(output);
 
-            ProcessCompleted?.Invoke(this, e);
+            ProcessCompleted?.Invoke(this, new EventArgsWithStrMessage
+            {
+                Message = output,
+                MessageList = messages.ToList<string>()
+            });
         }
 
         public List<string> GetOutputDataAsList()
@@ -67,11 +72,13 @@ namespace SN.Cmd
             List<string> resultList = new List<string>();
 
             var messages = OutputData.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-            
+
             foreach (var message in messages)
                 resultList.Add(message);
 
             return resultList;
         }
     }
+
+
 }

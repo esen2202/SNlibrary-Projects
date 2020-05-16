@@ -13,7 +13,8 @@
         <ResourceDictionary>
             <converters:StringFormatConverter x:Key="StringFormatConverter" />
             <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
-            <converters:ObjectIsNullToVisibility x:Key="ObjectIsNullToVisibility"/>
+            <converters:NullToVisibility x:Key="NullToVisibility"/>
+            <converters:BoolInverseConverter x:Key="BoolInverse"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../../Assets/styles/_AppSettingsStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -30,7 +31,7 @@
                     <materialDesign:PackIcon Kind="ShapeOutline" Foreground="DeepSkyBlue" VerticalAlignment="Center" 
                                              Height="20" Width="20" Margin="0 0 15 0"/>
                     <TextBlock x:Name="TBConfigName"
-                                Text="{Binding ConfigName,FallbackValue=''}"                                        
+                               Text="{Binding ConfigName,FallbackValue=''}"                                        
                                Style="{StaticResource AppSetTitle}"/>
                 </DockPanel>
             </HeaderedContentControl>
@@ -61,7 +62,7 @@
                 <DockPanel Grid.Column="1" Grid.Row="0"  >
                     <TextBlock Name="TxbIPAddress" VerticalAlignment="Center" 
                                Style="{StaticResource ValueTextBlock}"
-                               Text="{Binding IpAddress,FallbackValue='0.0.0.0'}"/>
+                               Text="{Binding IpAddress}"/>
                 </DockPanel>
 
                 <DockPanel Grid.Column="2" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"
@@ -83,7 +84,7 @@
                 <DockPanel Grid.Column="1" Grid.Row="1"  >
                     <TextBlock Name="TxbSubnetMask" VerticalAlignment="Center" 
                                Style="{StaticResource ValueTextBlock}"
-                               Text="{Binding SubnetMask,FallbackValue='0.0.0.0'}"/>
+                               Text="{Binding SubnetMask,FallbackValue=''}"/>
                 </DockPanel>
 
                 <DockPanel Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"
@@ -109,7 +110,7 @@
                          NavigateUri="{Binding Gateway, Converter={StaticResource StringFormatConverter}, ConverterParameter='http://{0}', FallbackValue='0.0.0.0'}">
                         <TextBlock Name="TxbGateway"
                                    Style="{StaticResource ValueTextBlock}"
-                                   Text="{Binding Gateway,FallbackValue='0.0.0.0'}"/>
+                                   Text="{Binding Gateway,FallbackValue=''}"/>
                      </Hyperlink>
                     </TextBlock>
                 </DockPanel>
@@ -126,18 +127,18 @@
 
                 <!--#region DNSServer1 -->
                 <DockPanel Grid.Column="0" Grid.Row="3">
-                    <TextBlock Text="DNS Server 1"  VerticalAlignment="Center"
+                    <TextBlock Text="DNS Server1"  VerticalAlignment="Center"
                                    Style="{StaticResource LabelTextBlock}"/>
                 </DockPanel>
 
                 <DockPanel Grid.Column="1" Grid.Row="3"  >
                     <TextBlock  Name="TxbDNSServer1" Foreground="White" VerticalAlignment="Center"
                                     Style="{StaticResource ValueTextBlock}"
-                                    Text="{Binding DnsServer1,FallbackValue='0.0.0.0'}"/>
+                                    Text="{Binding DnsServer1,FallbackValue=''}"/>
                 </DockPanel>
 
                 <DockPanel Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left"
-                               Visibility="{Binding DnsServer,Converter={StaticResource StringToVisibilityConverter}}">
+                               Visibility="{Binding DnsServer1,Converter={StaticResource StringToVisibilityConverter}}">
                     <Button Name="BtnCopyDNSServer1" 
                                 Style="{StaticResource CopyButton}"
                                 CommandParameter="{Binding DnsServer1}"
@@ -148,18 +149,18 @@
 
                     <!--#region DNSServer2 -->
                     <DockPanel Grid.Column="0" Grid.Row="4">
-                        <TextBlock Text="DNS Server 2"  VerticalAlignment="Center"
+                        <TextBlock Text="DNS Server2"  VerticalAlignment="Center"
                                    Style="{StaticResource LabelTextBlock}"/>
                     </DockPanel>
 
                     <DockPanel Grid.Column="1" Grid.Row="4"  >
                         <TextBlock  Name="TxbDNSServer2" Foreground="White" VerticalAlignment="Center"
                                     Style="{StaticResource ValueTextBlock}"
-                                    Text="{Binding DnsServer2,FallbackValue='0.0.0.0'}"/>
+                                    Text="{Binding DnsServer2,FallbackValue=''}"/>
                     </DockPanel>
 
                     <DockPanel Grid.Column="2" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left"
-                               Visibility="{Binding DnsServer,Converter={StaticResource StringToVisibilityConverter}}">
+                               Visibility="{Binding DnsServer2,Converter={StaticResource StringToVisibilityConverter}}">
                         <Button Name="BtnCopyDNSServer2" 
                                 Style="{StaticResource CopyButton}"
                                 CommandParameter="{Binding DnsServer2}"
@@ -173,7 +174,10 @@
     </Expander>
     
     <!--#region Buttons -->
-    <DockPanel Margin="0 15 0 0" Background="#51000000" Height="35">
+        <DockPanel Margin="0 15 0 0" Background="#51000000" Height="35"  
+                   IsEnabled="{Binding RelativeSource={RelativeSource FindAncestor,
+            AncestorType={x:Type UserControl},AncestorLevel=2}, 
+            Path=DataContext.OperationInProcess,Converter={StaticResource BoolInverse}}">
 
         <Button x:Name="BtnApply"
                 Content="Apply the Config" Margin="0 0 5 0" Width="150"
@@ -182,14 +186,16 @@
                 Command="{Binding RelativeSource={RelativeSource FindAncestor,
                 AncestorType={x:Type UserControl},AncestorLevel=2}, Path=DataContext.ApplyConfigCommand}"
                 Style="{StaticResource MaterialDesignFlatAccentButton}"
-                Visibility="{Binding ElementName=_this,Path=DataContext, Converter={StaticResource ObjectIsNullToVisibility}}"/>
+                Visibility="{Binding ElementName=_this,Path=DataContext.ConfigName, Converter={StaticResource NullToVisibility}}"
+                />
 
         <Button Content="Activate Dhcp" Margin="0 0 15 0"
                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor,            
                 AncestorType={x:Type Window}}, Path=DataContext.CurrentAdapter.Name}"
                 Command="{Binding RelativeSource={RelativeSource FindAncestor,
                 AncestorType={x:Type UserControl},AncestorLevel=2}, Path=DataContext.ActivateDhcpCommand}"
-                Style="{StaticResource MaterialDesignFlatAccentButton}"/>
+                Style="{StaticResource MaterialDesignFlatAccentButton}"
+                />
     </DockPanel>
     <!--#endregion-->
     </StackPanel>
