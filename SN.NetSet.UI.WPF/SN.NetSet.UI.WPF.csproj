@@ -93,6 +93,9 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\_ConfigPanelViewModel.cs" />
+    <Compile Include="Views\About\AboutMe.xaml.cs">
+      <DependentUpon>AboutMe.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ConfigPanel\_ConfigRecordControl.xaml.cs">
       <DependentUpon>_ConfigRecordControl.xaml</DependentUpon>
     </Compile>
@@ -124,11 +127,11 @@
     <Compile Include="Views\UserControls\NetworkConfigViewer\_NetworkConfigViewer.xaml.cs">
       <DependentUpon>_NetworkConfigViewer.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\UserControls\TaggedText\_TaggedText.xaml.cs">
-      <DependentUpon>_TaggedText.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\UserControls\NetworkAdapterViewer\_NetworkAdapterViewer.xaml.cs">
       <DependentUpon>_NetworkAdapterViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControls\TextObjects\IPTextBox.xaml.cs">
+      <DependentUpon>IPTextBox.xaml</DependentUpon>
     </Compile>
     <Page Include="Assets\styles\AppStyles.xaml">
       <SubType>Designer</SubType>
@@ -146,6 +149,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Assets\styles\_NetConfigListStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Assets\styles\_ConfigRecordControlStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\styles\_ControlButtonSetStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,7 +165,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Assets\styles\_ConfigPanelStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Assets\styles\_NetworkAdapterContainerStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\About\AboutMe.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -218,15 +237,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\TaggedText\_TaggedText.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\UserControls\NetworkAdapterViewer\_NetworkAdapterViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\UserControls\TaggedText\_TaggedTextStyle.xaml">
+    <Page Include="Views\UserControls\TextObjects\IPTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

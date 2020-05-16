@@ -27,7 +27,7 @@ namespace SN.NetSet.UI.WPF.Views.ConfigPanel
             this.Loaded += _ConfigPanel_Loaded;
 
             Snackbar = this.MainSnackbar;
-            BorderConfiguration.Width = 0;
+            BorderMain.Width = 0;
 
             openConfigStoryboard = new Storyboard();
             closeConfigStoryboard = new Storyboard();
@@ -73,12 +73,12 @@ namespace SN.NetSet.UI.WPF.Views.ConfigPanel
 
         public void OpenConfig()
         {
-            BorderWidthAnimation(BorderConfiguration, openConfigStoryboard, BorderConfiguration.Width, 320);
+            BorderWidthAnimation(BorderMain, openConfigStoryboard, BorderMain.Width, 320);
         }
 
         public void CloseConfig()
         {
-            BorderWidthAnimation(BorderConfiguration, closeConfigStoryboard, BorderConfiguration.Width, 0);
+            BorderWidthAnimation(BorderMain, closeConfigStoryboard, BorderMain.Width, 0);
         }
 
         private void BtnHideConfiguration_Click(object sender, RoutedEventArgs e)

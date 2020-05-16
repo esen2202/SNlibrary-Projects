@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SN.NetSet.UI.WPF.Views.UserControls.TaggedText
+namespace SN.NetSet.UI.WPF.Views.About
 {
     /// <summary>
-    /// Interaction logic for LabelTextButton.xaml
+    /// Interaction logic for AboutMe.xaml
     /// </summary>
-    public partial class _TaggedText : UserControl
+    public partial class AboutMe : Window
     {
-        public _TaggedText()
+        public AboutMe()
         {
             InitializeComponent();
         }

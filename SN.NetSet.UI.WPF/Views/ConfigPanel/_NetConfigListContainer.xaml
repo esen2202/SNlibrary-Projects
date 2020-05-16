@@ -13,6 +13,9 @@
         <ResourceDictionary>
             <converters:BoolInverseConverter x:Key="BoolInverse"/>
             <converters:BoolAndConverter x:Key="BoolAnd"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\..\Assets\styles\_NetConfigListStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
     
@@ -20,11 +23,12 @@
         Name="LBConfigList"
         Grid.Row="3"
         ItemsSource="{Binding}"
+        Background="{x:Null}"
+        BorderBrush="{x:Null}"
         HorizontalContentAlignment="Stretch"
-        Background="{x:Null}" BorderBrush="{x:Null}"
-        IsSynchronizedWithCurrentItem="False"
-        ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
         ScrollViewer.VerticalScrollBarVisibility="Auto"
+        IsSynchronizedWithCurrentItem="False"
         SelectionChanged="LBConfigList_SelectionChanged">
         <ListBox.IsEnabled>
             <MultiBinding Converter="{StaticResource BoolAnd}">
@@ -38,7 +42,7 @@
                          Converter="{StaticResource BoolInverse}"  />
             </MultiBinding>
         </ListBox.IsEnabled>
-        
+      
         <ListBox.ItemTemplate>
             <DataTemplate>
                 <configList:_NetworkConfigListItem Margin="0"/>

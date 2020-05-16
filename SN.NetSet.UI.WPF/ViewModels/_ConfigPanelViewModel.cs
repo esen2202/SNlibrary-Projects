@@ -226,6 +226,7 @@ namespace SN.NetSet.UI.WPF.ViewModels
         }
         private void EnableAddingModeMethod()
         {
+            NewNetConfig = new NetConfigBase();
             EnabledAddingMode = true;
         }
 

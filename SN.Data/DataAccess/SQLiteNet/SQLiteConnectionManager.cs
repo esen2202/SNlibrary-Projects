@@ -16,7 +16,7 @@ namespace SN.Data.DataAccess.SQLiteNet
         public SQLiteConnection GetConnection()
         {
             
-           // _sqliteConnection = new SQLiteConnection("deneme");
+            _sqliteConnection = new SQLiteConnection("deneme");
 
             _sqliteConnection = new SQLiteConnection(DbName);
 

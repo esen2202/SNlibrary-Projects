@@ -1,0 +1,33 @@
+﻿<Window x:Class="SN.NetSet.UI.WPF.Views.About.AboutMe"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.About" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d" 
+        WindowStyle="None" AllowsTransparency="True" Background="{x:Null}"
+        Title="AboutMe" Height="300" Width="500">
+    <Grid>
+        <Border Background="AliceBlue" CornerRadius="10" Width="500" Height="300">
+            <Canvas>
+                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" RenderTransformOrigin="4.746,0.547" Canvas.Left="452">
+                    <materialDesign:PackIcon Name="iconNetworkStatus" Kind="Close" VerticalAlignment="Center" Foreground="DarkRed" Width="25" Height="25"/>
+                </Button>
+                
+                <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Canvas.Left="173" Canvas.Top="60" Foreground="DarkMagenta" Text="Design Programming" />
+
+
+                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Canvas.Left="166" Canvas.Top="81">
+                    Erkan Esen
+                </TextBlock>
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="75" Canvas.Top="202" Foreground="DimGray">
+                    https://www.linkedin.com/in/esen2202/
+                </TextBlock>
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="114" Canvas.Top="248" Foreground="DimGray">
+                    https://github.com/esen2202
+                </TextBlock>
+
+            </Canvas>
+        </Border>
+    </Grid>
+</Window>

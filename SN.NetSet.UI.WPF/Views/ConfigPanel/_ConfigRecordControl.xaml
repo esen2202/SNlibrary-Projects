@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.ConfigPanel" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             xmlns:converters="clr-namespace:SN.NetSet.UI.WPF.Converters"
+             xmlns:converters="clr-namespace:SN.NetSet.UI.WPF.Converters" xmlns:textobjects="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.TextObjects"
              mc:Ignorable="d" 
              d:DesignHeight="100" d:DesignWidth="320">
 
@@ -22,16 +22,9 @@
                 <converters:BoolTrueToVisiblityConverter/>
             </converters:ValueConverterGroup>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../Assets/styles/_ConfigRecordControlStyle.xaml" />
                 <ResourceDictionary Source="../../Assets/styles/_AppSettingsStyle.xaml" />
-                <ResourceDictionary>
-                    <Style x:Key="TextInputStyle" TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
-                        <Setter Property="materialDesign:HintAssist.FloatingScale" Value="1"/>
-                        <Setter Property="materialDesign:HintAssist.Foreground" Value="LightBlue"/>
-                        <Setter Property="materialDesign:HintAssist.IsFloating" Value="True"/>
-                        <Setter Property="Foreground" Value="GhostWhite"/>
-                    </Style>
-                </ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
+             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -64,7 +57,7 @@
                 <materialDesign:PackIcon Kind="SettingsHelper" Foreground="Aqua" VerticalAlignment="Center" 
                                      Height="20" Width="20" Margin="0 0 15 0"/>
             <TextBlock Text="Operations" Foreground="Fuchsia"                                      
-                       Style="{StaticResource MaterialDesignButtonTextBlock}"/>
+                       Style="{StaticResource OperationStatusTextBlock}"/>
             </DockPanel>
 
             <DockPanel>
@@ -78,7 +71,7 @@
                 <materialDesign:PackIcon Kind="Add" Foreground="LimeGreen" VerticalAlignment="Center" 
                                      Height="20" Width="20" Margin="0 0 15 0"/>
                 <TextBlock Text="New Config" Foreground="LimeGreen"                                      
-                       Style="{StaticResource MaterialDesignButtonTextBlock}"/>
+                       Style="{StaticResource OperationStatusTextBlock}"/>
             </DockPanel>
 
             <DockPanel>
@@ -92,13 +85,17 @@
                 <materialDesign:PackIcon Kind="Update" Foreground="Aqua" VerticalAlignment="Center" 
                                      Height="20" Width="20" Margin="0 0 15 0"/>
                 <TextBlock Text="Update Config" Foreground="Aqua"                                      
-                       Style="{StaticResource MaterialDesignButtonTextBlock}"/>
+                       Style="{StaticResource OperationStatusTextBlock}"/>
             </DockPanel>
         </DockPanel>
 
         <!-- Form  -->
-        <Border x:Name="BorderConfig" Grid.Row="1" Margin="10">
-            <!--<Border.Style>
+        <materialDesign:Card Width="auto" Grid.Row="1" Margin="5" 
+                             Background="#AF2A2A2A" Effect="{StaticResource MaterialDesignShadowDepth1}"
+                             BorderBrush="AliceBlue" BorderThickness="1">
+            
+            <Border x:Name="BorderConfig" Margin="10">
+                <!--<Border.Style>
                     <Style>
                         <Setter Property="Control.Visibility" Value="Visible" />
                         <Style.Triggers>
@@ -114,73 +111,73 @@
                         </Style.Triggers>
                     </Style>
                 </Border.Style>-->
-            <Border.Visibility>
-                <MultiBinding Converter="{StaticResource BoolOrVisibility}">
-                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+                <Border.Visibility>
+                    <MultiBinding Converter="{StaticResource BoolOrVisibility}">
+                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
                     AncestorType={x:Type UserControl},AncestorLevel=2}" 
                          Path="DataContext.EnabledUpdateMode"  />
-                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+                        <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
                     AncestorType={x:Type UserControl},AncestorLevel=2}" 
                          Path="DataContext.EnabledAddingMode"  />
-                </MultiBinding>
-            </Border.Visibility>
+                    </MultiBinding>
+                </Border.Visibility>
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="45" />
-                    <RowDefinition Height="45" />
-                    <RowDefinition Height="45" />
-                    <RowDefinition Height="45" />
-                    <RowDefinition Height="45" />
-                    <RowDefinition Height="45" />
-                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
 
-                <TextBox Name="TxtConfigName" Grid.Row="0" 
+                    <TextBox Name="TxtConfigName" Grid.Row="0" 
                      Text="{Binding NewNetConfig.ConfigName,FallbackValue=''}"
                      Style="{StaticResource TextInputStyle}"
-                             materialDesign:HintAssist.Hint="Config Name"
-                             MaxLength="25"
+                             materialDesign:HintAssist.Hint="* Config Name"
+                             MaxLength="30"
                              Margin="0 0 0 0" />
-                <TextBox Name="TxtIpAddress" Grid.Row="1" 
+                    <TextBox Name="TxtIpAddress" Grid.Row="1" 
                      Text="{Binding NewNetConfig.IpAddress,FallbackValue=''}"
                      Style="{StaticResource TextInputStyle}"
-                             materialDesign:HintAssist.Hint="Ip Adress"
+                             materialDesign:HintAssist.Hint="* Ip Adress"
                              MaxLength="25"
                              Margin="0 0 0 0" />
-                <TextBox Name="TxtSubnetMask" Grid.Row="2" 
+                    <TextBox Name="TxtSubnetMask" Grid.Row="2" 
                      Text="{Binding NewNetConfig.SubnetMask,FallbackValue=''}"
                      Style="{StaticResource TextInputStyle}"
-                             materialDesign:HintAssist.Hint="Subnet Mask"
+                             materialDesign:HintAssist.Hint="* Subnet Mask"
                              MaxLength="25"
                              Margin="0 0 0 0" />
-                <TextBox Name="TxtGateway" Grid.Row="3"
+                    <TextBox Name="TxtGateway" Grid.Row="3"
                      Text="{Binding NewNetConfig.Gateway,FallbackValue=''}"
                      Style="{StaticResource TextInputStyle}"
                              materialDesign:HintAssist.Hint="Gateway"
                              MaxLength="25"
                              Margin="0 0 0 0" />
-                <TextBox Name="TxtDnsServer1" Grid.Row="4" 
+                    <TextBox Name="TxtDnsServer1" Grid.Row="4" 
                      Text="{Binding NewNetConfig.DnsServer1,FallbackValue=''}"
                      Style="{StaticResource TextInputStyle}"
                              materialDesign:HintAssist.Hint="Dns Server 1"
                              MaxLength="25"
                              Margin="0 0 0 0" />
-                <TextBox Name="TxtDnsServer2" Grid.Row="5" 
+                    <TextBox Name="TxtDnsServer2" Grid.Row="5" 
                      Text="{Binding NewNetConfig.DnsServer2,FallbackValue=''}"
                      Style="{StaticResource TextInputStyle}"
                              materialDesign:HintAssist.Hint="Dns Server 2"
                              MaxLength="25"
                              Margin="0 0 0 0" />
-            </Grid>
-        </Border>
+                </Grid>
+            </Border>
+        </materialDesign:Card>
         
         <!-- Button Tool Set -->
         <DockPanel Grid.Row="2" HorizontalAlignment="Center">
 
-            <Button x:Name="BtnNewConfig" Width="65" Background="AliceBlue"
-                        Style="{StaticResource MaterialDesignFlatButton}" 
-                        Command="{Binding EnableAddingModeCommand}"
-                        Margin="5">
+            <Button x:Name="BtnNewConfig"  
+                        Style="{StaticResource NewConfigButton}" 
+                        Command="{Binding EnableAddingModeCommand}">
                 <Button.IsEnabled>
                     <MultiBinding Converter="{StaticResource BoolAnd}">
                         <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
@@ -193,19 +190,12 @@
                          Converter="{StaticResource BoolInverse}"  />
                     </MultiBinding>
                 </Button.IsEnabled>
-
-                <materialDesign:PackIcon Kind="PlusCircle" 
-                                             Width="25" Height="25"
-                                             Foreground="Chocolate"
-                                             materialDesign:ColorZoneAssist.Mode="PrimaryMid"
-                                             VerticalAlignment="Center"/>
             </Button>
 
-            <Button x:Name="BtnAddUpdateConfig" Width="65" Background="AliceBlue"
-                        Style="{StaticResource MaterialDesignFlatButton}"
+            <Button x:Name="BtnAddUpdateConfig"  
+                        Style="{StaticResource ConfirmButton}"
                         CommandParameter="{Binding NewNetConfig}"
-                        Command="{Binding AddUpdateConfigCommand}"
-                        Margin="5" >
+                        Command="{Binding AddUpdateConfigCommand}">
                 <Button.IsEnabled>
                     <MultiBinding Converter="{StaticResource BoolOr}">
                         <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
@@ -216,18 +206,12 @@
                          Path="DataContext.EnabledAddingMode"/>
                     </MultiBinding>
                 </Button.IsEnabled>
-
-                <materialDesign:PackIcon Kind="CheckCircle" 
-                                         Width="25" Height="25"
-                                         materialDesign:ColorZoneAssist.Mode="PrimaryDark"
-                                         Foreground="LimeGreen"
-                                         VerticalAlignment="Center"/>
+ 
             </Button>
 
-            <Button x:Name="BtnCancel" Width="65" Background="AliceBlue"
-                    Style="{StaticResource MaterialDesignFlatButton}" 
-                    Command="{Binding CancelModeCommand}"
-                    Margin="5" HorizontalAlignment="Left">
+            <Button x:Name="BtnCancel"  
+                    Style="{StaticResource CancelButton}" 
+                    Command="{Binding CancelModeCommand}">
                 <Button.IsEnabled>
                     <MultiBinding Converter="{StaticResource BoolOr}">
                         <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
@@ -238,16 +222,10 @@
                          Path="DataContext.EnabledAddingMode"/>
                     </MultiBinding>
                 </Button.IsEnabled>
-                
-                <materialDesign:PackIcon Kind="CloseCircle" 
-                                         Foreground="DarkRed"
-                                         Width="25" Height="25"
-                                         materialDesign:ColorZoneAssist.Mode="PrimaryMid"
-                                         VerticalAlignment="Center"/>
+ 
             </Button>
 
         </DockPanel>
         
     </Grid>
-
 </UserControl>

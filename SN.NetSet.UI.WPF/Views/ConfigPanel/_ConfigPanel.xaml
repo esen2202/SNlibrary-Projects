@@ -8,10 +8,17 @@
              mc:Ignorable="d" 
              Name="_this"
              d:DesignHeight="450" d:DesignWidth="320">
+    
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="..\..\Assets\styles\_ConfigPanelStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-    <Border Name="BorderConfiguration" Width="320"  
-            VerticalAlignment="Stretch" HorizontalAlignment="Right" 
-            Background="#F01D4263" >
+    <Border Name="BorderMain" 
+            Style="{StaticResource MainBorder}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
@@ -26,21 +33,15 @@
                     <DockPanel Margin="10 0 0 0"
                         VerticalAlignment="Center" HorizontalAlignment="Right">
                         <TextBlock Style="{StaticResource LabelTextBlock}"
-                                   Text="{Binding RelativeSource={RelativeSource FindAncestor,            
-                AncestorType={x:Type Window}}, Path=DataContext.CurrentAdapter.Name}" 
-                                   />
+                                   Text="{Binding RelativeSource={RelativeSource FindAncestor,
+                            AncestorType={x:Type Window}}, Path=DataContext.CurrentAdapter.Name}"/>
                     </DockPanel>
                     
                     <!-- Config Control Buttons -->
                     <DockPanel VerticalAlignment="Center" HorizontalAlignment="Right">
                         <Button Name="BtnHideConfiguration" 
-                                HorizontalAlignment="Right" 
-                                VerticalAlignment="Bottom" Margin="2 3 5 4" 
-                                Padding="0"
-                                Style="{StaticResource MaterialDesignToolButton}"
-                                Width="25" Height="25" 
+                                Style="{StaticResource HideConfigurationButton}"
                                 Click="BtnHideConfiguration_Click">
-                            <materialDesign:PackIcon  Kind="Close" Foreground="Red" />
                         </Button>
                     </DockPanel>
                 </DockPanel>
