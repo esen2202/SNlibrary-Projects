@@ -9,8 +9,9 @@
     </Style>
 
 
-    <Style x:Key="ButtonSetBase" BasedOn="{StaticResource MaterialDesignFlatButton}" 
+    <Style x:Key="ButtonSetBase" BasedOn="{StaticResource MaterialDesignFlatLightBgButton}" 
            TargetType="Button">
+        <Setter Property="BorderBrush" Value="CadetBlue"/>
         <Setter Property="Width" Value="65"/>
         <Setter Property="Height" Value="32"/>
         <Setter Property="Padding" Value="0"/>
@@ -69,7 +70,8 @@
         <Setter Property="materialDesign:TextFieldAssist.UnderlineBrush" Value="GreenYellow"/>
         <Setter Property="materialDesign:TextFieldAssist.HasClearButton" Value="True"/>
         <Setter Property="materialDesign:TextFieldAssist.TextBoxViewMargin" Value="100 0 0 0"/>
-        <Setter Property="materialDesign:ThemeAssist.Theme"  Value="Dark"/>
+        <Setter Property="materialDesign:ThemeAssist.Theme"  Value="Light"/>
+        <Setter Property="CaretBrush"  Value="GreenYellow"/>
         <Setter Property="Foreground" Value="GhostWhite"/>
     </Style>
 

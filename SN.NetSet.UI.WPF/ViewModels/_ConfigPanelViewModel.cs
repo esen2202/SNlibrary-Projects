@@ -8,6 +8,7 @@ using SN.NetSet.UI.WPF.Commands.Generic;
 using SN.NetSet.UI.WPF.Views;
 using SN.Network.Model;
 using System;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 
@@ -383,6 +384,19 @@ namespace SN.NetSet.UI.WPF.ViewModels
         {
             EnabledAddingMode = false;
         }
+
+    
+        public void ImportConfigDb(string json)
+        {
+            _netConfigDataService.ImportFromJsonListConfig(json);
+            RefreshConfigList();
+        }
+
+        public void ExportConfigDb(string fileName)
+        {
+            _netConfigDataService.SaveToFileLisConfig(fileName);
+        }
+
         #endregion
 
     }

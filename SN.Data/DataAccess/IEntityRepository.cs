@@ -12,5 +12,6 @@ namespace SN.Data.DataAccess
         void Add(TEntity entity);
         void Delete(TEntity entity);
         void Update(TEntity entity, Expression<Func<TEntity, bool>> filter = null);
+        void InsertAll(IList<TEntity> entities);
     }
 }

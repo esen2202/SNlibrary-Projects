@@ -12,17 +12,20 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
     {
         private int _selectedItemIndex = 0;
 
+        MainWindow mainWindow;
+
         public _NetworkAdapterListContainer()
         {
             InitializeComponent();
 
             LBAdapterList.SelectionChanged += LBAdapterList_SelectionChanged;
             this.Loaded += _NetworkAdapterListContainer_Loaded;
+            mainWindow = (MainWindow)Application.Current.MainWindow;
         }
   
         private void _NetworkAdapterListContainer_Loaded(object sender, RoutedEventArgs e)
         {
-            (Application.Current.MainWindow.DataContext as MainWindowViewModel).NetAdaptersUpdated += _NetworkAdapterListContainer_NetAdaptersUpdated;
+          // (mainWindow.DataContext as MainWindowViewModel).NetAdaptersUpdated += _NetworkAdapterListContainer_NetAdaptersUpdated;
         }
 
         private void _NetworkAdapterListContainer_NetAdaptersUpdated(object sender, ReceivedDataEventArgs e)
@@ -38,6 +41,7 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
 
         private void LBAdapterList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             if (LBAdapterList.SelectedIndex != -1)
                 _selectedItemIndex = LBAdapterList.SelectedIndex;
         }

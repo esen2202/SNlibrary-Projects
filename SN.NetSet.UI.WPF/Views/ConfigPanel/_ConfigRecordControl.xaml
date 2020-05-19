@@ -17,6 +17,7 @@
             <converters:BoolOrConverter x:Key="BoolOr"/>
             <converters:BoolInverseConverter x:Key="BoolInverse"/>
             <converters:BoolTrueToVisiblityConverter x:Key="TrueToVisiblity"/>
+            <converters:StringToIpFormatConverter x:Key="StringToIpFormat"/>
             <converters:ValueConverterGroup x:Key="FalseToVisibility">
                 <converters:BoolInverseConverter/>
                 <converters:BoolTrueToVisiblityConverter/>
@@ -32,13 +33,13 @@
     <!-- Detail Content -->
     <Grid >
         <Grid.RowDefinitions>
-            <RowDefinition Height="45" />
+            <RowDefinition Height="25" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="45" />
         </Grid.RowDefinitions>
 
         <!-- Title Config Settings-->
-        <DockPanel VerticalAlignment="Center" Grid.Row="0" Margin="10">
+        <DockPanel VerticalAlignment="Center" Grid.Row="0" Margin="10 0 0 0" >
 
             <DockPanel>
                 <DockPanel.Visibility>
@@ -53,10 +54,10 @@
                          Converter="{StaticResource BoolInverse}"  />
                     </MultiBinding>
                 </DockPanel.Visibility>
-                
-                <materialDesign:PackIcon Kind="SettingsHelper" Foreground="Aqua" VerticalAlignment="Center" 
+
+                <materialDesign:PackIcon Kind="SettingsHelper" Foreground="LightCoral" VerticalAlignment="Center" 
                                      Height="20" Width="20" Margin="0 0 15 0"/>
-            <TextBlock Text="Operations" Foreground="Fuchsia"                                      
+            <TextBlock Text="Operations" Foreground="LightCoral"                                      
                        Style="{StaticResource OperationStatusTextBlock}"/>
             </DockPanel>
 
@@ -90,7 +91,7 @@
         </DockPanel>
 
         <!-- Form  -->
-        <materialDesign:Card Width="auto" Grid.Row="1" Margin="5" 
+        <materialDesign:Card Width="auto" Grid.Row="1" Margin="5 5 5 0" 
                              Background="#AF2A2A2A" Effect="{StaticResource MaterialDesignShadowDepth1}"
                              BorderBrush="AliceBlue" BorderThickness="1">
             
@@ -142,31 +143,32 @@
                      Text="{Binding NewNetConfig.IpAddress,FallbackValue=''}"
                      Style="{StaticResource TextInputStyle}"
                              materialDesign:HintAssist.Hint="* Ip Adress"
-                             MaxLength="25"
-                             Margin="0 0 0 0" />
+                             MaxLength="15"
+                             Margin="0 0 0 0" 
+                             />
                     <TextBox Name="TxtSubnetMask" Grid.Row="2" 
                      Text="{Binding NewNetConfig.SubnetMask,FallbackValue=''}"
                      Style="{StaticResource TextInputStyle}"
                              materialDesign:HintAssist.Hint="* Subnet Mask"
-                             MaxLength="25"
+                             MaxLength="15"
                              Margin="0 0 0 0" />
                     <TextBox Name="TxtGateway" Grid.Row="3"
                      Text="{Binding NewNetConfig.Gateway,FallbackValue=''}"
                      Style="{StaticResource TextInputStyle}"
                              materialDesign:HintAssist.Hint="Gateway"
-                             MaxLength="25"
+                             MaxLength="15"
                              Margin="0 0 0 0" />
                     <TextBox Name="TxtDnsServer1" Grid.Row="4" 
                      Text="{Binding NewNetConfig.DnsServer1,FallbackValue=''}"
                      Style="{StaticResource TextInputStyle}"
                              materialDesign:HintAssist.Hint="Dns Server 1"
-                             MaxLength="25"
+                             MaxLength="15"
                              Margin="0 0 0 0" />
                     <TextBox Name="TxtDnsServer2" Grid.Row="5" 
                      Text="{Binding NewNetConfig.DnsServer2,FallbackValue=''}"
                      Style="{StaticResource TextInputStyle}"
                              materialDesign:HintAssist.Hint="Dns Server 2"
-                             MaxLength="25"
+                             MaxLength="15"
                              Margin="0 0 0 0" />
                 </Grid>
             </Border>

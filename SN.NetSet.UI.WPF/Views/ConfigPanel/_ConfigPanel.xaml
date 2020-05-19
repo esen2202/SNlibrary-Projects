@@ -25,6 +25,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <!-- Left Panel Title Bar -->
@@ -60,9 +61,15 @@
                 <local:_NetConfigListContainer/>
             </Border>
 
+            <!-- Import Export Button Set -->
+            <Border Name="BorderImportExport"
+                    Grid.Row="3" Margin="0 15 0 0">
+                <local:_ImportExportControl/>
+            </Border>
+            
             <!-- Config Editor -->
             <Border Name="BorderConfigEditor"
-                    Grid.Row="3" Margin="0 15 0 0"
+                    Grid.Row="4" Margin="0 15 0 0"
                     DataContext="{Binding ElementName=_this,Path=DataContext}">
                 <local:_ConfigRecordControl/>
             </Border>

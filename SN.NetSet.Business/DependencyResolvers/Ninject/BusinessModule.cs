@@ -12,8 +12,8 @@ namespace SN.NetSet.Business.DependencyResolvers.Ninject
         public override void Load()
         {
             Bind<INetConfigDataService>().To<NetConfigDbManager>();
-            Bind<INetConfigDal>().To<FakeDbNetConfigDal>();
-            Bind<IUserDal>().To<FakeDbUserDal>();
+            Bind<INetConfigDal>().To<SQLiteNetConfigDal>();
+            Bind<IUserDal>().To<SQLiteUserDal>();
         }
     }
 }

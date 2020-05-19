@@ -1,9 +1,11 @@
 ﻿using FluentValidation.Results;
+using Newtonsoft.Json;
 using SN.NetSet.Business.Abstract;
 using SN.NetSet.Business.Data.Validation;
 using SN.NetSet.DataAccess.Abstract;
 using SN.NetSet.Entities.Concrete.Network;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace SN.NetSet.Business.Data
@@ -28,9 +30,9 @@ namespace SN.NetSet.Business.Data
 
         public void AddNewConfig(NetConfigBase config)
         {
-            ValidationResult validationResult =  validationRules.Validate(config);
-    
-            if(validationResult.IsValid)
+            ValidationResult validationResult = validationRules.Validate(config);
+
+            if (validationResult.IsValid)
             {
                 _netConfigDal.Add(config);
             }
@@ -57,6 +59,41 @@ namespace SN.NetSet.Business.Data
         public void DeleteConfig(NetConfigBase config)
         {
             _netConfigDal.Delete(config);
+        }
+
+        public void AddNewListConfig(List<NetConfigBase> configList)
+        {
+            foreach (var config in configList)
+            {
+                ValidationResult validationResult = validationRules.Validate(config);
+
+                if (validationResult.IsValid)
+                {
+                    _netConfigDal.Add(config);
+                }
+                else
+                {
+                    throw new System.Exception(validationResult.Errors.First().ErrorMessage);
+                }
+            }
+        }
+
+        public void ImportFromJsonListConfig(string json)
+        {
+            List<NetConfigBase> configList = JsonConvert.DeserializeObject<List<NetConfigBase>>(json);
+            AddNewListConfig(configList);
+        }
+
+        public void SaveToFileLisConfig(string fileName)
+        {
+            File.WriteAllText(fileName, JsonConvert.SerializeObject(GetConfigList(), Formatting.Indented));
+
+            //// serialize JSON directly to a file
+            //using (StreamWriter file = File.CreateText(fileName))
+            //{
+            //    JsonSerializer serializer = new JsonSerializer();
+            //    serializer.Serialize(file, GetConfigList() );
+            //}
         }
     }
 }

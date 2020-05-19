@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SN.NetSet.Business.Abstract
 {
-    public interface INetConfigDataService  
+    public interface INetConfigDataService
     {
         IList<NetConfigBase> GetConfigList();
 
@@ -14,5 +14,11 @@ namespace SN.NetSet.Business.Abstract
         void UpdateConfig(NetConfigBase config);
 
         void DeleteConfig(NetConfigBase config);
+
+        void AddNewListConfig(List<NetConfigBase> configList);
+
+        void ImportFromJsonListConfig(string json);
+
+        void SaveToFileLisConfig(string fileName);
     }
 }

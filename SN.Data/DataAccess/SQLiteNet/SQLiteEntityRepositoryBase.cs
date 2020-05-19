@@ -73,5 +73,13 @@ namespace SN.Data.DataAccess.SQLiteNet
                 var result = connection.Update(entity);
             }
         }
+
+        public void InsertAll(IList<TEntity> entities)
+        {
+            using (connection = _connectionManager.GetConnection())
+            {
+                var result = connection.InsertAll(entities);
+            }
+        }
     }
 }

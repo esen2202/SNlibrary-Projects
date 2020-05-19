@@ -61,8 +61,9 @@
         </Setter>
     </Style>
 
-    <Style x:Key="DeleteConfirmButton" BasedOn="{StaticResource MaterialDesignFlatButton}" 
+    <Style x:Key="DeleteConfirmButton" BasedOn="{StaticResource MaterialDesignFlatLightBgButton}" 
            TargetType="Button">
+        <Setter Property="BorderBrush" Value="CadetBlue"/>
         <Setter Property="Width" Value="65"/>
         <Setter Property="Background" Value="AliceBlue"/>
         <Setter Property="Margin" Value="5"/>
@@ -78,8 +79,9 @@
         </Setter>
     </Style>
 
-    <Style x:Key="CancelDeleteButton" BasedOn="{StaticResource MaterialDesignFlatButton}" 
+    <Style x:Key="CancelDeleteButton" BasedOn="{StaticResource MaterialDesignFlatLightBgButton}" 
            TargetType="Button">
+        <Setter Property="BorderBrush" Value="CadetBlue"/>
         <Setter Property="Width" Value="65"/>
         <Setter Property="Background" Value="AliceBlue"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>

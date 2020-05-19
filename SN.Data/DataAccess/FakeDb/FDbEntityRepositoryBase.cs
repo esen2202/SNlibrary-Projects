@@ -43,5 +43,10 @@ namespace SN.Data.DataAccess.FakeDb
             if (record != null)
                 SN.Class.Helpers.ClassHelper.CopyObjectPropertiesValue(entity, record);
         }
+
+        public void InsertAll(IList<TEntity> entities)
+        {
+            _context.AddRange(entities);
+        }
     }
 }

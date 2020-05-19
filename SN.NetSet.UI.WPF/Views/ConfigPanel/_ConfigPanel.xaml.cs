@@ -13,27 +13,33 @@ namespace SN.NetSet.UI.WPF.Views.ConfigPanel
     /// </summary>
     public partial class _ConfigPanel : UserControl
     {
+        public static _ConfigPanel ConfigPanelInstance { get; private set; }
+
         public static Snackbar Snackbar;
 
-        private Storyboard openConfigStoryboard;
+        private Storyboard _openConfigStoryboard;
 
-        private Storyboard closeConfigStoryboard;
+        private Storyboard _closeConfigStoryboard;
 
         public _ConfigPanel()
         {
             InitializeComponent();
+            this.Visibility = Visibility.Collapsed;
+
             this.DataContext = new _ConfigPanelViewModel();
+            ConfigPanelInstance = this;
+
             (this.DataContext as _ConfigPanelViewModel).ReturnedResultMessage += _ConfigPanel_ReturnedResultMessage;
             this.Loaded += _ConfigPanel_Loaded;
 
             Snackbar = this.MainSnackbar;
             BorderMain.Width = 0;
 
-            openConfigStoryboard = new Storyboard();
-            closeConfigStoryboard = new Storyboard();
+            _openConfigStoryboard = new Storyboard();
+            _closeConfigStoryboard = new Storyboard();
 
-            openConfigStoryboard.Completed += OpenConfigStoryboard_Completed; ;
-            closeConfigStoryboard.Completed += CloseConfigStoryboard_Completed; ;
+            _openConfigStoryboard.Completed += OpenConfigStoryboard_Completed; ;
+            _closeConfigStoryboard.Completed += CloseConfigStoryboard_Completed; ;
         }
 
         private void _ConfigPanel_ReturnedResultMessage(object sender, EventArgsWithStrMessage e)
@@ -57,6 +63,7 @@ namespace SN.NetSet.UI.WPF.Views.ConfigPanel
         private void CloseConfigStoryboard_Completed(object sender, EventArgs e)
         {
             (Application.Current.MainWindow as MainWindow).MainPanel.PreventClose = false;
+            this.Visibility = Visibility.Collapsed;
         }
 
         private void BorderWidthAnimation(Border border, Storyboard storyboard, Double widthStart, Double widthFinish)
@@ -73,12 +80,13 @@ namespace SN.NetSet.UI.WPF.Views.ConfigPanel
 
         public void OpenConfig()
         {
-            BorderWidthAnimation(BorderMain, openConfigStoryboard, BorderMain.Width, 320);
+            BorderWidthAnimation(BorderMain, _openConfigStoryboard, BorderMain.Width, 320);
+            this.Visibility = Visibility.Visible;
         }
 
         public void CloseConfig()
         {
-            BorderWidthAnimation(BorderMain, closeConfigStoryboard, BorderMain.Width, 0);
+            BorderWidthAnimation(BorderMain, _closeConfigStoryboard, BorderMain.Width, 0);
         }
 
         private void BtnHideConfiguration_Click(object sender, RoutedEventArgs e)

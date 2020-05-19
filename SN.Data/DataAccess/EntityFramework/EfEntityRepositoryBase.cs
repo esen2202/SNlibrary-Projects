@@ -49,6 +49,14 @@ namespace SN.Data.DataAccess.EntityFramework
             }
         }
 
+        public void InsertAll(IList<TEntity> entities)
+        {
+            using (TContext context = new TContext())
+            {
+               
+            }
+        }
+
         public void Update(TEntity entity, Expression<Func<TEntity, bool>> filter = null)
         {
             using (TContext context = new TContext())

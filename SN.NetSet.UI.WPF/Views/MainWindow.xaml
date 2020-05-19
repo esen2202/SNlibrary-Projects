@@ -8,7 +8,8 @@
         xmlns:configPanel ="clr-namespace:SN.NetSet.UI.WPF.Views.ConfigPanel" 
         mc:Ignorable="d"
         WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" ShowInTaskbar="False"
-        Name="MainWindowXaml" Title="SNNetSet">
+        Name="MainWindowXaml" Title="SNNetSet" Icon="/SNNetSet;component/Assets/icons/icon.png">
+    
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,6 +17,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+    
     <Grid x:Name="MainGrid" Height="auto">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
