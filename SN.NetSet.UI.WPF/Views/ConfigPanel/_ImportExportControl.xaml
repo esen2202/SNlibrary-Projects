@@ -3,11 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.ConfigPanel" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.ConfigPanel" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:SN.NetSet.UI.WPF.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="32" d:DesignWidth="158">
+    
     <UserControl.Resources>
         <ResourceDictionary>
+            <converters:BoolInverseConverter x:Key="BoolInverse"/>
+            <converters:BoolAndConverter x:Key="BoolAnd"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../Assets/styles/_ConfigRecordControlStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -17,6 +22,18 @@
     <Grid Margin="0">
         
         <DockPanel HorizontalAlignment="Center" Margin="0">
+            <DockPanel.IsEnabled>
+                <MultiBinding Converter="{StaticResource BoolAnd}">
+                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+                    AncestorType={x:Type UserControl},AncestorLevel=2}" 
+                         Path="DataContext.EnabledUpdateMode" 
+                         Converter="{StaticResource BoolInverse}"/>
+                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+                    AncestorType={x:Type UserControl},AncestorLevel=2}" 
+                         Path="DataContext.EnabledAddingMode" 
+                         Converter="{StaticResource BoolInverse}"  />
+                </MultiBinding>
+            </DockPanel.IsEnabled>
 
             <Button x:Name="BtnImport"  
                         Style="{StaticResource MaterialDesignToolButton}"

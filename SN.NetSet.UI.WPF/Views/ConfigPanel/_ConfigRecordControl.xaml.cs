@@ -15,11 +15,39 @@ namespace SN.NetSet.UI.WPF.Views.ConfigPanel
         {
             InitializeComponent();
 
-            TxtIpAddress.KeyDown += delegate (object sender, KeyEventArgs e) { IpFormatDelegate(sender, e); };
-            TxtSubnetMask.KeyDown += delegate (object sender, KeyEventArgs e) { IpFormatDelegate(sender, e); };
-            TxtGateway.KeyDown += delegate (object sender, KeyEventArgs e) { IpFormatDelegate(sender, e); };
-            TxtDnsServer1.KeyDown += delegate (object sender, KeyEventArgs e) { IpFormatDelegate(sender, e); };
-            TxtDnsServer2.KeyDown += delegate (object sender, KeyEventArgs e) { IpFormatDelegate(sender, e); };
+            TxtIpAddress.PreviewKeyDown += TxtIpAddress_KeyDown; ;
+            TxtSubnetMask.PreviewKeyDown += TxtSubnetMask_KeyDown; ;
+            TxtGateway.PreviewKeyDown += TxtGateway_KeyDown;
+            TxtDnsServer1.PreviewKeyDown += TxtDnsServer1_KeyDown;
+            TxtDnsServer2.PreviewKeyDown += TxtDnsServer2_KeyDown;
+        }
+
+        private void TxtDnsServer2_KeyDown(object sender, KeyEventArgs e)
+        {
+            IpFormatDelegate(sender, e);
+        }
+
+        private void TxtDnsServer1_KeyDown(object sender, KeyEventArgs e)
+        {
+            IpFormatDelegate(sender, e);
+
+        }
+
+        private void TxtGateway_KeyDown(object sender, KeyEventArgs e)
+        {
+            IpFormatDelegate(sender, e);
+
+        }
+
+        private void TxtSubnetMask_KeyDown(object sender, KeyEventArgs e)
+        {
+            IpFormatDelegate(sender, e);
+
+        }
+
+        private void TxtIpAddress_KeyDown(object sender, KeyEventArgs e)
+        {
+            IpFormatDelegate(sender, e);
         }
 
         private void TxtIpAddress_TextChanged(object sender, TextChangedEventArgs e)
@@ -57,7 +85,8 @@ namespace SN.NetSet.UI.WPF.Views.ConfigPanel
             && !Char.IsDigit((char)KeyInterop.VirtualKeyFromKey(e.Key))
             && e.Key != System.Windows.Input.Key.Back
             && e.Key != System.Windows.Input.Key.Delete
-            && e.Key != Key.Left && e.Key != Key.Right)
+            && e.Key != Key.Left && e.Key != Key.Right
+            && e.Key != System.Windows.Input.Key.Tab)
             {
                 e.Handled = true;
                 return;
@@ -67,15 +96,17 @@ namespace SN.NetSet.UI.WPF.Views.ConfigPanel
             var strArrLast = strArr.Last();
 
             if ((strArrLast.Length >= 3 || e.Key == System.Windows.Input.Key.Right && !tb.Text.EndsWith("."))
-        && strArr.Count() < 4 && e.Key != System.Windows.Input.Key.Back)
+            && pointNumber < 3 
+            && e.Key != System.Windows.Input.Key.Back 
+            && e.Key != System.Windows.Input.Key.Delete 
+            &&  e.Key != System.Windows.Input.Key.Tab)
             {
                 tb.Text += ".";
                 tb.CaretIndex = tb.Text.Length;
-                e.Handled = true;
+                //e.Handled = true;
                 return;
             }
 
-            pointNumber = tb.Text.Count(o => o == '.');
         }
     }
 }

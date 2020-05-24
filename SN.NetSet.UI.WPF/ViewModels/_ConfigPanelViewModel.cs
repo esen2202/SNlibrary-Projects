@@ -303,16 +303,16 @@ namespace SN.NetSet.UI.WPF.ViewModels
                     _enableUpdateModeCommand = new RelayCommand(
                         p =>
                         {
-                            NewNetConfig = (NetConfigBase)p;
-                            SelectConfigMethod(p);
-                            EnableUpdateModeMethod();
+                            EnableUpdateModeMethod((NetConfigBase)p);
                         });
                 }
                 return _enableUpdateModeCommand;
             }
         }
-        private void EnableUpdateModeMethod()
+        private void EnableUpdateModeMethod(NetConfigBase config)
         {
+            NewNetConfig = config;
+            SelectConfigMethod(config);
             EnabledUpdateMode = true;
         }
 
@@ -385,7 +385,7 @@ namespace SN.NetSet.UI.WPF.ViewModels
             EnabledAddingMode = false;
         }
 
-    
+
         public void ImportConfigDb(string json)
         {
             _netConfigDataService.ImportFromJsonListConfig(json);

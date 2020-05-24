@@ -21,7 +21,7 @@
         <Setter Property="ContentTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <materialDesign:PackIcon Kind="Lan" Foreground="#DD2E85C1" Width="25" Height="25" />
+                    <materialDesign:PackIcon Kind="LanCheck" Foreground="LightSlateGray" Width="25" Height="25" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -47,6 +47,26 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ConfigButton" TargetType="Button" BasedOn="{StaticResource ToolButtonBase}">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <materialDesign:PackIcon Kind="EggOutline" Foreground="LightSlateGray" Width="25" Height="25" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="AboutButton" TargetType="Button" BasedOn="{StaticResource ToolButtonBase}">
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <materialDesign:PackIcon Kind="AboutVariant" Foreground="LightSlateGray" Width="25" Height="25"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <Style x:Key="AlwaysTopButton" TargetType="Button" BasedOn="{StaticResource ToolButtonBase}">
     </Style>
 
@@ -55,5 +75,43 @@
 
     <Style x:Key="TopMostButton" TargetType="Button" BasedOn="{StaticResource ToolButtonBase}">
     </Style>
-    
+
+
+    <Style x:Key="ExitConfirmButton" BasedOn="{StaticResource MaterialDesignFlatLightBgButton}" 
+           TargetType="Button">
+        <Setter Property="BorderBrush" Value="CadetBlue"/>
+        <Setter Property="Width" Value="65"/>
+        <Setter Property="Background" Value="AliceBlue"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <materialDesign:PackIcon Kind="WindowClose" 
+                                             Width="25" Height="25"
+                                             Foreground="Red"
+                                             VerticalAlignment="Center"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CancelExitButton" BasedOn="{StaticResource MaterialDesignFlatLightBgButton}" 
+           TargetType="Button">
+        <Setter Property="BorderBrush" Value="CadetBlue"/>
+        <Setter Property="Width" Value="65"/>
+        <Setter Property="Background" Value="AliceBlue"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="35 0 0 0"/>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <materialDesign:PackIcon Kind="Cancel" 
+                                             Width="25" Height="25"
+                                             Foreground="LightSteelBlue"
+                                             VerticalAlignment="Center"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

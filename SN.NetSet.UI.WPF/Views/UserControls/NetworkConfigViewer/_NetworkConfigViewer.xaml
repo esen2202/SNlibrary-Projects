@@ -28,7 +28,7 @@
         <Expander.Header >
             <HeaderedContentControl >
                 <DockPanel VerticalAlignment="Center">
-                    <materialDesign:PackIcon Kind="ShapeOutline" Foreground="DeepSkyBlue" VerticalAlignment="Center" 
+                    <materialDesign:PackIcon Kind="Egg" Foreground="DeepSkyBlue" VerticalAlignment="Center" 
                                              Height="20" Width="20" Margin="0 0 15 0"/>
                     <TextBlock x:Name="TBConfigName"
                                Text="{Binding ConfigName,FallbackValue=''}"                                        

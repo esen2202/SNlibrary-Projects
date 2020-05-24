@@ -24,7 +24,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
@@ -77,7 +77,7 @@
 
                 <!-- Button Set -->
                 <Border Grid.Row="2">
-                    <local:_ControlButtonSet/>
+                    <local:_ControlButtonSet x:Name="ControlButtonSet"/>
                 </Border>
 
                 <!-- Show Adapter List -->

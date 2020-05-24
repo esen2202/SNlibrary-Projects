@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#define Ef
+
+#if NoEf
+using Microsoft.EntityFrameworkCore;
 using SN.Data.Entities;
 using System;
 using System.Collections.Generic;
@@ -68,3 +71,5 @@ namespace SN.Data.DataAccess.EntityFramework
         }
     }
 }
+
+#endif

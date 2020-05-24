@@ -51,6 +51,7 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
         {
             BorderFloating.Visibility = Visibility.Visible;
             (mainWindow.DataContext as MainWindowViewModel).SuspendInfoService();
+            this.ControlButtonSet.HideExitDailog();
             mainWindow.SetTopMost(true, false);
         }
 

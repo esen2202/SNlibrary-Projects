@@ -5,27 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.About" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" 
+        WindowState="Normal" WindowStartupLocation="CenterScreen" Topmost="True"
         WindowStyle="None" AllowsTransparency="True" Background="{x:Null}"
         Title="AboutMe" Height="300" Width="500">
     <Grid>
         <Border Background="AliceBlue" CornerRadius="10" Width="500" Height="300">
             <Canvas>
-                <Button Style="{StaticResource MaterialDesignIconForegroundButton}" RenderTransformOrigin="4.746,0.547" Canvas.Left="452">
-                    <materialDesign:PackIcon Name="iconNetworkStatus" Kind="Close" VerticalAlignment="Center" Foreground="DarkRed" Width="25" Height="25"/>
+                <Button Style="{StaticResource MaterialDesignIconButton}" 
+                        RenderTransformOrigin="4.746,0.547" Canvas.Left="452"
+                        Click="Button_Click">
+                    <materialDesign:PackIcon Name="iconColse" Kind="Close" VerticalAlignment="Center" Foreground="IndianRed" Width="25" Height="25"/>
                 </Button>
-                
-                <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Canvas.Left="173" Canvas.Top="60" Foreground="DarkMagenta" Text="Design Programming" />
+
+                <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Canvas.Left="166" Canvas.Top="60" Foreground="SteelBlue" Text="Design | Programming" />
 
 
-                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Canvas.Left="166" Canvas.Top="81">
+                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Canvas.Left="166" Canvas.Top="81" Foreground="SlateGray">
                     Erkan Esen
                 </TextBlock>
-                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="75" Canvas.Top="202" Foreground="DimGray">
-                    https://www.linkedin.com/in/esen2202/
+
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="166" Canvas.Top="15" Foreground="SlateGray">
+                    SNNetSet
                 </TextBlock>
-                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="114" Canvas.Top="248" Foreground="DimGray">
-                    https://github.com/esen2202
+                <TextBlock Style="{StaticResource MaterialDesignTextBlock}" Canvas.Left="262" Canvas.Top="19" Foreground="SteelBlue">
+                    v1.20.05.01
                 </TextBlock>
+
+                <materialDesign:PackIcon Name="icon1" Kind="NavigateNext" VerticalAlignment="Center" Foreground="SteelBlue" Width="48" Height="52" Canvas.Left="113" Canvas.Top="60"/>
+
+                <materialDesign:PackIcon Name="icon3" Kind="Linkedin" VerticalAlignment="Center" Foreground="CornflowerBlue" Width="32" Height="35" Canvas.Left="92" Canvas.Top="210"/>
+
+                <materialDesign:PackIcon Name="icon2" Kind="Github" VerticalAlignment="Center" Foreground="MediumPurple" Width="32" Height="35" Canvas.Left="129" Canvas.Top="246"/>
+
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="129" Canvas.Top="214" Foreground="DimGray" FontWeight="Medium" >
+                    <Hyperlink Name="HLinkLinkedIn" RequestNavigate="HLinkLinkedIn_RequestNavigate"  NavigateUri="https://linkedin.com/in/esen2202">
+                        linkedin.com/in/esen2202
+                    </Hyperlink>
+                </TextBlock>
+
+                <TextBlock Name="HLinkGithub" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="166" Canvas.Top="246" Foreground="DimGray">
+                    <Hyperlink RequestNavigate="Hyperlink_RequestNavigate"  NavigateUri="https://github.com/esen2202">
+                       github.com/esen2202
+                    </Hyperlink>
+
+                </TextBlock>
+                <materialDesign:PackIcon x:Name="icon1_Copy" Kind="Egg" VerticalAlignment="Center" Foreground="BurlyWood" Width="39" Height="37" Canvas.Left="117" Canvas.Top="10"/>
 
             </Canvas>
         </Border>

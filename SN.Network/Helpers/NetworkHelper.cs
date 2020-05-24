@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 
 namespace SN.Network.Helpers
 {
@@ -71,7 +72,7 @@ namespace SN.Network.Helpers
             byte tempForParsing;
 
             return splitValues.All(r => byte.TryParse(r, out tempForParsing));
-        
+
         }
 
         public static void ShowNetConnections()
@@ -80,6 +81,32 @@ namespace SN.Network.Helpers
             startInfo.UseShellExecute = true;
 
             Process.Start(startInfo);
+        }
+
+        public static bool Ping(string hostName, int timeOut, out PingReply pingReply)
+        {
+            bool result = false;
+            pingReply = null;
+            try
+            { 
+                Ping myPing = new Ping();
+                pingReply = myPing.Send(hostName, timeOut);
+                if (pingReply != null)
+                {
+                    Console.WriteLine("Status :  " + pingReply.Status + " \n Time : " + pingReply.RoundtripTime + " \n Address : " + pingReply.Address);
+                    result = true;
+                }
+                else
+                {
+
+                }
+            }
+            catch
+            {
+               
+            }
+
+            return result;
         }
     }
 }

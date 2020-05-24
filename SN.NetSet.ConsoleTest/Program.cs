@@ -5,6 +5,7 @@ using SN.NetSet.DataAccess.Concrete.SQLite;
 using SN.NetSet.Entities.Concrete.Network;
 using System;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 
 namespace SN.NetSet.ConsoleTest
 {
@@ -12,9 +13,30 @@ namespace SN.NetSet.ConsoleTest
     {
         static void Main(string[] args)
         {
-            CRUDOperations();
-
+           // CRUDOperations();
+            Ping();
             Console.ReadKey();
+        }
+
+        private static void Ping()
+        {
+            try
+            {
+                Ping myPing = new Ping();
+                PingReply reply = myPing.Send("www.google.com", 1000);
+                if (reply != null)
+                {
+                    Console.WriteLine("Status :  " + reply.Status + " \n Time : " + reply.RoundtripTime  + " \n Address : " + reply.Address);
+                    //Console.WriteLine(reply.ToString());
+                    
+                }
+            }
+            catch
+            {
+                Console.WriteLine("ERROR: You have Some TIMEOUT issue");
+            }
+            Console.ReadKey();
+
         }
 
         private static void CRUDOperations()

@@ -44,7 +44,7 @@ namespace SN.NetSet.DataAccess.Concrete.SQLite
             var mapping = sqliteConnection.GetMapping(typeof(NetConfigBase), CreateFlags.AutoIncPK);
 
             sqliteConnection.CreateTable<User>();
-            sqliteConnection.CreateTable<NetConfigBase>();
+            sqliteConnection.CreateTable<NetConfigBase>();  
         }
 
      

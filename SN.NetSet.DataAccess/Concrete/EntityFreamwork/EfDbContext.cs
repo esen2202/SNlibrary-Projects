@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿#define Ef
+#if NoEf
+using Microsoft.EntityFrameworkCore;
 using SN.NetSet.Entities.Concrete.Network;
 using SN.NetSet.Entities.Concrete.User;
 
@@ -15,3 +17,4 @@ namespace SN.NetSet.DataAccess.Concrete.EntityFreamwork
 
     }
 }
+#endif

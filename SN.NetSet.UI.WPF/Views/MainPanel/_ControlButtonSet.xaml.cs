@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SN.NetSet.UI.WPF.Views.About;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SN.NetSet.UI.WPF.Views.MainPanel
 {
@@ -21,6 +9,15 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
     /// </summary>
     public partial class _ControlButtonSet : UserControl
     {
+        public Visibility ExitDialog
+        {
+            get { return (Visibility)GetValue(ExitDialogProperty); }
+            set { SetValue(ExitDialogProperty, value); }
+        }
+
+        public static readonly DependencyProperty ExitDialogProperty =
+            DependencyProperty.Register("ExitDialog", typeof(Visibility), typeof(_ControlButtonSet), new PropertyMetadata(Visibility.Collapsed));
+
         MainWindow mainWindow;
 
         public _ControlButtonSet()
@@ -95,6 +92,32 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
         {
             MainWindow.SetSettings();
             Application.Current.Shutdown();
+        }
+
+        private void BtnCancelClose_Click(object sender, RoutedEventArgs e)
+        {
+            HideExitDailog();
+        }
+
+        private void BtnCloseDialog_Click(object sender, RoutedEventArgs e)
+        {
+            ToggleExitDailog();
+        }
+
+        private void BtnAbout_Click(object sender, RoutedEventArgs e)
+        {
+            AboutMe aboutMe = new AboutMe();
+            aboutMe.ShowDialog();
+        }
+
+        public void HideExitDailog()
+        {
+            ExitDialog = Visibility.Collapsed;
+        }
+
+        public void ToggleExitDailog()
+        {
+            ExitDialog = ExitDialog == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
     }
 }

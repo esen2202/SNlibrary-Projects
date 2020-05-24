@@ -5,37 +5,54 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d" 
-             d:DesignHeight="40" d:DesignWidth="320">
+             mc:Ignorable="d" x:Name="_this"
+             d:DesignHeight="100" d:DesignWidth="320">
     <UserControl.Resources>
         <ResourceDictionary Source="../../Assets/styles/_ControlButtonSetStyle.xaml"/>
     </UserControl.Resources>
 
     <Border Style="{StaticResource MainBorder}">
-        <StackPanel>
-            <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-                <Button Name="BtnClose" Margin="2 0 20 4" 
-                        Style="{StaticResource CloseButton}"
-                        Click="BtnClose_Click"/>
+            <DockPanel Grid.Column="0" Grid.Row="0"
+                VerticalAlignment="Center" HorizontalAlignment="Left" 
+                Margin="0" >
 
-                <Button Name="BtnNetConnections" Margin="10 0 10 4" 
+                <Button Name="BtnConfig"  Margin="10 0 10 4" 
+                        Style="{StaticResource ConfigButton}"
+                        Click="BtnConfig_Click">
+                </Button>
+
+                <Button Name="BtnNetConnections" Margin="5 0 10 4"  
                         Style="{StaticResource NetConnectionsButton}"
                         Command="{Binding RelativeSource={RelativeSource FindAncestor,
                     AncestorType={x:Type Window}}, Path=DataContext.ShowNetworksCommand}"/>
 
+                <Button Name="BtnAbout"  Margin="5 0 0 4" 
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource AboutButton}"
+                        Click="BtnAbout_Click"/>
+
+            </DockPanel>
+
+            <DockPanel Grid.Column="1" Grid.Row="0"
+                VerticalAlignment="Center" HorizontalAlignment="Right" 
+                Margin="0" >
+
                 <Button Name="BtnRefresh"  Margin="10 0 10 4" 
+                        Visibility="Collapsed"
                         Style="{StaticResource RefreshButton}"
                         Command="{Binding RelativeSource={RelativeSource FindAncestor,
                     AncestorType={x:Type Window}}, Path=DataContext.RefreshExecuteCommand}"/>
 
-                <Button Name="BtnConfig"  Margin="10 0 10 4" 
-                        Style="{StaticResource TopMostButton}"
-                        Click="BtnConfig_Click">
-                    <materialDesign:PackIcon  Kind="ShapePlus" Foreground="BlanchedAlmond" Width="25" Height="25" />
-                </Button>
-
-                
                 <Button Name="BtnTopMost"  Margin="10 0 10 4" 
                         Style="{StaticResource TopMostButton}"
                         Click="BtnTopMost_Click"
@@ -46,15 +63,50 @@
                 <Button Name="BtnAlwaysTop"   Margin="10 0 10 4" 
                         Style="{StaticResource AlwaysTopButton}"
                         Click="BtnAlwaysTop_Click">
-                    <materialDesign:PackIcon Name="iconPin" Kind="PinOutline" Foreground="#DDC7C3F3" Width="25" Height="25" />
+                    <materialDesign:PackIcon Name="iconPin" Kind="PinOutline" Foreground="DarkSlateGray" Width="25" Height="25" />
                 </Button>
 
-                <Button Name="BtnShowHideList"  Margin="10 0 10 4" Style="{StaticResource ShowHideButton}"
+
+                <Button Name="BtnShowHideList"  Margin="10 0 10 4" 
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource ShowHideButton}"
                         Click="BtnShowHideList_Click">
-                    <materialDesign:PackIcon Name="iconShowHide" Kind="ArrowCollapse" Foreground="#FF2E4665" Width="25" Height="25" />
+                    <materialDesign:PackIcon Name="iconShowHide" Kind="ArrowCollapse" Foreground="DarkSlateGray" Width="25" Height="25" />
+                </Button>
+
+                <Button Name="BtnCloseDialog" Margin="2 0 5 4" 
+                        HorizontalAlignment="Right"
+                        Style="{StaticResource CloseButton}"
+                        Click="BtnCloseDialog_Click"/>
+            </DockPanel>
+
+            <!-- Exit Box -->
+            <Border Grid.Row="1" Grid.ColumnSpan="2" Background="{x:Null}" />
+
+            <DockPanel Grid.Row="1" Grid.Column="0" 
+                       VerticalAlignment="Center" HorizontalAlignment="Center"
+                       Visibility="{Binding ExitDialog,ElementName=_this}">
+                <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Foreground="AliceBlue" >
+                    Application Exit
+                </TextBlock>
+            </DockPanel>
+
+            <DockPanel Grid.Row="1" Grid.Column="1"
+                       Visibility="{Binding ExitDialog,ElementName=_this}">
+
+                <Button x:Name="BtnClose" 
+                        Style="{StaticResource ExitConfirmButton}" 
+                       Click="BtnClose_Click">
+                </Button>
+
+                <Button x:Name="BtnCancelClose"  Margin="15 15 15 15"
+                        Style="{StaticResource CancelExitButton}" 
+                        Click="BtnCancelClose_Click">
                 </Button>
 
             </DockPanel>
-        </StackPanel>
+
+        </Grid>
+
     </Border>
 </UserControl>
