@@ -17,39 +17,39 @@
                     <materialDesign:PackIcon Name="iconColse" Kind="Close" VerticalAlignment="Center" Foreground="IndianRed" Width="25" Height="25"/>
                 </Button>
 
-                <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Canvas.Left="166" Canvas.Top="60" Foreground="SteelBlue" Text="Design | Programming" />
+                <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Canvas.Left="175" Canvas.Top="60" Foreground="SteelBlue" Text="Design | Programming" />
 
 
-                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Canvas.Left="166" Canvas.Top="81" Foreground="SlateGray">
+                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Canvas.Left="175" Canvas.Top="81" Foreground="SlateGray">
                     Erkan Esen
                 </TextBlock>
 
-                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="166" Canvas.Top="15" Foreground="SlateGray">
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="175" Canvas.Top="15" Foreground="SlateGray">
                     SNNetSet
                 </TextBlock>
-                <TextBlock Style="{StaticResource MaterialDesignTextBlock}" Canvas.Left="262" Canvas.Top="19" Foreground="SteelBlue">
+                <TextBlock Style="{StaticResource MaterialDesignTextBlock}" Canvas.Left="272" Canvas.Top="19" Foreground="SteelBlue">
                     v1.20.05.01
                 </TextBlock>
 
-                <materialDesign:PackIcon Name="icon1" Kind="NavigateNext" VerticalAlignment="Center" Foreground="SteelBlue" Width="48" Height="52" Canvas.Left="113" Canvas.Top="60"/>
+                <materialDesign:PackIcon Name="icon1" Kind="NavigateNext" VerticalAlignment="Center" Foreground="SteelBlue" Width="48" Height="52" Canvas.Left="127" Canvas.Top="60"/>
 
-                <materialDesign:PackIcon Name="icon3" Kind="Linkedin" VerticalAlignment="Center" Foreground="CornflowerBlue" Width="32" Height="35" Canvas.Left="92" Canvas.Top="210"/>
+                <materialDesign:PackIcon Name="icon3" Kind="Linkedin" VerticalAlignment="Center" Foreground="CornflowerBlue" Width="32" Height="35" Canvas.Left="99" Canvas.Top="200"/>
 
-                <materialDesign:PackIcon Name="icon2" Kind="Github" VerticalAlignment="Center" Foreground="MediumPurple" Width="32" Height="35" Canvas.Left="129" Canvas.Top="246"/>
+                <materialDesign:PackIcon Name="icon2" Kind="Github" VerticalAlignment="Center" Foreground="MediumPurple" Width="32" Height="35" Canvas.Left="119" Canvas.Top="250"/>
 
-                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="129" Canvas.Top="214" Foreground="DimGray" FontWeight="Medium" >
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="136" Canvas.Top="203" Foreground="DimGray" FontWeight="Medium" >
                     <Hyperlink Name="HLinkLinkedIn" RequestNavigate="HLinkLinkedIn_RequestNavigate"  NavigateUri="https://linkedin.com/in/esen2202">
                         linkedin.com/in/esen2202
                     </Hyperlink>
                 </TextBlock>
 
-                <TextBlock Name="HLinkGithub" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="166" Canvas.Top="246" Foreground="DimGray">
+                <TextBlock Name="HLinkGithub" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="156" Canvas.Top="250" Foreground="DimGray">
                     <Hyperlink RequestNavigate="Hyperlink_RequestNavigate"  NavigateUri="https://github.com/esen2202">
                        github.com/esen2202
                     </Hyperlink>
 
                 </TextBlock>
-                <materialDesign:PackIcon x:Name="icon1_Copy" Kind="Egg" VerticalAlignment="Center" Foreground="BurlyWood" Width="39" Height="37" Canvas.Left="117" Canvas.Top="10"/>
+                <materialDesign:PackIcon x:Name="icon1_Copy" Kind="Egg" VerticalAlignment="Center" Foreground="BurlyWood" Width="39" Height="37" Canvas.Left="136" Canvas.Top="10"/>
 
             </Canvas>
         </Border>
