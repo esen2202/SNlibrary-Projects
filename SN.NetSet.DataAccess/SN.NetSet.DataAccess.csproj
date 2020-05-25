@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\INetConfigDal.cs" />
+    <Compile Include="Abstract\ISQLiteDBProperties.cs" />
     <Compile Include="Abstract\IUserDal.cs" />
     <Compile Include="Concrete\EntityFreamwork\EfNetConfigDal.cs" />
     <Compile Include="Concrete\EntityFreamwork\EfUserDal.cs" />

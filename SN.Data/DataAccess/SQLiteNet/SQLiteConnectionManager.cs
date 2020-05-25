@@ -16,9 +16,9 @@ namespace SN.Data.DataAccess.SQLiteNet
         public SQLiteConnection GetConnection()
         {
             
-            _sqliteConnection = new SQLiteConnection("BufferDB");
-            _sqliteConnection.Close();
-            _sqliteConnection.Dispose();
+            //_sqliteConnection = new SQLiteConnection("BufferDB");
+            //_sqliteConnection.Close();
+            //_sqliteConnection.Dispose();
 
             _sqliteConnection = new SQLiteConnection(DbName);
 

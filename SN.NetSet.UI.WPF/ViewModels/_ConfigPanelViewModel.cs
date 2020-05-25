@@ -84,6 +84,17 @@ namespace SN.NetSet.UI.WPF.ViewModels
             }
         }
 
+        private string _dbPath;
+        public string DbPath
+        {
+            get { return _dbPath; }
+            set
+            {
+                _dbPath = value;
+                base.OnPropertyChanged(() => DbPath);
+            }
+        }
+
         private readonly INetConfigDataService _netConfigDataService;
 
         private readonly INetAdapterIpConfigService _netAdapterIpConfigService;
@@ -99,6 +110,7 @@ namespace SN.NetSet.UI.WPF.ViewModels
             _netAdapterIpConfigService = InstanceFactory.GetInstance<INetAdapterIpConfigService>();
             _netAdapterIpConfigService.SetIpOperationCompleted += this._netAdapterIpConfigService_SetIpOperationCompleted;
 
+            DbPath = _netConfigDataService.GetAddress();
             NewNetConfig = new NetConfigBase();
 
             GetConfigList();

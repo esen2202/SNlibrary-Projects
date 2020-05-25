@@ -2,7 +2,7 @@
 using SN.NetSet.Entities.Concrete.Network;
 using SN.NetSet.Entities.Concrete.User;
 using SQLite;
-using System;
+using System.IO;
 using System.Reflection;
 
 namespace SN.NetSet.DataAccess.Concrete.SQLite
@@ -39,14 +39,14 @@ namespace SN.NetSet.DataAccess.Concrete.SQLite
 
         public override void OnConfigure()
         {
-            ConnectionManager = new SQLiteConnectionManager("NetSetDB");
+            ConnectionManager = new SQLiteConnectionManager(Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "NetSetDB"));
             sqliteConnection = ConnectionManager.GetConnection();
             var mapping = sqliteConnection.GetMapping(typeof(NetConfigBase), CreateFlags.AutoIncPK);
 
             sqliteConnection.CreateTable<User>();
-            sqliteConnection.CreateTable<NetConfigBase>();  
+            sqliteConnection.CreateTable<NetConfigBase>();
         }
 
-     
+
     }
 }

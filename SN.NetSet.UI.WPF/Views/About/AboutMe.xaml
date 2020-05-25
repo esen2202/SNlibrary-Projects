@@ -17,21 +17,19 @@
                     <materialDesign:PackIcon Name="iconColse" Kind="Close" VerticalAlignment="Center" Foreground="IndianRed" Width="25" Height="25"/>
                 </Button>
 
-                <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Canvas.Left="175" Canvas.Top="60" Foreground="SteelBlue" Text="Design | Programming" />
+                <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Canvas.Left="165" Canvas.Top="60" Foreground="SteelBlue" Text="Design | Programming" />
 
 
-                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Canvas.Left="175" Canvas.Top="81" Foreground="SlateGray">
+                <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" Canvas.Left="163" Canvas.Top="81" Foreground="SlateGray">
                     Erkan Esen
                 </TextBlock>
 
                 <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Canvas.Left="175" Canvas.Top="15" Foreground="SlateGray">
                     SNNetSet
                 </TextBlock>
-                <TextBlock Style="{StaticResource MaterialDesignTextBlock}" Canvas.Left="272" Canvas.Top="19" Foreground="SteelBlue">
-                    v1.20.05.01
-                </TextBlock>
+                <TextBlock Style="{StaticResource MaterialDesignTextBlock}" Canvas.Left="272" Canvas.Top="19" Foreground="SteelBlue"><Run Text="v1.20."/><Run Text="05."/><Run Text="0"/><Run Text="2"/></TextBlock>
 
-                <materialDesign:PackIcon Name="icon1" Kind="NavigateNext" VerticalAlignment="Center" Foreground="SteelBlue" Width="48" Height="52" Canvas.Left="127" Canvas.Top="60"/>
+                <materialDesign:PackIcon Name="icon1" Kind="NavigateNext" VerticalAlignment="Center" Foreground="SteelBlue" Width="48" Height="52" Canvas.Left="127" Canvas.Top="60" Visibility="Collapsed"/>
 
                 <materialDesign:PackIcon Name="icon3" Kind="Linkedin" VerticalAlignment="Center" Foreground="CornflowerBlue" Width="32" Height="35" Canvas.Left="99" Canvas.Top="200"/>
 

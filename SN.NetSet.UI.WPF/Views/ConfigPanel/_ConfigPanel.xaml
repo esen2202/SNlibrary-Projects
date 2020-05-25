@@ -26,6 +26,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
             <!-- Left Panel Title Bar -->
@@ -77,6 +78,10 @@
             <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}"
                                      x:Name="MainSnackbar"
                                      Grid.Row="2" />
+
+            <TextBlock Text="{Binding DbPath}" Foreground="Wheat" Grid.Row="5"  Visibility="Hidden"/>
+
+
         </Grid>
 
     </Border>

@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\INetConfigDataService.cs" />
+    <Compile Include="Abstract\IAddressableDB.cs" />
     <Compile Include="Data\NetConfigDataManager.cs" />
     <Compile Include="Data\Validation\NetConfigBaseValidator.cs" />
     <Compile Include="DependencyResolvers\Ninject\AutoMapperModule.cs" />

@@ -21,7 +21,7 @@
       <applicationRequestMinimum>
         <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
         <defaultAssemblyRequest permissionSetReference="Custom" />
-      </applicationRequestMinimum>
+      </applicationRequestMinimum>  
     </security>
   </trustInfo>
   <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">

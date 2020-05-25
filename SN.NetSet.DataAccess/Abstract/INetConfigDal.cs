@@ -6,5 +6,6 @@ namespace SN.NetSet.DataAccess.Abstract
     public interface INetConfigDal : IEntityRepository<NetConfigBase>
     {
         //Custom operations
+
     }
 }

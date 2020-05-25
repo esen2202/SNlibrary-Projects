@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SN.NetSet.Business.Abstract
 {
-    public interface INetConfigDataService
+    public interface INetConfigDataService : IAddressableDB
     {
         IList<NetConfigBase> GetConfigList();
 

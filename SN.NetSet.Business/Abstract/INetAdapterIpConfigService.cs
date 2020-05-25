@@ -4,7 +4,7 @@ using System;
 
 namespace SN.NetSet.Business.Abstract
 {
-    public interface INetAdapterIpConfigService
+    public interface INetAdapterIpConfigService 
     {
         event EventHandler<EventArgsWithStrMessage> SetIpOperationCompleted;
 

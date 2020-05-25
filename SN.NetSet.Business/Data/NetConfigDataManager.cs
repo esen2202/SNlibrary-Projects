@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace SN.NetSet.Business.Data
 {
-    public class NetConfigDbManager : INetConfigDataService
+    public class NetConfigDbManager : INetConfigDataService 
     {
         private readonly NetConfigBaseValidator validationRules = new NetConfigBaseValidator();
 
@@ -94,6 +94,11 @@ namespace SN.NetSet.Business.Data
             //    JsonSerializer serializer = new JsonSerializer();
             //    serializer.Serialize(file, GetConfigList() );
             //}
+        }
+
+        public string GetAddress()
+        {
+            return _netConfigDal is ISQLiteDBProperties ? (_netConfigDal as ISQLiteDBProperties).GetDBPath() : "";
         }
     }
 }
