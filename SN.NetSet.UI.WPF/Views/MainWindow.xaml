@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views"
         xmlns:mainPanel ="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel"
-        xmlns:configPanel ="clr-namespace:SN.NetSet.UI.WPF.Views.ConfigPanel" 
+        xmlns:configPanel ="clr-namespace:SN.NetSet.UI.WPF.Views.ConfigPanel"
         mc:Ignorable="d"
         WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" ShowInTaskbar="False"
         Name="MainWindowXaml" Title="SNNetSet" Icon="/SNNetSet;component/Assets/icons/icon.png">
