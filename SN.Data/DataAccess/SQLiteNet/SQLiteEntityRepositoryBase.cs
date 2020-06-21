@@ -3,7 +3,6 @@ using SN.Data.Entities;
 using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace SN.Data.DataAccess.SQLiteNet
