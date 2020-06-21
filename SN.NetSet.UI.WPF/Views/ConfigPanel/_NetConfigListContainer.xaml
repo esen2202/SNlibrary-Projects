@@ -21,7 +21,6 @@
     
     <ListBox 
         Name="LBConfigList"
-        Grid.Row="3"
         ItemsSource="{Binding}"
         Background="{x:Null}"
         BorderBrush="{x:Null}"

@@ -10,7 +10,6 @@
 
     <ListBox 
         Name="LBAdapterList"
-        Grid.Row="3"
         ItemsSource="{Binding}"
         HorizontalContentAlignment="Stretch"
         Background="{x:Null}" BorderBrush="{x:Null}"

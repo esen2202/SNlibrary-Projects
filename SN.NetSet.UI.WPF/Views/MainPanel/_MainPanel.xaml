@@ -6,7 +6,9 @@
              xmlns:local="clr-namespace:SN.NetSet.UI.WPF.Views.MainPanel"
              xmlns:usercontrols="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls"
              xmlns:adapterViewer="clr-namespace:SN.NetSet.UI.WPF.Views.UserControls.NetworkAdapterViewer"
-             xmlns:converters="clr-namespace:SN.NetSet.UI.WPF.Converters" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:pinging="clr-namespace:SN.NetSet.UI.WPF.Views.Pinging"
+             xmlns:converters="clr-namespace:SN.NetSet.UI.WPF.Converters" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              Name="MainPanel"
              Height="auto" d:DesignWidth="320">
@@ -26,6 +28,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
@@ -92,6 +95,12 @@
                 <Border Name="BorderSettings"
                     Grid.Row="4">
                     <local:_AppSettings Margin=" 10 0 0 0"/>
+                </Border>
+
+                <!-- **** Pinging Beta **** -->
+                <Border Name="BorderPİnging"
+                    Grid.Row="5">
+                    <pinging:_PingMain Margin=" 10 10 0 0"/>
                 </Border>
             </Grid>
         </Border>

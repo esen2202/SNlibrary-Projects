@@ -83,27 +83,55 @@ namespace SN.Network.Helpers
             Process.Start(startInfo);
         }
 
-        public static bool Ping(string hostName, int timeOut, out PingReply pingReply)
+        public static string Ping(string hostName, int timeOut, out PingReply pingReply)
         {
-            bool result = false;
+            string result = "Host is unreachable.";
             pingReply = null;
+
             try
-            { 
+            {
                 Ping myPing = new Ping();
                 pingReply = myPing.Send(hostName, timeOut);
                 if (pingReply != null)
                 {
-                    Console.WriteLine("Status :  " + pingReply.Status + " \n Time : " + pingReply.RoundtripTime + " \n Address : " + pingReply.Address);
-                    result = true;
+                    result =
+                     "Address : " + pingReply.Address +
+                     " Status :  " + pingReply.Status +
+                     " Time : " + pingReply.RoundtripTime + 
+                     "";
                 }
-                else
-                {
 
-                }
             }
             catch
             {
-               
+
+            }
+
+            return result;
+        }
+
+        public static string Ping(string hostName, int timeOut)
+        {
+            string result = "Host is unreachable.";
+            PingReply pingReply = null;
+
+            try
+            {
+                Ping myPing = new Ping();
+                pingReply = myPing.Send(hostName, timeOut);
+                if (pingReply != null)
+                {
+                    result =
+                     "Address : " + pingReply.Address +
+                     " Status :  " + pingReply.Status +
+                     " Time : " + pingReply.RoundtripTime +
+                     "";
+                }
+
+            }
+            catch
+            {
+
             }
 
             return result;

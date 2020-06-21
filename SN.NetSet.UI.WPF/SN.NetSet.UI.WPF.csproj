@@ -148,6 +148,7 @@
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\_ConfigPanelViewModel.cs" />
+    <Compile Include="ViewModels\_PingingViewModel.cs" />
     <Compile Include="Views\About\AboutMe.xaml.cs">
       <DependentUpon>AboutMe.xaml</DependentUpon>
     </Compile>
@@ -174,6 +175,9 @@
     </Compile>
     <Compile Include="Views\ConfigPanel\_ConfigPanel.xaml.cs">
       <DependentUpon>_ConfigPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pinging\_PingMain.xaml.cs">
+      <DependentUpon>_PingMain.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserControls\IUserControlNameSpace.cs" />
     <Compile Include="Views\UserControls\NetworkAdapterList\_NetworkAdapterListItem.xaml.cs">
@@ -284,6 +288,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\ConfigPanel\_ConfigPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pinging\_PingMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

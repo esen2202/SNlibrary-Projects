@@ -1,4 +1,5 @@
 ﻿using SN.Network.Helpers;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 
 namespace SN.NetSet.Business.Network
@@ -22,14 +23,25 @@ namespace SN.NetSet.Business.Network
                 return NetworkHelper.CheckForInternetConnection();
             });
 
-            return result;
+           return result;
         }
+
         public static Task<bool> CheckForInternetConnectionAPI()
         {
             Task<bool> result = Task.Run<bool>(() =>
             {
                 int desc;
                 return NetworkHelper.CheckForInternetConnection(out desc);
+            });
+
+            return result;
+        }
+
+        public static Task<string> Ping(string hostName, int timeOut)
+        {
+            Task<string> result = Task.Run<string>(() =>
+            {
+                return NetworkHelper.Ping( hostName,  timeOut);
             });
 
             return result;
