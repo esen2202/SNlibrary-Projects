@@ -34,7 +34,7 @@ namespace SN.NetSet.UI.WPF
 
         private void SystemEvents_SessionEnding(object sender, SessionEndingEventArgs e)
         {
-            WPF.Views.MainWindow.SetSettings();
+            //WPF.Views.MainWindow.SetSettings();
             App.Current.Shutdown();
         }
 

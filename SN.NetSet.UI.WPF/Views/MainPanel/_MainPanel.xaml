@@ -15,6 +15,7 @@
     
     <UserControl.Resources>
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        <converters:IntToMarginTopConverter x:Key="IntToMarginTopConverter"/>
     </UserControl.Resources>
     
     <Grid>
@@ -108,9 +109,19 @@
         <!-- Floating -->
         
             <Border x:Name="BorderFloating" VerticalAlignment="Top"
+                Margin="{Binding HolderMarginTop, ElementName=MainPanel,Converter={StaticResource IntToMarginTopConverter}}"
                 Style="{StaticResource FloatingBar}"
                 MouseEnter="BorderFloating_OnMouseEnter"/>
-  
+
+        <Border x:Name="BorderFloatingMove" VerticalAlignment="Top"
+                Margin="{Binding HolderMoveMargin, ElementName=MainPanel,Converter={StaticResource IntToMarginTopConverter}}"
+                Style="{StaticResource FloatingBarMove}"
+                MouseLeftButtonDown="BorderFloatingMove_MouseLeftButtonDown"          
+                MouseMove="BorderFloatingMove_MouseMove"
+                > 
+            <materialDesign:PackIcon Kind="ExpandHorizontal" Foreground="Beige"  VerticalAlignment="Center"/>
+        </Border>
+
     </Grid>
     
 </UserControl>

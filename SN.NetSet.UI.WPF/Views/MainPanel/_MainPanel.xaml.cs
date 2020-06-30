@@ -1,8 +1,10 @@
 ﻿using SN.NetSet.UI.WPF.ViewModels;
 using System;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace SN.NetSet.UI.WPF.Views.MainPanel
@@ -29,9 +31,34 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
         public static readonly DependencyProperty ListVisibilityProperty =
             DependencyProperty.Register("ListVisibility", typeof(Visibility), typeof(_MainPanel), new PropertyMetadata(Visibility.Visible));
 
+        public int HolderMarginTop
+        {
+            get { return (int)GetValue(HolderMarginTopProperty); }
+            set { SetValue(HolderMarginTopProperty, value); }
+        }
+
+        public static readonly DependencyProperty HolderMarginTopProperty =
+            DependencyProperty.Register("HolderMarginTop", typeof(int), typeof(_MainPanel), new PropertyMetadata(150));
+        public int HolderMoveMargin
+        {
+            get { return (int)GetValue(HolderMoveMarginProperty); }
+            set
+            {
+                SetValue(HolderMoveMarginProperty, value);
+                SetValue(HolderMarginTopProperty, value - 100);
+                MainWindow.HolderMarginTop = value;
+            }
+        }
+
+        public static readonly DependencyProperty HolderMoveMarginProperty =
+            DependencyProperty.Register("HolderMoveMargin", typeof(int), typeof(_MainPanel), new PropertyMetadata(250));
+
+
         public _MainPanel()
         {
             InitializeComponent();
+            HolderMoveMargin = MainWindow.HolderMarginTop;
+
 
             this.Loaded += _MainPanel_Loaded;
 
@@ -91,6 +118,52 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
         {
             if (BorderPanel.Width >= 320 && !MainWindow.GetStatusPinSideBar() && !PreventClose)
                 BorderWidthAnimation(BorderPanel, closeSideBarStoryboard, BorderPanel.Width, 0);
+        }
+
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static extern bool GetCursorPos(ref Win32Point pt);
+
+        [StructLayout(LayoutKind.Sequential)]
+        internal struct Win32Point
+        {
+            public Int32 X;
+            public Int32 Y;
+        };
+        public static Point GetMousePosition()
+        {
+            Win32Point w32Mouse = new Win32Point();
+            GetCursorPos(ref w32Mouse);
+            return new Point(w32Mouse.X, w32Mouse.Y);
+        }
+
+        private void BorderFloatingMove_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            BorderFloatingMove.Background = Brushes.White;
+            if (BorderFloatingMove.Width != 20)
+            {
+                BorderFloatingMove.Width = 20; BorderFloatingMove.Height = 40;
+                BorderFloatingMove.Background = Brushes.Red;
+            }
+            else
+            {
+                BorderFloatingMove.Width = 4; BorderFloatingMove.Height = 15;
+                BorderFloatingMove.Background = Brushes.DarkSlateBlue;
+            }
+
+        }
+
+        private void BorderFloatingMove_MouseMove(object sender, MouseEventArgs e)
+        {
+            var pos = GetMousePosition();
+            if (BorderFloatingMove.Width == 20 &&
+                pos.Y - 110 > 0 &&
+                pos.Y + 40 < SystemParameters.WorkArea.Height)
+            {
+
+                HolderMoveMargin = (int)pos.Y - 20;
+            }
         }
     }
 }

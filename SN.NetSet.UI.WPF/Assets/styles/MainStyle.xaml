@@ -50,10 +50,23 @@
         <Setter Property="HorizontalAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Top" />
         <Setter Property="Background" Value="#FF316089" />
-        <Setter Property="BorderThickness" Value="1,1,0,1" />
+        <Setter Property="BorderThickness" Value="1,1,0,0" />
         <Setter Property="BorderBrush" Value="#FF4085C1" />
         <Setter Property="Height" Value="100" />
         <Setter Property="Width" Value="4" />
     </Style>
-    
+
+    <Style x:Key="FloatingBarMove" TargetType="Border">
+        <Setter Property="Margin" Value="0,200,0,0" />
+        <Setter Property="CornerRadius" Value="2 0 0 2" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Background" Value="DarkSlateBlue" />
+        <Setter Property="BorderThickness" Value="1,0,0,1" />
+        <Setter Property="BorderBrush" Value="DarkRed" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="Width" Value="4" />
+ 
+    </Style>
+
 </ResourceDictionary>

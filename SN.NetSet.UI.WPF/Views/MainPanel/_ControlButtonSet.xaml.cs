@@ -90,7 +90,6 @@ namespace SN.NetSet.UI.WPF.Views.MainPanel
 
         private void BtnClose_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.SetSettings();
             Application.Current.Shutdown();
         }
 

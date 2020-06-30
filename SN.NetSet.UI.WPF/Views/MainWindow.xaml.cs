@@ -15,30 +15,34 @@ namespace SN.NetSet.UI.WPF.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static bool PinnedSideBar { get; set; }
-
-        private static bool StatusTopMost { get; set; }
-
-        public static string LastAdapterName { get; set; }
-
-        public static int LastConfigId { get; set; }
-
-        public static void GetSettings()
+        private static bool PinnedSideBar
         {
-            PinnedSideBar = AppSettings.Default.PinnedSideBar;
-            StatusTopMost = AppSettings.Default.StatusTopMost;
-            LastAdapterName = AppSettings.Default.LastAdapterName;
-            LastConfigId = AppSettings.Default.LastConfigId;
+            get { return AppSettings.Default.PinnedSideBar; }
+            set { AppSettings.Default.PinnedSideBar = value; AppSettings.Default.Save(); }
         }
 
-        public static void SetSettings()
+        private static bool StatusTopMost
         {
-            AppSettings.Default.PinnedSideBar = PinnedSideBar;
-            AppSettings.Default.StatusTopMost = StatusTopMost;
-            AppSettings.Default.LastAdapterName = LastAdapterName;
-            AppSettings.Default.LastConfigId = LastConfigId;
+            get { return AppSettings.Default.StatusTopMost; }
+            set { AppSettings.Default.StatusTopMost = value; AppSettings.Default.Save(); }
+        }
 
-            AppSettings.Default.Save();
+        public static string LastAdapterName
+        {
+            get { return AppSettings.Default.LastAdapterName; }
+            set { AppSettings.Default.LastAdapterName = value; AppSettings.Default.Save(); }
+        }
+
+        public static int LastConfigId
+        {
+            get { return AppSettings.Default.LastConfigId; }
+            set { AppSettings.Default.LastConfigId = value; AppSettings.Default.Save(); }
+        }
+
+        public static int HolderMarginTop
+        {
+            get { return AppSettings.Default.HolderTopPosition; }
+            set { AppSettings.Default.HolderTopPosition = value; AppSettings.Default.Save(); }
         }
 
         public static bool GetStatusTopMost() => StatusTopMost;
@@ -68,7 +72,6 @@ namespace SN.NetSet.UI.WPF.Views
 
         public MainWindow()
         {
-            GetSettings();
             InitializeComponent();
             InitializeViewStyles();
 
@@ -85,7 +88,6 @@ namespace SN.NetSet.UI.WPF.Views
 
         private void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            SetSettings();
         }
 
     }

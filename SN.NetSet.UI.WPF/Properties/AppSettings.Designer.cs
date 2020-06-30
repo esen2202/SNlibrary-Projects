@@ -83,5 +83,20 @@ namespace SN.NetSet.UI.WPF.Properties {
                 this["LastConfigId"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int HolderTopPosition
+        {
+            get
+            {
+                return ((int)(this["HolderTopPosition"]));
+            }
+            set
+            {
+                this["HolderTopPosition"] = value;
+            }
+        }
     }
 }
